@@ -195,66 +195,66 @@ const shelves = ref([
     { 
       name: 'Grand Theft Auto: San Andreas', desc: 'El mundo abierto definitivo de los 2000. Recorre el estado de San Andreas como CJ en una épica historia de pandillas, traición y supervivencia.', details: 'Acción / Mundo Abierto', year: '2004', developer: 'Rockstar North', players: '1-2 Jugadores', price: '$90.000', 
       img: 'https://images.launchbox-app.com//56b5479a-bba5-43d6-b458-0fcd00bf10ba.png',
-      media: { box3d: 'https://images.launchbox-app.com//54377eb1-fa31-4278-bb1e-56ca552e0b08.png', cart: 'https://images.launchbox-app.com//25129bda-7947-4a3c-bec7-d80907b62dc4.png', video: '/src/assets/videos/ps2/Grand Theft Auto - San Andreas (USA) (v3.00).mp4' }
+      media: { box3d: 'https://images.launchbox-app.com//54377eb1-fa31-4278-bb1e-56ca552e0b08.png', cart: 'https://images.launchbox-app.com//25129bda-7947-4a3c-bec7-d80907b62dc4.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031132/Grand_Theft_Auto_-_San_Andreas_USA_v3.00_v8zboy.mp4' }
     },
     { 
       name: 'God of War II', desc: 'Kratos desafía al Olimpo en esta brutal secuela. Combate épico a escala titánica con una de las mejores narrativas de la era PS2.', details: 'Acción / Hack and Slash', year: '2007', developer: 'SCE Santa Monica', players: '1 Jugador', price: '$85.000', 
       img: 'https://images.launchbox-app.com//2b06034c-9d15-4bdd-8e20-b564027cd957.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//bd7e8288-1e2f-4d88-8c6e-495e41cdb8d2.png', cart: 'https://images.launchbox-app.com//4c64ba67-6bbc-4264-89cc-0ab9b489c02d.png', video: '/src/assets/videos/ps2/God of War II (USA).mp4' }
+      media: { box3d: 'https://images.launchbox-app.com//bd7e8288-1e2f-4d88-8c6e-495e41cdb8d2.png', cart: 'https://images.launchbox-app.com//4c64ba67-6bbc-4264-89cc-0ab9b489c02d.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031125/God_of_War_II_USA_jmu6kg.mp4' }
     },
     { 
       name: 'Silent Hill 2', desc: 'La obra maestra del terror psicológico. James Sunderland recibe una carta de su esposa fallecida que lo lleva de regreso a Silent Hill.', details: 'Survival Horror', year: '2001', developer: 'Konami / Team Silent', players: '1 Jugador', price: '$120.000', 
       img: 'https://images.launchbox-app.com//c4007fff-9166-4389-83b6-e338c2278a29.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//f8dbb6c7-fb1e-4043-a8d1-ee0d8ba0dbb2.png', cart: 'https://images.launchbox-app.com//6b03fe0e-e562-4484-93d2-6bad8f2a1330.png', video: '/src/assets/videos/ps2/Silent Hill 2 (USA) (En,Ja,Fr,De,Es,It) (v2.01).mp4' }
+      media: { box3d: 'https://images.launchbox-app.com//f8dbb6c7-fb1e-4043-a8d1-ee0d8ba0dbb2.png', cart: 'https://images.launchbox-app.com//6b03fe0e-e562-4484-93d2-6bad8f2a1330.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031131/Silent_Hill_2_USA_En_Ja_Fr_De_Es_It_v2.01_jtri88.mp4' }
     },
     { 
       name: 'Pro Evolution Soccer 2008', desc: 'El simulador de fútbol que dominó una era. Jugabilidad táctica, pases precisos y la emoción del fútbol real en cada partido.', details: 'Deportes / Fútbol', year: '2007', developer: 'Konami', players: '1-4 Jugadores', price: '$35.000', 
       img: 'https://images.launchbox-app.com//808ba41a-1c0b-4d0f-b057-37685c03d7ca.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//46ff22c6-3db4-48cf-939e-f370dc758d59.png', cart: 'https://images.launchbox-app.com//689d40c1-d913-433b-bb12-2beed927313d.png', video: '/src/assets/videos/ps2/PES 2008 - Pro Evolution Soccer (USA).mp4' }
+      media: { box3d: 'https://images.launchbox-app.com//46ff22c6-3db4-48cf-939e-f370dc758d59.png', cart: 'https://images.launchbox-app.com//689d40c1-d913-433b-bb12-2beed927313d.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031125/PES_2008_-_Pro_Evolution_Soccer_USA_f8ylhe.mp4' }
     }
   ],
   [
     { 
       name: 'Burnout 3: Takedown', desc: 'Velocidad extrema y destrucción total. El juego de carreras arcade más adrenalínico donde chocar es tan divertido como ganar.', details: 'Carreras / Arcade', year: '2004', developer: 'Criterion Games', players: '1-2 Jugadores', price: '$50.000', 
       img: 'https://images.launchbox-app.com//58b3d988-8d18-4f56-a1c3-d87ca0808918.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//2b32c01b-f7de-4d29-b587-fdca6b8ea991.png', cart: 'https://images.launchbox-app.com//074c3463-1672-4191-bdf1-90b0cf28c14b.png', video: '/src/assets/videos/ps2/Burnout 3 - Takedown (USA).mp4' }
+      media: { box3d: 'https://images.launchbox-app.com//2b32c01b-f7de-4d29-b587-fdca6b8ea991.png', cart: 'https://images.launchbox-app.com//074c3463-1672-4191-bdf1-90b0cf28c14b.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031138/Burnout_3_-_Takedown_USA_i1mrbm.mp4' }
     },
     { 
       name: 'Need for Speed: Most Wanted', desc: 'Conviértete en el corredor más buscado. Carreras ilegales, persecuciones policiales cinematográficas y un extenso mundo abierto por dominar.', details: 'Carreras / Mundo Abierto', year: '2005', developer: 'EA Canada', players: '1-2 Jugadores', price: '$55.000', 
       img: 'https://images.launchbox-app.com//1ca80c9b-5ade-4655-93c4-3dab49b0e0e7.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//f58f4e7c-7bc2-4d1c-8cd9-a032815ea801.png', cart: 'https://images.launchbox-app.com//d1a409a4-d29b-4de3-b003-a5a981172b3c.png', video: '/src/assets/videos/ps2/Need for Speed - Most Wanted (USA) (v2.00).mp4' }
+      media: { box3d: 'https://images.launchbox-app.com//f58f4e7c-7bc2-4d1c-8cd9-a032815ea801.png', cart: 'https://images.launchbox-app.com//d1a409a4-d29b-4de3-b003-a5a981172b3c.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031135/Need_for_Speed_-_Most_Wanted_USA_v2.00_prrktv.mp4' }
     },
     { 
       name: 'Ratchet & Clank', desc: 'La dupla más carismática de PlayStation. Plataformas 3D con un arsenal de armas absurdas y planetas enteros por explorar.', details: 'Plataformas / Acción', year: '2002', developer: 'Insomniac Games', players: '1 Jugador', price: '$60.000', 
       img: 'https://images.launchbox-app.com//85d0d853-1edf-4086-a5b5-281edcb3f9ac.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//869ca65c-dc01-459b-b6a3-0a72c089d309.png', cart: 'https://images.launchbox-app.com//03c0c663-f1f1-4fbb-adb1-91a44d755eff.png', video: '/src/assets/videos/ps2/Ratchet & Clank (USA) (En,Fr,De,Es,It).mp4' }
+      media: { box3d: 'https://images.launchbox-app.com//869ca65c-dc01-459b-b6a3-0a72c089d309.png', cart: 'https://images.launchbox-app.com//03c0c663-f1f1-4fbb-adb1-91a44d755eff.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031129/Ratchet_Clank_USA_En_Fr_De_Es_It_xzszaw.mp4' }
     },
     { 
       name: 'Guitar Hero III: Legends of Rock', desc: 'El fenómeno musical que conquistó al mundo. Toma la guitarra y domina los riffs más legendarios del rock en escenarios épicos.', details: 'Ritmo / Musical', year: '2007', developer: 'Neversoft', players: '1-2 Jugadores', price: '$45.000', 
       img: 'https://images.launchbox-app.com//eeb2d4fc-0eef-4138-8714-0e236e317052.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//69fc9413-2c44-4914-86c4-e0f9e64345ce.png', cart: 'https://images.launchbox-app.com//dba9d2bd-6aad-4afb-8f5c-608beb118e16.png', video: '/src/assets/videos/ps2/Guitar Hero III - Legends of Rock (USA).mp4' }
+      media: { box3d: 'https://images.launchbox-app.com//69fc9413-2c44-4914-86c4-e0f9e64345ce.png', cart: 'https://images.launchbox-app.com//dba9d2bd-6aad-4afb-8f5c-608beb118e16.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031127/Guitar_Hero_III_-_Legends_of_Rock_USA_xjeu7t.mp4' }
     }
   ],
   [
     { 
       name: 'Metal Gear Solid 3: Snake Eater', desc: 'La precuela definitiva de la saga. Sobrevive en la jungla soviética durante la Guerra Fría en una historia de espionaje inolvidable.', details: 'Acción / Sigilo', year: '2004', developer: 'Konami', players: '1 Jugador', price: '$80.000', 
       img: 'https://images.launchbox-app.com//e8fb6be7-937e-4147-b64c-2002381bf024.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//3bc4200f-00bc-44db-8a73-09ff0d45584e.png', cart: 'https://images.launchbox-app.com//b0bb419e-3076-4615-a140-143c742df081.png', video: '/src/assets/videos/ps2/Metal Gear Solid 3 - Snake Eater (USA).mp4' }
+      media: { box3d: 'https://images.launchbox-app.com//3bc4200f-00bc-44db-8a73-09ff0d45584e.png', cart: 'https://images.launchbox-app.com//b0bb419e-3076-4615-a140-143c742df081.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031123/Metal_Gear_Solid_3_-_Snake_Eater_USA_yn0115.mp4' }
     },
     { 
       name: 'Killzone', desc: 'La respuesta de PlayStation al shooter bélico. Una guerra futurista contra los Helghast con intensos combates tácticos en primera persona.', details: 'FPS / Acción', year: '2004', developer: 'Guerrilla Games', players: '1-2 Jugadores', price: '$40.000', 
       img: 'https://images.launchbox-app.com//e61ccc2c-d8d5-4181-9196-0a2348d44b5e.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//e2e3be0c-132b-4ce8-9ee1-90dd08837541.png', cart: 'https://images.launchbox-app.com//581b1a06-24b0-479c-a065-698335af6f75.png', video: '/src/assets/videos/ps2/Killzone (USA).mp4' }
+      media: { box3d: 'https://images.launchbox-app.com//e2e3be0c-132b-4ce8-9ee1-90dd08837541.png', cart: 'https://images.launchbox-app.com//581b1a06-24b0-479c-a065-698335af6f75.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031119/Killzone_USA_zlscxc.mp4' }
     },
     { 
       name: 'Kingdom Hearts II', desc: 'La fusión perfecta entre Disney y Final Fantasy. Sora regresa para enfrentar a la Organización XIII en mundos mágicos e inolvidables.', details: 'Acción RPG', year: '2005', developer: 'Square Enix', players: '1 Jugador', price: '$75.000', 
       img: 'https://images.launchbox-app.com//1c8b27cb-a5a0-419e-b369-f050752f3e07.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//cd72b7cb-2712-4eba-92c5-f737212817e3.png', cart: 'https://images.launchbox-app.com//8587a7cd-511a-4d05-a917-e29d15f8f6e9.png', video: '/src/assets/videos/ps2/Kingdom Hearts II (USA).mp4' }
+      media: { box3d: 'https://images.launchbox-app.com//cd72b7cb-2712-4eba-92c5-f737212817e3.png', cart: 'https://images.launchbox-app.com//8587a7cd-511a-4d05-a917-e29d15f8f6e9.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031121/Kingdom_Hearts_II_USA_unnjsu.mp4' }
     },
     { 
       name: 'Grand Theft Auto: Vice City', desc: 'Bienvenido a los 80. Motos, neón y una banda sonora legendaria en la ciudad más estilosa del crimen organizado.', details: 'Acción / Mundo Abierto', year: '2002', developer: 'Rockstar North', players: '1 Jugador', price: '$70.000', 
       img: 'https://images.launchbox-app.com//9ab89a02-8481-495f-b16b-f669573a34a0.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//380bd625-be55-473c-8d4c-f4d8a7490380.png', cart: 'https://images.launchbox-app.com//7cafc5b1-77b8-4431-b2e4-73c67b7187e2.png', video: '/src/assets/videos/ps2/Grand Theft Auto - Vice City (USA) (v4.00).mp4' }
+      media: { box3d: 'https://images.launchbox-app.com//380bd625-be55-473c-8d4c-f4d8a7490380.png', cart: 'https://images.launchbox-app.com//7cafc5b1-77b8-4431-b2e4-73c67b7187e2.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031123/Grand_Theft_Auto_-_Vice_City_USA_v4.00_hiiwi9.mp4' }
     }
   ]
 ]);

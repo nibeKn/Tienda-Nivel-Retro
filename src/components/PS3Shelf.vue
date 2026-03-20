@@ -165,8 +165,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue';
+import { ps3Games } from '../data/gamesData.js';
 
+const props = defineProps(['preselectedGame']);
 defineEmits(['back', 'add-to-cart']);
 
 
@@ -188,74 +190,31 @@ const closeLightbox = () => {
   lightboxImage.value = null;
 };
 
-const shelves = ref([
-  [
-    { 
-      name: 'The Last of Us', desc: 'Una obra maestra narrativa de supervivencia. Acompaña a Joel y Ellie en un desgarrador viaje a través de un mundo post-apocalíptico infectado.', details: 'Acción / Aventura', year: '2013', developer: 'Naughty Dog', players: '1 Jugador', price: '$120.000', 
-      img: 'https://images.launchbox-app.com//9a204038-8491-4714-8639-62b6af67ad36.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//a4e83ba3-f4dc-4f1c-83c3-35cce554b7e1.png', cart: 'https://images.launchbox-app.com//9531c70b-c263-4ca3-9254-251a76b85327.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031320/The_Last_of_Us_kvs6lj.mp4' }
-    },
-    { 
-      name: 'God of War III', desc: 'El épico final de la venganza de Kratos. Escala el Monte Olimpo y destruye a los dioses en uno de los juegos más espectaculares de la generación.', details: 'Acción / Hack and Slash', year: '2010', developer: 'SCE Santa Monica', players: '1 Jugador', price: '$85.000', 
-      img: 'https://images.launchbox-app.com//43250330-b1dc-40c7-ac61-7bac745c5ace.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//6dc2b29f-8f6f-4ea1-9a0f-aa9229a586e8.png', cart: 'https://images.launchbox-app.com//de746212-f5d0-47e6-943d-27d6f499e8b9.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031303/God_of_war_III_sua6gr.mp4' }
-    },
-    { 
-      name: 'Uncharted 2: Among Thieves', desc: 'La aventura de acción definitiva. Nathan Drake busca la legendaria flota perdida de Marco Polo en una superproducción cinematográfica.', details: 'Acción / Aventura', year: '2009', developer: 'Naughty Dog', players: '1 Jugador', price: '$75.000', 
-      img: 'https://images.launchbox-app.com//cbfc0edb-730a-48ed-8fd7-e6b3e2e9107b.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//5ad0822a-2f48-41f9-97a1-c04de55daf52.png', cart: 'https://images.launchbox-app.com//55f67e78-c437-4415-ae45-a505888e47c1.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031337/Uncharted_2_nevlli.mp4' }
-    },
-    { 
-      name: 'Red Dead Redemption', desc: 'El lejano oeste como nunca antes. Vive la redención del forajido John Marston en un inmenso y detallado mundo abierto.', details: 'Acción / Mundo Abierto', year: '2010', developer: 'Rockstar San Diego', players: '1 Jugador', price: '$90.000', 
-      img: 'https://images.launchbox-app.com//f2ec004b-1d8b-4bc3-a120-0015dc0c571d.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//4f91a4b6-d6c1-44b6-8d6b-4170b7d860a5.png', cart: 'https://images.launchbox-app.com//c29c7835-317a-4622-826a-f1e5040b6346.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031314/Red_Dead_Redemption_hq1au4.mp4' }
+const shelves = ref(ps3Games);
+
+onMounted(() => {
+  if (props.preselectedGame) {
+    for (const row of shelves.value) {
+      const match = row.find(g => g.name === props.preselectedGame);
+      if (match) {
+        selectItem(match);
+        break;
+      }
     }
-  ],
-  [
-    { 
-      name: 'Metal Gear Solid 4: Guns of the Patriots', desc: 'El adiós de Solid Snake. Un campo de batalla donde la tecnología militar dicta las reglas en esta pieza maestra del sigilo y la narrativa.', details: 'Acción / Sigilo', year: '2008', developer: 'Kojima Productions', players: '1 Jugador', price: '$80.000', 
-      img: 'https://images.launchbox-app.com//38d572c3-30ad-418d-9142-4f35628c7c85.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//42b017b5-2f16-4819-8e20-1108507958ef.png', cart: 'https://images.launchbox-app.com//46bc82c8-a5b4-4c25-a3b7-671f4c780915.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031316/Metal_Gear_Solid_4_aqlfgj.mp4' }
-    },
-    { 
-      name: 'Grand Theft Auto IV', desc: 'El sueño americano en Liberty City. Sigue a Niko Bellic en una historia oscura y realista que revolucionó la físicas en el mundo abierto.', details: 'Acción / Mundo Abierto', year: '2008', developer: 'Rockstar North', players: '1 Jugador', price: '$70.000', 
-      img: 'https://images.launchbox-app.com//3e472d4d-2df7-408d-b0fc-7bd51f1773fe.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//c9282931-c28c-4350-9624-33d59d0c3aeb.png', cart: 'https://images.launchbox-app.com//59ddd3e8-8447-4809-9e94-1203ae0eadf6.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031298/Grand_Theft_Auto_IV_i15pfv.mp4' }
-    },
-    { 
-      name: 'LittleBigPlanet', desc: 'Juega, crea y comparte. Adéntrate en un universo de imaginación donde Sackboy y la creatividad no tienen límites.', details: 'Plataformas / Creación', year: '2008', developer: 'Media Molecule', players: '1-4 Jugadores', price: '$45.000', 
-      img: 'https://images.launchbox-app.com//c57b9e6a-dbf7-483f-8200-e9ccac818cf5.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//f39cf456-6fa6-476f-ba00-2402a455321d.png', cart: 'https://images.launchbox-app.com//69d1630d-630e-47ee-9a32-fa0ad540a296.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031330/Little_Big_Planet_vginj9.mp4' }
-    },
-    { 
-      name: 'Killzone 2', desc: 'Lleva la guerra a Helghan. Un portento técnico que demostró el verdadero poder de PS3 con combates viscerales y gráficos revolucionarios.', details: 'FPS / Acción', year: '2009', developer: 'Guerrilla Games', players: '1 Jugador', price: '$55.000', 
-      img: 'https://images.launchbox-app.com//80e5f402-7eda-4cb6-992c-7cbcb9cc1b8b.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//96643ec1-601d-4bf2-a9ef-71c572ad6685.png', cart: 'https://images.launchbox-app.com//1da36286-9eb2-4c34-a7ec-8b6f2ce08262.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031298/Killzone_2_ls7cmt.mp4' }
+  }
+});
+
+watch(() => props.preselectedGame, (newVal) => {
+  if (newVal) {
+    for (const row of shelves.value) {
+      const match = row.find(g => g.name === newVal);
+      if (match) {
+        selectItem(match);
+        break;
+      }
     }
-  ],
-  [
-    { 
-      name: 'Gran Turismo 5', desc: 'El simulador de conducción real. Cientos de vehículos detallados y físicas perfeccionadas para verdaderos entusiastas del motor.', details: 'Carreras / Simulación', year: '2010', developer: 'Polyphony Digital', players: '1-2 Jugadores', price: '$50.000', 
-      img: 'https://gamesdb-images.launchbox.gg/r2_966c30f1-adef-4fa6-af1e-41e24fd65e55.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//172c3365-cab4-4d0c-b3d5-845bf8781668.png', cart: 'https://images.launchbox-app.com//1e597105-37b5-4952-a7c3-2cffa50a2827.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031339/Gran_Turismo_5_i1v2ux.mp4' }
-    },
-    { 
-      name: 'inFamous', desc: 'Escoge tu karma en Empire City. Eres un mensajero que obtuvo poderes eléctricos tras una explosión; ¿serás un héroe o un villano?', details: 'Acción / Superhéroes', year: '2009', developer: 'Sucker Punch', players: '1 Jugador', price: '$60.000', 
-      img: 'https://images.launchbox-app.com//d22e2edb-c0be-4062-8e2e-5ae3ee108cd0.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//29dc3c8a-3028-49b5-9c44-944d199cad49.png', cart: 'https://images.launchbox-app.com//cc3cb626-3480-463a-bad9-0dab2273b47a.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031311/Infamous_tfvlag.mp4' }
-    },
-    { 
-      name: "Demon's Souls", desc: 'El origen del mito. Una experiencia desafiante y oscura en Boletaria que sentó las bases para toda una generación de juegos Souls.', details: 'Action RPG', year: '2009', developer: 'FromSoftware', players: '1 Jugador', price: '$100.000', 
-      img: 'https://images.launchbox-app.com//ed20109d-8c83-45ac-bd79-4a173745fde7.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//85b89ac8-d4ef-4609-9c3a-7a532917da0b.png', cart: 'https://images.launchbox-app.com//7c8a27ad-7b64-49c1-9453-c9d3743a955a.png', video: "https://res.cloudinary.com/dabfglubl/video/upload/v1774031305/Demon_s_Souls_rum4mk.mp4" }
-    },
-    { 
-      name: 'MotorStorm', desc: 'Caos todoterreno en Monument Valley. Carreras brutales donde motos, buggies y camiones pesados colisionan en el lodo.', details: 'Carreras / Off-Road', year: '2006', developer: 'Evolution Studios', players: '1-12 Jugadores', price: '$40.000', 
-      img: 'https://images.launchbox-app.com//f5227c2c-edd8-476e-9954-d4c1f848dde6.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//6f961f44-b431-4832-8e45-c6f256cd5162.png', cart: 'https://images.launchbox-app.com//1aff65ae-6713-4425-a193-5c571365eac7.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031298/MotorStorm_eotrih.mp4' }
-    }
-  ]
-]);
+  }
+});
 </script>
 
 <style scoped>

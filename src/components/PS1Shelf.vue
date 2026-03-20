@@ -168,11 +168,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
+import { ps1Games } from '../data/gamesData.js';
 
+const props = defineProps({
+  preselectedGame: String
+});
 defineEmits(['back', 'add-to-cart']);
-
-
 
 const selectedItem = ref(null);
 const lightboxImage = ref(null);
@@ -191,74 +193,31 @@ const closeLightbox = () => {
   lightboxImage.value = null;
 };
 
-const shelves = ref([
-  [
-    { 
-      name: 'Metal Gear Solid', desc: 'Una obra maestra del espionaje táctico. Infiltra una base militar nuclear como Solid Snake en una experiencia cinematográfica inolvidable.', details: 'Acción / Sigilo', year: '1998', developer: 'Konami', players: '1 Jugador', price: '$85.000', 
-      img: 'https://gamesdb-images.launchbox.gg/r2_d810b36e-fd9e-435f-9e1b-32ef76459e66.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//41570f73-a665-49eb-9803-cbc196bc7b6f.png', cart: 'https://images.launchbox-app.com//e2cfb4a5-df51-4a29-8324-9c5de6689057.png', video: 'https://www.gamesdatabase.org/Media/SYSTEM/Sony_Playstation/Video/Formated/Metal_Gear_Solid___1998___Konami.mp4' }
-    },
-    { 
-      name: 'Final Fantasy VII', desc: 'El RPG que definió una generación. Acompaña a Cloud Strife y AVALANCHE en su lucha contra la corporación Shinra y la amenaza de Sephiroth.', details: 'RPG', year: '1997', developer: 'Square', players: '1 Jugador', price: '$120.000', 
-      img: 'https://gamesdb-images.launchbox.gg/r2_809dbd84-313e-4408-94f3-726899fe26c4.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//86364003-e46b-446b-a429-bd51b28eaffc.png', cart: 'https://images.launchbox-app.com//b3bda860-0ef2-461e-b1ff-91869f22958e.png', video: 'https://www.gamesdatabase.org/Media/SYSTEM/Sony_Playstation/Video/Formated/Final_Fantasy_VII___1997___Sony_Computer_Entertainment.mp4' }
-    },
-    { 
-      name: 'Gran Turismo', desc: 'El simulador de conducción definitivo. Colecciona y personaliza cientos de autos reales en circuitos fieles a la realidad.', details: 'Carreras / Simulación', year: '1998', developer: 'Polyphony Digital', players: '1-2 Jugadores', price: '$70.000', 
-      img: 'https://gamesdb-images.launchbox.gg/r2_22314dd3-9d06-48e4-85fc-c71d22a273fa.png',
-      media: { box3d: 'https://images.launchbox-app.com//65e7ce33-e0c6-4d17-ac0d-4aa6531c9c55.png', cart: 'https://images.launchbox-app.com//f04f5e0a-e494-46e0-94f6-043143a86320.png', video: 'https://www.gamesdatabase.org/Media/SYSTEM/Sony_Playstation/Video/Formated/Gran_Turismo___1998___Sony_Computer_Entertainment.mp4' }
-    },
-    { 
-      name: 'Crash Bandicoot', desc: 'El marsupial más carismático de PlayStation. Corre, salta y gira a través de islas tropicales para detener los planes del Dr. Neo Cortex.', details: 'Plataformas', year: '1996', developer: 'Naughty Dog', players: '1 Jugador', price: '$65.000', 
-      img: 'https://gamesdb-images.launchbox.gg/r2_9e84384c-d2b1-4ffa-a771-055eb16f0f4e.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//1f781f02-54a5-4792-acb9-e31361123526.png', cart: 'https://images.launchbox-app.com//d9070a16-161f-4d69-b1b0-5a0074d665af.png', video: 'https://www.gamesdatabase.org/Media/SYSTEM/Sony_Playstation/Video/Formated/Crash_Bandicoot___1996___Sony_Computer_Entertainment.mp4' }
+const shelves = ref(ps1Games);
+
+onMounted(() => {
+  if (props.preselectedGame) {
+    for (const row of shelves.value) {
+      const match = row.find(g => g.name === props.preselectedGame);
+      if (match) {
+        selectItem(match);
+        break;
+      }
     }
-  ],
-  [
-    { 
-      name: 'Tekken 3', desc: 'El rey de los juegos de lucha en PlayStation. Combates rápidos, un extenso roster de personajes y modos de juego adictivos.', details: 'Lucha', year: '1998', developer: 'Namco', players: '1-2 Jugadores', price: '$55.000', 
-      img: 'https://gamesdb-images.launchbox.gg/r2_a96204cb-2a26-46e9-80f6-598153d70046.png',
-      media: { box3d: 'https://gamesdb-images.launchbox.gg/r2_11d73073-c64f-4071-8b5e-791352f1791f.png', cart: 'https://gamesdb-images.launchbox.gg/r2_0c68270d-1477-4dbd-9178-7df42511a018.png', video: 'https://www.gamesdatabase.org/Media/SYSTEM/Sony_Playstation/Video/Formated/Tekken_3___1998___Namco_Limited.mp4' }
-    },
-    { 
-      name: 'PaRappa The Rapper', desc: 'El primer gran juego de ritmo. Rapea junto a PaRappa en etapas musicales hilarantes con un estilo visual de papel recortado único.', details: 'Ritmo / Musical', year: '1997', developer: 'NanaOn-Sha', players: '1 Jugador', price: '$75.000', 
-      img: 'https://images.launchbox-app.com//112d19f2-890d-4d7c-947e-caee5fa2fb31.png',
-      media: { box3d: 'https://images.launchbox-app.com//4bb8eaf5-0174-4af4-ae71-6629657566ae.png', cart: 'https://gamesdb-images.launchbox.gg/r2_b7ff75f1-f9a0-498b-9d99-293857e0334c.png', video: 'https://www.gamesdatabase.org/Media/SYSTEM/Sony_Playstation/Video/Formated/PaRappa_the_Rapper___1997___Sony_Computer_Entertainment.mp4' }
-    },
-    { 
-      name: 'Twisted Metal 4', desc: 'Combate vehicular caótico y desenfrenado. Elige tu vehículo y destruye a todos tus rivales en arenas repletas de explosiones.', details: 'Combate Vehicular', year: '1999', developer: '989 Studios', players: '1-2 Jugadores', price: '$45.000', 
-      img: 'https://images.launchbox-app.com//9d2dc753-3564-4320-8ef2-ca436b23bd95.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//128ec6f2-e105-4726-b297-d422f5ae087d.png', cart: 'https://images.launchbox-app.com//8e54073a-c1ec-48aa-bbb4-8994b0385926.png', video: 'https://www.gamesdatabase.org/Media/SYSTEM/Sony_Playstation/Video/Formated/Twisted_Metal_4___1999___989_Studios.mp4' }
-    },
-    { 
-      name: 'Spyro the Dragon', desc: 'Un encantador dragón púrpura en una aventura de plataformas 3D. Rescata a los dragones cristalizados y recupera las gemas robadas.', details: 'Plataformas 3D', year: '1998', developer: 'Insomniac Games', players: '1 Jugador', price: '$60.000', 
-      img: 'https://images.launchbox-app.com//425fc3f4-29d7-4862-b494-d3afbfc36c34.png',
-      media: { box3d: 'https://images.launchbox-app.com//a5f3093e-c741-47cd-9b8e-a7b2533fbdd8.png', cart: 'https://images.launchbox-app.com//144cf23a-1a90-4f85-9043-ab55f28544c9.png', video: 'https://www.gamesdatabase.org/Media/SYSTEM/Sony_Playstation/Video/Formated/Spyro_the_Dragon___1998___Sony_Computer_Entertainment.mp4' }
+  }
+});
+
+watch(() => props.preselectedGame, (newVal) => {
+  if (newVal) {
+    for (const row of shelves.value) {
+      const match = row.find(g => g.name === newVal);
+      if (match) {
+        selectItem(match);
+        break;
+      }
     }
-  ],
-  [
-    { 
-      name: 'MediEvil', desc: 'El caballero Sir Daniel Fortesque resucita para enfrentar al malvado hechicero Zarok. Acción y humor oscuro en un mundo gótico encantador.', details: 'Acción / Aventura', year: '1998', developer: 'SCE Cambridge', players: '1 Jugador', price: '$70.000', 
-      img: 'https://images.launchbox-app.com//03f15946-1988-4f6e-a9c0-48c1aa8f93be.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//ed7b25f9-3f8a-4e66-a498-ee40748cf0a4.png', cart: 'https://gamesdb-images.launchbox.gg/r2_cf6a1be2-fb0c-4456-8f25-89e35094017a.png', video: 'https://www.gamesdatabase.org/Media/SYSTEM/Sony_Playstation/Video/Formated/MediEvil___1998___Sony_Computer_Entertainment.mp4' }
-    },
-    { 
-      name: 'Ace Combat 3: Electrosphere', desc: 'Combate aéreo futurista con una narrativa ramificada. Pilota cazas avanzados en un conflicto corporativo ambientado en el año 2040.', details: 'Simulación Aérea', year: '2000', developer: 'Namco', players: '1 Jugador', price: '$50.000', 
-      img: 'https://images.launchbox-app.com//da1d3ac2-cb33-420d-993d-660bef446259.png',
-      media: { box3d: 'https://images.launchbox-app.com//dd7b25a6-135b-49b6-838a-609b36a2790f.png', cart: 'https://images.launchbox-app.com//a9d981e2-037c-4436-bf5a-06588293113f.png', video: 'https://www.gamesdatabase.org/Media/SYSTEM/Sony_Playstation/Video/Formated/Ace_Combat_3__Electrosphere___2000___Namco_Limited.mp4' }
-    },
-    { 
-      name: 'Dino Crisis', desc: 'Survival horror con dinosaurios del creador de Resident Evil. Explora una isla de investigación invadida por criaturas prehistóricas.', details: 'Survival Horror', year: '1999', developer: 'Capcom', players: '1 Jugador', price: '$80.000', 
-      img: 'https://images.launchbox-app.com//c2270543-c5db-4b5b-ae18-2a005714761c.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//92334ae4-9af7-4166-9165-85ac8ebddf13.png', cart: 'https://images.launchbox-app.com//b608d983-b442-40e5-a8c3-f8f1f9ef06a4.png', video: 'https://www.gamesdatabase.org/Media/SYSTEM/Sony_Playstation/Video/Formated/Dino_Crisis___1999___Capcom_Co___Ltd_.mp4' }
-    },
-    { 
-      name: 'Rayman', desc: 'El clásico de plataformas 2D de Ubisoft. Recorre mundos coloridos y surrealistas para liberar a los Electoons y derrotar al malvado Mr. Dark.', details: 'Plataformas 2D', year: '1995', developer: 'Ubisoft', players: '1 Jugador', price: '$40.000', 
-      img: 'https://images.launchbox-app.com//2db70fad-1e03-459e-ab80-3ba0012bba15.jpg',
-      media: { box3d: 'https://gamesdb-images.launchbox.gg/r2_6ca09eec-97d3-4fd9-89a2-964babc5eba2.png', cart: 'https://images.launchbox-app.com//9d0c2c4c-7f54-47f1-8f9a-f6adee7ea4cd.png', video: 'https://www.gamesdatabase.org/Media/SYSTEM/Sony_Playstation/Video/Formated/Rayman___1995___Ubisoft.mp4' }
-    }
-  ]
-]);
+  }
+});
 </script>
 
 <style scoped>

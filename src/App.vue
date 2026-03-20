@@ -6,6 +6,8 @@ import WiiShelf from './components/WiiShelf.vue';
 import PS1Shelf from './components/PS1Shelf.vue';
 import PS2Shelf from './components/PS2Shelf.vue';
 import PS3Shelf from './components/PS3Shelf.vue';
+import Catalog from './components/Catalog.vue';
+import About from './components/About.vue';
 import Footer from './components/Footer.vue';
 
 const currentView = ref('store');
@@ -55,35 +57,68 @@ const checkout = () => {
   showCart.value = false;
 };
 
+const selectedGameName = ref(null);
+
+const goToGame = (view, gameName) => {
+  selectedGameName.value = gameName;
+  currentView.value = view;
+};
+
 const goToN64 = () => {
   currentView.value = 'n64';
+  selectedGameName.value = null;
 };
 
 const goToGC = () => {
   currentView.value = 'gc';
+  selectedGameName.value = null;
 };
 
 const goToWii = () => {
   currentView.value = 'wii';
+  selectedGameName.value = null;
 };
 
 const goToPS1 = () => {
   currentView.value = 'ps1';
+  selectedGameName.value = null;
 };
 
 const goToPS2 = () => {
   currentView.value = 'ps2';
+  selectedGameName.value = null;
 };
 
 const goToPS3 = () => {
   currentView.value = 'ps3';
+  selectedGameName.value = null;
 };
-
-
 
 const goBack = () => {
   currentView.value = 'store';
+  selectedGameName.value = null;
 };
+
+const goToCatalog = () => {
+  currentView.value = 'catalog';
+  selectedGameName.value = null;
+};
+
+const targetAboutSection = ref(null);
+
+const goToAbout = (section) => {
+  currentView.value = 'about';
+  targetAboutSection.value = section;
+};
+
+const recommendedGames = [
+  { view: 'gc', name: 'The Legend Of Zelda Twilight Princess', box3d: 'https://images.launchbox-app.com//a6b372e5-d59b-4381-b23c-2c63fd88b364.png', title: 'Zelda Twilight Princess' },
+  { view: 'gc', name: 'Super Mario Strikers', box3d: 'https://images.launchbox-app.com//7be33efc-95a2-4861-bf96-96250cd23937.png', title: 'Super Mario Strikers' },
+  { view: 'ps2', name: 'Metal Gear Solid 3: Snake Eater', box3d: 'https://images.launchbox-app.com//3bc4200f-00bc-44db-8a73-09ff0d45584e.png', title: 'Metal Gear Solid 3' },
+  { view: 'ps2', name: 'Guitar Hero III: Legends of Rock', box3d: 'https://images.launchbox-app.com//69fc9413-2c44-4914-86c4-e0f9e64345ce.png', title: 'Guitar Hero III' },
+  { view: 'ps3', name: 'The Last of Us', box3d: 'https://images.launchbox-app.com//a4e83ba3-f4dc-4f1c-83c3-35cce554b7e1.png', title: 'The Last of Us' },
+  { view: 'wii', name: 'Super Mario Galaxy', box3d: 'https://images.launchbox-app.com//c61fafb1-bb9d-4e9b-9207-4ff4f48fc6be.png', title: 'Super Mario Galaxy' }
+];
 
 const scale = ref(0.7);
 const panX = ref(0);
@@ -115,6 +150,14 @@ const endDrag = () => {
   isDragging.value = false;
 };
 
+const onWheel = (e) => {
+  if (currentView.value !== 'store') return;
+  e.preventDefault();
+  const zoomFactor = -e.deltaY * 0.001;
+  const newScale = Math.min(Math.max(0.4, scale.value + zoomFactor), 1.5);
+  scale.value = Number(newScale.toFixed(2));
+};
+
 const imageTransform = computed(() => {
   return {
     transform: `scale(${scale.value}) translate(${panX.value}px, ${panY.value}px)`,
@@ -125,17 +168,16 @@ const imageTransform = computed(() => {
 </script>
 
 <template>
-  <div class="app-container">
+  <div class="app-container" :class="{ 'app-locked': currentView === 'store' }">
     <!-- Navbar -->
     <header class="navbar">
-      <div class="navbar-left">
+      <div class="navbar-left" @click="goBack">
          <img src="./assets/img/Nivel Retro 2.png" alt="Nivel Retro" class="navbar-logo" />
       </div>
       <nav class="navbar-right-menu">
         <ul>
-          <li><a href="#" class="active">TIENDA</a></li>
-          <li><a href="#">CATÁLOGO</a></li>
-          <li><a href="#">OFERTAS</a></li>
+          <li><a href="#" :class="{ active: currentView === 'store' }" @click.prevent="goBack">TIENDA</a></li>
+          <li><a href="#" :class="{ active: currentView === 'catalog' }" @click.prevent="goToCatalog">CATÁLOGO</a></li>
           <li><a href="#" class="account-link"><i class="fas fa-user"></i> CUENTA</a></li>
           <li><a href="#" class="cart-link" @click.prevent="showCart = true"><i class="fas fa-shopping-cart"></i> CARRITO <span v-if="cart.length" class="cart-badge">{{ cart.reduce((acc, item) => acc + item.quantity, 0) }}</span></a></li>
         </ul>
@@ -154,7 +196,8 @@ const imageTransform = computed(() => {
               @mousedown="startDrag"
               @mousemove="onDrag"
               @mouseup="endDrag"
-              @mouseleave="endDrag">
+              @mouseleave="endDrag"
+              @wheel="onWheel">
           
         <!-- Sidebar Menu Flotante -->
         <aside class="floating-menu" @mousedown.stop @wheel.stop>
@@ -191,11 +234,6 @@ const imageTransform = computed(() => {
                  <span class="icon-placeholder"><img src="./assets/img/Logo PS3.png" alt="PS3" class="console-logo" /></span> PS3
               </button>
             </li>
-            <li>
-              <button class="filter-btn">
-                 <span class="icon-placeholder"><i class="fas fa-tshirt" style="color: #64748b;"></i></span> MERCH
-              </button>
-            </li>
           </ul>
         </aside>
 
@@ -203,23 +241,8 @@ const imageTransform = computed(() => {
         <aside class="floating-recommendations" @mousedown.stop @wheel.stop>
           <h2 class="sidebar-title">RECOMENDACIONES DE LA SEMANA:</h2>
           <div class="recommendations-grid">
-            <div class="rec-game-box">
-              <img src="https://images.launchbox-app.com//a4e83ba3-f4dc-4f1c-83c3-35cce554b7e1.png" alt="The Last of Us" title="The Last of Us" />
-            </div>
-            <div class="rec-game-box">
-              <img src="https://images.launchbox-app.com//6dc2b29f-8f6f-4ea1-9a0f-aa9229a586e8.png" alt="God of War III" title="God of War III" />
-            </div>
-            <div class="rec-game-box">
-              <img src="https://images.launchbox-app.com//5ad0822a-2f48-41f9-97a1-c04de55daf52.png" alt="Uncharted 2: Among Thieves" title="Uncharted 2: Among Thieves" />
-            </div>
-            <div class="rec-game-box">
-              <img src="https://images.launchbox-app.com//4f91a4b6-d6c1-44b6-8d6b-4170b7d860a5.png" alt="Red Dead Redemption" title="Red Dead Redemption" />
-            </div>
-            <div class="rec-game-box">
-              <img src="https://images.launchbox-app.com//42b017b5-2f16-4819-8e20-1108507958ef.png" alt="Metal Gear Solid 4" title="Metal Gear Solid 4" />
-            </div>
-            <div class="rec-game-box">
-              <img src="https://images.launchbox-app.com//c9282931-c28c-4350-9624-33d59d0c3aeb.png" alt="Grand Theft Auto IV" title="Grand Theft Auto IV" />
+            <div class="rec-game-box" v-for="rec in recommendedGames" :key="rec.name" @click="goToGame(rec.view, rec.name)">
+              <img :src="rec.box3d" :alt="rec.title" :title="rec.title" />
             </div>
           </div>
         </aside>
@@ -240,32 +263,42 @@ const imageTransform = computed(() => {
 
       <!-- Vista del estante N64 -->
       <template v-else-if="currentView === 'n64'">
-        <N64Shelf @back="goBack" @add-to-cart="addToCart" />
+        <N64Shelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" />
       </template>
 
       <!-- Vista del estante GC -->
       <template v-else-if="currentView === 'gc'">
-        <GCShelf @back="goBack" @add-to-cart="addToCart" />
+        <GCShelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" />
       </template>
 
       <!-- Vista del estante Wii -->
       <template v-else-if="currentView === 'wii'">
-        <WiiShelf @back="goBack" @add-to-cart="addToCart" />
+        <WiiShelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" />
       </template>
 
       <!-- Vista del estante PS1 -->
       <template v-else-if="currentView === 'ps1'">
-        <PS1Shelf @back="goBack" @add-to-cart="addToCart" />
+        <PS1Shelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" />
       </template>
 
       <!-- Vista del estante PS2 -->
       <template v-else-if="currentView === 'ps2'">
-        <PS2Shelf @back="goBack" @add-to-cart="addToCart" />
+        <PS2Shelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" />
       </template>
 
       <!-- Vista del estante PS3 -->
       <template v-else-if="currentView === 'ps3'">
-        <PS3Shelf @back="goBack" @add-to-cart="addToCart" />
+        <PS3Shelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" />
+      </template>
+
+      <!-- Vista del catálogo global -->
+      <template v-else-if="currentView === 'catalog'">
+        <Catalog @back="goBack" @open-game="(payload) => goToGame(payload.view, payload.game)" />
+      </template>
+
+      <!-- Vista de Nosotros (Historia, Contacto, FAQ) -->
+      <template v-else-if="currentView === 'about'">
+        <About @back="goBack" :section="targetAboutSection" />
       </template>
 
     </div>
@@ -310,7 +343,7 @@ const imageTransform = computed(() => {
 
           <div class="cart-footer" v-if="cart.length > 0">
             <div class="cart-total-container">
-              <span class="total-label">Total General:</span>
+              <span class="total-label">TOTAL:</span>
               <span class="total-value">{{ formatPrice(cartTotal) }}</span>
             </div>
             <button class="checkout-btn" @click="checkout">Finalizar Compra</button>
@@ -318,7 +351,7 @@ const imageTransform = computed(() => {
         </div>
       </div>
     </Transition>
-    <Footer />
+    <Footer @navigate="goToAbout" />
   </div>
 </template>
 
@@ -336,13 +369,17 @@ body {
 
 <style scoped>
 .app-container {
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
   background-color: #1a273b; /* Dark blue background from the image */
   color: #e2e8f0;
   font-family: 'Roboto', sans-serif;
   display: flex;
   flex-direction: column;
+}
+
+.app-locked {
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* --- Navbar --- */
@@ -368,6 +405,12 @@ body {
   object-fit: contain;
   display: block;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.navbar-logo:hover {
+  opacity: 0.8;
 }
 
 .navbar-right-menu ul {
@@ -433,6 +476,9 @@ body {
   display: flex;
   flex: 1;
   padding: 0;
+}
+
+.app-locked .main-layout {
   overflow: hidden;
 }
 
@@ -682,7 +728,7 @@ body {
 }
 
 .cart-header {
-  padding: 25px 20px;
+  padding: 25px 40px 25px 20px;
   border-bottom: 2px solid #334155;
   display: flex;
   justify-content: space-between;
@@ -717,7 +763,7 @@ body {
 .cart-body {
   flex: 1;
   overflow-y: auto;
-  padding: 20px;
+  padding: 20px 40px 20px 20px;
 }
 
 .cart-items {
@@ -886,7 +932,7 @@ body {
 }
 
 .cart-footer {
-  padding: 25px 20px;
+  padding: 25px 40px 25px 20px;
   background-color: #0f172a;
   border-top: 2px solid #334155;
   display: flex;

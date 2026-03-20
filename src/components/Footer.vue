@@ -7,10 +7,10 @@
       
       <div class="footer-center-section">
         <div class="footer-links-row">
-          <a href="#">Contacto</a>
-          <a href="#">Nuestra historia</a>
-          <a href="#">Estado de pedido</a>
-          <a href="#">Preguntas Frecuentes</a>
+          <a href="#" @click.prevent="$emit('navigate', 'historia')">NUESTRA HISTORIA</a>
+          <a href="#" @click.prevent="$emit('navigate', 'contacto')">CONTACTO</a>
+          <a href="#" @click.prevent="$emit('navigate', 'faq')">PREGUNTAS FRECUENTES</a>
+          <a href="#" class="highlight-link">ESTADO DE PEDIDO</a>
         </div>
         <div class="footer-bottom">
           <p>&copy; 2026 Nivel Retro. Todos los derechos reservados.</p>
@@ -28,6 +28,10 @@
     </div>
   </footer>
 </template>
+
+<script setup>
+defineEmits(['navigate']);
+</script>
 
 <style scoped>
 .footer {
@@ -67,17 +71,18 @@
 
 .footer-links-row {
   display: flex;
-  gap: 30px;
+  gap: 60px;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* Asegura una sola fila */
 }
 
 .footer-links-row a {
   color: #8ca3c3;
   text-decoration: none;
   transition: color 0.2s;
-  font-size: 0.95rem; /* slightly larger to match image */
-  font-weight: 500;
+  font-size: 1rem; 
+  font-weight: 700;
+  white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
 }
 
 .footer-links-row a:hover {
@@ -133,5 +138,9 @@
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.highlight-link {
+  color: #f1f5f9 !important;
 }
 </style>

@@ -168,8 +168,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue';
+import { gcGames } from '../data/gamesData.js';
 
+const props = defineProps(['preselectedGame']);
 defineEmits(['back', 'add-to-cart']);
 
 const libretroGC = 'https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_GameCube/master/Named_Boxarts/';
@@ -191,74 +193,31 @@ const closeLightbox = () => {
   lightboxImage.value = null;
 };
 
-const shelves = ref([
-  [
-    { 
-      name: 'Zelda: The Wind Waker', desc: 'Una épica aventura por un mundo inundado. Destaca por su hermoso apartado gráfico cel-shading y una inolvidable banda sonora.', detailsTitle: 'Género', details: 'Aventura / Acción', year: '2002', developer: 'Nintendo EAD', players: '1 Jugador', price: '$80.000', 
-      img: 'https://images.launchbox-app.com//8d018e6c-9754-49bb-859a-749ef63ddc09.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//6549e045-bd01-4982-9308-c9f3a1acc4d6.png', cart: 'https://images.launchbox-app.com//af78b849-a63d-4806-aeca-2b1a7c04715a.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031057/Legend_of_Zelda_The_-_The_Wind_Waker_USA_wy9tqv.mp4' }
-    },
-    { 
-      name: 'Pikmin 2', desc: 'Lidera a unas curiosas criaturas planta para recolectar tesoros en un planeta alienígena. Estrategia en tiempo real única.', detailsTitle: 'Género', details: 'Estrategia en tiempo real', year: '2004', developer: 'Nintendo EAD', players: '1-2 Jugadores', price: '$65.000', 
-      img: 'https://images.launchbox-app.com//06275055-3633-4207-bf83-b8cad124d04e.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//a988faa6-450a-48ed-9bdf-b75ac502c7fd.png', cart: 'https://images.launchbox-app.com//eb84137f-7ce4-4a2f-9189-5d5c03637ccb.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031059/Pikmin_2_USA_lvweh8.mp4' }
-    },
-    { 
-      name: 'Super Mario Sunshine', desc: 'Mario viaja a la paradisíaca Isla Delfino pero es incriminado. Ayudado por F.L.U.D.D., deberá limpiar la isla completa con agua.', detailsTitle: 'Género', details: 'Plataformas 3D', year: '2002', developer: 'Nintendo EAD', players: '1 Jugador', price: '$70.000', 
-      img: 'https://images.launchbox-app.com//c953705e-44d3-40f7-ba2b-7dee1b84a768.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//68ba6164-3fcd-4b93-be4d-5608aac01118.png', cart: 'https://images.launchbox-app.com//0f71a42f-ab8a-425b-bff0-74b06e844a4f.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031064/Super_Mario_Sunshine_USA_ynjpyb.mp4' }
-    },
-    { 
-      name: 'Super Smash Bros. Melee', desc: 'El rey de los juegos de lucha plataformeros. Un título de culto absoluto en el componente competitivo con físicas frenéticas.', detailsTitle: 'Género', details: 'Lucha / Party', year: '2001', developer: 'HAL Laboratory', players: '1-4 Jugadores', price: '$120.000', 
-      img: 'https://images.launchbox-app.com//6a50a9dc-ac31-440d-ab12-6c322c7ceed0.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//bc1471f7-0124-4b38-a88f-e650f73156af.png', cart: 'https://images.launchbox-app.com//273a9b53-79e4-4899-b254-03157ee749dc.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031065/Super_Smash_Bros._Melee_USA_rjiaoq.mp4' }
+const shelves = ref(gcGames);
+
+onMounted(() => {
+  if (props.preselectedGame) {
+    for (const row of shelves.value) {
+      const match = row.find(g => g.name === props.preselectedGame);
+      if (match) {
+        selectItem(match);
+        break;
+      }
     }
-  ],
-  [
-    { 
-      name: 'Mario Party 4', desc: 'La clásica serie de tableros de Mario debuta en GameCube con mini-juegos más creativos, gráficos mejorados y uso de objetos en 3D.', detailsTitle: 'Género', details: 'Party Game', year: '2002', developer: 'Hudson Soft', players: '1-4 Jugadores', price: '$55.000', 
-      img: 'https://images.launchbox-app.com//adcd0147-858e-4450-bb1b-9168966d2128.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//84021eea-7e7d-45e5-ba85-3507d1514d12.png', cart: 'https://images.launchbox-app.com//dbc01198-d6c8-4985-97ac-67b26b352fd3.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031061/Mario_Party_4_USA_rldcpo.mp4' }
-    },
-    { 
-      name: 'Super Monkey Ball', desc: 'Controla a un mono en una esfera transparente, inclinando el escenario para llevarlo a la meta. Increíblemente adictivo y exigente.', detailsTitle: 'Género', details: 'Party / Puzzle', year: '2001', developer: 'Amusement Vision', players: '1-4 Jugadores', price: '$35.000', 
-      img: 'https://images.launchbox-app.com//0b53e4c6-fe74-460e-a236-26d335563f90.png',
-      media: { box3d: 'https://images.launchbox-app.com//6f8a9784-2fcd-432a-816e-2ea102f60bf3.png', cart: 'https://images.launchbox-app.com//a3d4c831-4df6-461c-b10e-d89c631bf714.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031067/Super_Monkey_Ball_USA_pjfv2d.mp4' }
-    },
-    { 
-      name: 'Mario Kart Double Dash', desc: 'La revolución del karting donde ¡dos personajes van en un mismo coche! Permite lanzar objetos y cambiar pilotos en medio de la carrera.', detailsTitle: 'Género', details: 'Carreras Arcade', year: '2003', developer: 'Nintendo EAD', players: '1-4 Jugadores', price: '$90.000', 
-      img: 'https://images.launchbox-app.com//0db38719-5ccc-4710-b416-ddc25eb4332b.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//e234aa6b-4099-401f-bdbf-460e436c23ad.png', cart: 'https://images.launchbox-app.com//84f2b8fe-32bf-4dec-b4c2-08664f088271.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031065/Mario_Kart_-_Double_Dash_USA_cabdh3.mp4' }
-    },
-    { 
-      name: 'Luigi\'s Mansion', desc: 'El hermano miedoso de Mario se convierte en protagonista para atrapar fantasmas en una siniestra mansión. Título de lanzamiento de GameCube.', detailsTitle: 'Género', details: 'Acción / Aventura', year: '2001', developer: 'Nintendo EAD', players: '1 Jugador', price: '$75.000', 
-      img: 'https://images.launchbox-app.com//06fbb90c-cb64-4d1f-8c48-c5e117c7fe67.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//63e19fe1-bd1e-4a92-8a4d-c63a60cc60d2.png', cart: 'https://images.launchbox-app.com//fcb4fab3-ba1e-46fe-ae5d-c3cda91b1e22.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031058/Luigi_s_Mansion_USA_mucjfx.mp4' }
+  }
+});
+
+watch(() => props.preselectedGame, (newVal) => {
+  if (newVal) {
+    for (const row of shelves.value) {
+      const match = row.find(g => g.name === newVal);
+      if (match) {
+        selectItem(match);
+        break;
+      }
     }
-  ],
-  [
-    { 
-      name: 'Donkey Kong Jungle Beat', desc: 'Un salvaje y rítmico juego de plataformas diseñado originalmente para jugarse con los Bongós DK.', detailsTitle: 'Género', details: 'Plataformas Rítmico', year: '2004', developer: 'Nintendo EAD Tokyo', players: '1-2 Jugadores', price: '$40.000', 
-      img: 'https://images.launchbox-app.com//f3024d40-f1f4-49f1-9641-cf6dbed20747.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//d18b85f3-beec-4d96-9d3e-b2b3804b14a4.png', cart: 'https://images.launchbox-app.com//3914698d-ff3e-48ca-9405-8f1faaa718b4.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031058/Donkey_Kong_Jungle_Beat_USA_y9ja1h.mp4' }
-    },
-    { 
-      name: 'Super Mario Strikers', desc: 'El frenético fútbol sin reglas del Reino Champiñón, donde los placajes severos y remates increíbles son la orden del día.', detailsTitle: 'Género', details: 'Fútbol Arcade', year: '2005', developer: 'Next Level Games', players: '1-4 Jugadores', price: '$65.000', 
-      img: 'https://images.launchbox-app.com//786d32bd-ab4a-45c3-acb6-32ac5666c242.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//7be33efc-95a2-4861-bf96-96250cd23937.png', cart: 'https://images.launchbox-app.com//ac5255fd-35fa-441f-b9b3-e4202cc0c998.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031059/Super_Mario_Strikers_USA_zhgfzm.mp4' }
-    },
-    { 
-      name: 'Viewtiful Joe', desc: 'Un juego de acción beat \'em up con estilo cel-shading espectacular donde controlas a un héroe amante del cine con la capacidad de controlar el tiempo.', detailsTitle: 'Género', details: 'Acción / Beat \'em up', year: '2003', developer: 'Capcom', players: '1 Jugador', price: '$50.000', 
-      img: 'https://images.launchbox-app.com//f273334d-89d8-4c16-80f8-76082b7a73d6.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//a58cab26-4ff4-4da7-9b4b-8cfe23789e57.png', cart: 'https://images.launchbox-app.com//2907e10e-38a2-4bea-a60a-7b91613f0031.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031071/Viewtiful_Joe_USA_a2cn2c.mp4' }
-    },
-    { 
-      name: 'The Legend Of Zelda Twilight Princess', desc: 'Una aventura oscura y madura donde Link puede transformarse en lobo. Explora un reino invadido por el crepúsculo y salva a Hyrule.', detailsTitle: 'Género', details: 'Acción / Aventura', year: '2006', developer: 'Nintendo EAD', players: '1 Jugador', price: '$95.000', 
-      img: 'https://images.launchbox-app.com//74c9cf0e-f788-49e0-90a3-b67f9ad28b6d.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//a6b372e5-d59b-4381-b23c-2c63fd88b364.png', cart: 'https://images.launchbox-app.com//a721520d-1ae9-4a7d-9a79-f450ab07d004.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031057/Legend_of_Zelda_The_-_Twilight_Princess_USA_wkn7rr.mp4' }
-    }
-  ]
-]);
+  }
+});
 </script>
 
 <style scoped>

@@ -163,11 +163,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
+import { n64Games } from '../data/gamesData.js';
 
+const props = defineProps({
+  preselectedGame: String
+});
 defineEmits(['back', 'add-to-cart']);
-
-const libretroN64 = 'https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_64/master/Named_Boxarts/';
 
 const selectedItem = ref(null);
 const lightboxImage = ref(null);
@@ -186,124 +188,31 @@ const closeLightbox = () => {
   lightboxImage.value = null;
 };
 
-const shelves = ref([
-  // Fila 1: Hardware Local
-  [
-    { 
-      name: 'Caja N64', 
-      title: 'Nintendo 64 Original',
-      img: '/src/assets/consoles/Caja N64.png', 
-      isHardware: true,
-      desc: 'Consola clásica de 64 bits en excelente estado de conservación estética y funcional.',
-      detailsTitle: 'Contenido adicional',
-      details: 'Incluye todos los accesorios originales y manuales de fábrica intactos.',
-      price: '$100.000',
-      year: '1996',
-      gallery: [
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Nintendo-64-wController-L.jpg/3840px-Nintendo-64-wController-L.jpg',
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Nintendo-64-Controller-Gray-Flat.jpg/1280px-Nintendo-64-Controller-Gray-Flat.jpg',
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Nintendo-64-Console-FL.png/1920px-Nintendo-64-Console-FL.png',
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Nintendo-64-Console-BR.jpg/1920px-Nintendo-64-Console-BR.jpg'
-      ]
-    },
-    { 
-      name: 'Control N64', 
-      title: 'Control N64 Clásico Gris',
-      img: '/src/assets/consoles/Control N64.png', 
-      isHardware: true,
-      desc: 'El revolucionario mando tridente que popularizó el stick analógico y el Rumble Pak (vibración).',
-      detailsTitle: 'Estado / Condición',
-      details: 'Joystick rígido (10/10), botones en perfecto funcionamiento táctil. Caja original abierta.',
-      price: '$35.000',
-      year: '1996',
-      gallery: [
-        'https://upload.wikimedia.org/wikipedia/commons/5/56/N64-Controller-Gray.jpg',
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/N64-Controller-Gray-Back.jpg/1920px-N64-Controller-Gray-Back.jpg'
-      ]
-    }
-  ],
-  // Fila 2: Juegos
-  [
-    { 
-      name: 'Super Mario 64', desc: 'El primer juego de plataformas 3D de Mario, revolucionó la industria de los videojuegos con su innovadora cámara libre en un mundo abierto.', detailsTitle: 'Género', details: 'Plataformas 3D', year: '1996', developer: 'Nintendo EAD', players: '1 Jugador', price: '$45.000', img: libretroN64 + 'Super%20Mario%2064%20(USA).png', 
-      media: {
-        box3d: 'https://images.launchbox-app.com//72ae66ab-466a-4173-8e8d-0fb39ea1cfab.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DE BOX 3D
-        cart: 'https://images.launchbox-app.com//391d6327-c8c3-4d4c-850e-e11466363a8a.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DEL CARTUCHO
-        video: 'https://www.gamesdatabase.org/Media/SYSTEM/Nintendo_N64/Video/Formated/Super_Mario_64___1996___Nintendo.mp4'
-      }
-    },
-    { 
-      name: 'Diddy Kong Racing', desc: 'Desafiante juego de carreras protagonizado por Diddy Kong y sus amigos. Innovó con un modo aventura muy completo y varios vehículos.', detailsTitle: 'Género', details: 'Carreras / Aventura', year: '1997', developer: 'Rareware', players: '1-4 Jugadores', price: '$30.000', img: libretroN64 + 'Diddy%20Kong%20Racing%20(USA)%20(En%2CFr).png', 
-      media: {
-        box3d: 'https://images.launchbox-app.com//e973dc04-4687-4b33-9135-e423334c00d3.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DE BOX 3D
-        cart: 'https://images.launchbox-app.com//b7e6f121-3dd2-46d5-abb3-7dff787cae77.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DEL CARTUCHO
-        video: 'https://www.gamesdatabase.org/Media/SYSTEM/Nintendo_N64/Video/Formated/Diddy_Kong_Racing___1997___Nintendo.mp4'
-      }
-    },
-    { 
-      name: 'Zelda: Ocarina of Time', desc: 'Aventura épica de Link a lo largo del tiempo para detener al malvado rey Ganondorf. Considerado uno de los mejores videojuegos.', detailsTitle: 'Género', details: 'Aventura / Acción RPG', year: '1998', developer: 'Nintendo EAD', players: '1 Jugador', price: '$60.000', img: libretroN64 + 'Legend%20of%20Zelda%2C%20The%20-%20Ocarina%20of%20Time%20(USA).png', 
-      media: {
-        box3d: 'https://images.launchbox-app.com//41c66c62-b72c-4df1-b536-b6d83aaf22ca.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DE BOX 3D
-        cart: 'https://images.launchbox-app.com//c20454c0-e6ab-4dd9-810d-50ade4278d3a.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DEL CARTUCHO
-        video: 'https://www.gamesdatabase.org/Media/SYSTEM/Nintendo_N64/Video/Formated/Legend_of_Zelda__Ocarina_of_Time___1998___Nintendo.mp4'
+const shelves = ref(n64Games);
+
+onMounted(() => {
+  if (props.preselectedGame) {
+    for (const row of shelves.value) {
+      const match = row.find(g => g.name === props.preselectedGame);
+      if (match) {
+        selectItem(match);
+        break;
       }
     }
-  ],
-  // Fila 3: Juegos
-  [
-    { 
-      name: 'Banjo-Kazooie', desc: 'Aventura de recolección en plataformas 3D desarrollada por Rare, aclamada universalmente por su carisma y diseño de niveles.', detailsTitle: 'Género', details: 'Plataformas 3D', year: '1998', developer: 'Rareware', players: '1 Jugador', price: '$40.000', img: libretroN64 + 'Banjo-Kazooie%20(USA).png', 
-      media: {
-        box3d: 'https://images.launchbox-app.com//96e9a938-d3e3-4cd4-a515-187682b69694.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DE BOX 3D
-        cart: 'https://images.launchbox-app.com//ed3b2914-ec04-4107-b963-4424d0971e7b.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DEL CARTUCHO
-        video: 'https://www.gamesdatabase.org/Media/SYSTEM/Nintendo_N64/Video/Formated/Banjo_Kazooie___1998___Nintendo.mp4' // Agregado para futura expansión
-      }
-    },
-    { 
-      name: 'Mario Kart 64', desc: 'La mítica segunda entrega de la saga Mario Kart, la primera en presentar circuitos en entornos poligonales 3D.', detailsTitle: 'Género', details: 'Carreras arcade', year: '1996', developer: 'Nintendo EAD', players: '1-4 Jugadores', price: '$50.000', img: libretroN64 + 'Mario%20Kart%2064%20(USA).png', 
-      media: {
-        box3d: 'https://images.launchbox-app.com//51fe3977-634a-4f9b-af22-00020943e874.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DE BOX 3D
-        cart: 'https://images.launchbox-app.com//7c40c487-dc15-4b9f-a80f-083e3941f29b.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DEL CARTUCHO
-        video: 'https://www.gamesdatabase.org/Media/SYSTEM/Nintendo_N64/Video/Formated/Mario_Kart_64___1997___Nintendo.mp4' // Agregado para futura expansión
-      }
-    },
-    { 
-      name: 'Donkey Kong 64', desc: 'El regreso de la familia Kong en una inmensa aventura. Este título empujó los límites del sistema requiriendo el Expansion Pak.', detailsTitle: 'Género', details: 'Plataformas 3D "Collectathon"', year: '1999', developer: 'Rareware', players: '1-4 Jugadores', price: '$35.000', img: libretroN64 + 'Donkey%20Kong%2064%20(USA).png', 
-      media: {
-        box3d: 'https://images.launchbox-app.com//f450ced5-c42f-45f6-a7a9-83b3fead145a.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DE BOX 3D
-        cart: 'https://images.launchbox-app.com//44fa4e81-13bb-44aa-8ef9-2e7adf6587fa.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DEL CARTUCHO
-        video: 'https://www.gamesdatabase.org/Media/SYSTEM/Nintendo_N64/Video/Formated/Donkey_Kong_64___1999___Nintendo.mp4' // Agregado para futura expansión
+  }
+});
+
+watch(() => props.preselectedGame, (newVal) => {
+  if (newVal) {
+    for (const row of shelves.value) {
+      const match = row.find(g => g.name === newVal);
+      if (match) {
+        selectItem(match);
+        break;
       }
     }
-  ],
-  // Fila 4: Juegos
-  [
-    { 
-      name: 'Paper Mario', desc: 'Aventura RPG única que mezcla personajes en 2D similares al papel en un mundo 3D. Un clásico entrañable por su humor y sistema de combate por turnos.', detailsTitle: 'Género', details: 'RPG de Acción', year: '2000', developer: 'Intelligent Systems', players: '1 Jugador', price: '$85.000', img: libretroN64 + 'Paper%20Mario%20(USA).png', 
-      media: {
-        box3d: 'https://images.launchbox-app.com//c7ae433d-5e91-4da5-bb75-24b84b68e69c.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DE BOX 3D
-        cart: 'https://images.launchbox-app.com//87d84d99-db78-4cbc-8450-fda0ffc3ce80.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DEL CARTUCHO
-        video: 'https://www.gamesdatabase.org/Media/SYSTEM/Nintendo_N64/Video/Formated/Paper_Mario___2000___Nintendo.mp4' // Agregado para futura expansión
-      }
-    },
-    { 
-      name: 'Conker\'s Bad Fur Day', desc: 'Una hilarante y sarcástica parodia para adultos de los juegos familiares. Además de un tremendo portento técnico para los gráficos de la consola.', detailsTitle: 'Género', details: 'Plataformas 3D para adultos', year: '2001', developer: 'Rareware', players: '1-4 Jugadores', price: '$120.000', img: libretroN64 + 'Conker\'s%20Bad%20Fur%20Day%20(USA).png', 
-      media: {
-        box3d: 'https://images.launchbox-app.com//b31c786f-1748-44a1-b138-494dbc194c32.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DE BOX 3D
-        cart: 'https://images.launchbox-app.com//a086ede4-599f-4397-887d-f0510be44efa.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DEL CARTUCHO
-        video: 'https://www.gamesdatabase.org/Media/SYSTEM/Nintendo_N64/Video/Formated/Conker_s_Bad_Fur_Day___2001___Rare__Ltd_.mp4' // Agregado para futura expansión
-      }
-    },
-    { 
-      name: 'Bomberman Hero', desc: 'Aventura 3D individual de Bomberman. A diferencia de otros juegos de la serie, se centra completamente en la exploración para un jugador.', detailsTitle: 'Género', details: 'Plataformas de acción', year: '1998', developer: 'Hudson Soft', players: '1 Jugador', price: '$25.000', img: libretroN64 + 'Bomberman%20Hero%20(USA).png', 
-      media: {
-        box3d: 'https://images.launchbox-app.com//5922e323-d7ca-4d6f-8084-e894e2d7833e.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DE BOX 3D
-        cart: 'https://images.launchbox-app.com//ed2db0c5-3353-4e24-8496-80894bda43c7.png', // <-- REEMPLAZA ESTE TEXTO POR EL LINK DEL CARTUCHO
-        video: 'https://www.gamesdatabase.org/Media/SYSTEM/Nintendo_N64/Video/Formated/Bomberman_Hero___1998___Nintendo.mp4' // Agregado para futura expansión
-      }
-    }
-  ]
-]);
+  }
+});
 </script>
 
 <style scoped>

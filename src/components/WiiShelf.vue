@@ -164,8 +164,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue';
+import { wiiGames } from '../data/gamesData.js';
 
+const shelves = ref(wiiGames);
+
+const props = defineProps(['preselectedGame']);
 defineEmits(['back', 'add-to-cart']);
 
 const libretroWii = 'https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Wii/master/Named_Boxarts/';
@@ -187,74 +191,30 @@ const closeLightbox = () => {
   lightboxImage.value = null;
 };
 
-const shelves = ref([
-  [
-    { 
-      name: 'New Super Mario Bros. Wii', desc: '¡El regreso triunfal de Mario a las plataformas 2D con modo cooperativo para 4 jugadores! Atraviesa mundos vibrantes usando nuevos ítems como el traje de hélice.', detailsTitle: 'Género', details: 'Plataformas 2D', year: '2009', developer: 'Nintendo EAD', players: '1-4 Jugadores', price: '$45.000', 
-      img: 'https://images.launchbox-app.com//bb1e4403-13e8-4611-af08-d94083dbc230.png',
-      media: { box3d: 'https://images.launchbox-app.com//81b4755d-8068-4013-b176-9b13464f5359.png', cart: 'https://images.launchbox-app.com//d51d70f5-7332-4feb-b6ce-2d19a3fccdbe.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031186/New_Super_Mario_Bros._Wii_USA_En_Fr_Es_Rev_2_uhbtgu.mp4' }
-    },
-    { 
-      name: 'Mario Kart Wii', desc: 'Siente la velocidad con el Wii Wheel. Incluye un enorme plantel de personajes y circuitos clásicos junto a la gran novedad: ¡las motocicletas!', detailsTitle: 'Género', details: 'Carreras Arcade', year: '2008', developer: 'Nintendo EAD', players: '1-4 Jugadores', price: '$50.000', 
-      img: 'https://images.launchbox-app.com//48d25208-91e4-4e2d-89d7-6c3359313528.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//2a1760af-8570-40cb-8782-2920119c734f.png', cart: 'https://images.launchbox-app.com//47d85a57-297a-4852-8472-13e170dac3d9.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031201/Mario_Kart_Wii_USA_En_Fr_Es_lwhfaa.mp4' }
-    },
-    { 
-      name: 'Metroid Prime 3: Corruption', desc: 'Samus Aran regresa para cerrar su épica trilogía. Usa el Wii Remote para apuntar con precisión absoluta mientras combates la corrupción de Phazon.', detailsTitle: 'Género', details: 'FPA / Acción / Aventura', year: '2007', developer: 'Retro Studios', players: '1 Jugador', price: '$40.000', 
-      img: 'https://images.launchbox-app.com//4d46980a-5f8f-4c52-a993-ab45f9bea4f9.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//a30058dd-0b49-4390-ad9c-3ac8093e8610.png', cart: 'https://images.launchbox-app.com//47a78d1b-5d94-4961-bef4-2c3e236ef3ea.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031197/Metroid_Prime_3_-_Corruption_USA_b9vzdy.mp4' }
-    },
-    { 
-      name: 'The Legend of Zelda: Skyward Sword', desc: 'Descubre los orígenes de la Espada Maestra en esta épica aventura por las nubes. Combates realistas con detección 1:1 gracias al Wii MotionPlus.', detailsTitle: 'Género', details: 'Acción / Aventura', year: '2011', developer: 'Nintendo EAD', players: '1 Jugador', price: '$60.000', 
-      img: 'https://images.launchbox-app.com//158911e9-23ba-45cd-acbb-1270d3252ca8.png',
-      media: { box3d: 'https://images.launchbox-app.com//cc3d5f80-264a-4942-b5b8-a5431ea4ffc5.png', cart: 'https://gamesdb-images.launchbox.gg/r2_9f8ceff8-3a35-45b1-8237-105b02028f93.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031183/Legend_of_Zelda_The_-_Skyward_Sword_USA_En_Fr_Es_Rev_2_feryfj.mp4' }
+
+onMounted(() => {
+  if (props.preselectedGame) {
+    for (const row of shelves.value) {
+      const match = row.find(g => g.name === props.preselectedGame);
+      if (match) {
+        selectItem(match);
+        break;
+      }
     }
-  ],
-  [
-    { 
-      name: 'Super Mario Galaxy', desc: 'La reinvención definitiva de las plataformas 3D. Viaja a través de planetoides con gravedad variable en una odisea espacial sin precedentes.', detailsTitle: 'Género', details: 'Plataformas 3D', year: '2007', developer: 'Nintendo EAD Tokyo', players: '1-2 Jugadores', price: '$55.000', 
-      img: 'https://images.launchbox-app.com//7a1a4534-4a67-468d-b218-397293981bf5.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//c61fafb1-bb9d-4e9b-9207-4ff4f48fc6be.png', cart: 'https://images.launchbox-app.com//da9bea87-791c-4f80-896f-d073955ef9bc.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031195/Super_Mario_Galaxy_USA_En_Fr_Es_dgg8ka.mp4' }
-    },
-    { 
-      name: 'Wii Sports Resort', desc: '¡Bienvenido a la Isla Wuhu! Disfruta de una colección de deportes perfeccionados con la precisión del Wii MotionPlus, desde esgrima hasta arquería.', detailsTitle: 'Género', details: 'Simulación / Deportivo', year: '2009', developer: 'Nintendo EAD', players: '1-4 Jugadores', price: '$35.000', 
-      img: 'https://images.launchbox-app.com//307075fe-7a34-4c3b-8b8a-b1d525ee6694.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//c4e1c1f0-9098-40c2-b502-c3e85e4e0f05.png', cart: 'https://images.launchbox-app.com//f585b75e-934e-45ea-a0fe-29ca6bbce972.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031190/Wii_Sports_Resort_USA_En_Fr_Es_Rev_1_z417cr.mp4' }
-    },
-    { 
-      name: 'Epic Mickey', desc: 'Utiliza el poder de la pintura y el disolvente para restaurar el Mundo del Páramo. Una visión oscura y artística del universo de Walt Disney.', detailsTitle: 'Género', details: 'Aventura / Plataformas', year: '2010', developer: 'Junction Point', players: '1 Jugador', price: '$30.000', 
-      img: 'https://images.launchbox-app.com//75dad23f-9996-4c3b-b0fe-8e2fdde660a7.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//28f6fac3-c401-439e-8e23-cf74d546c534.png', cart: 'https://images.launchbox-app.com//1d394685-745f-4120-8920-db6337c73033.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031183/Disney_Epic_Mickey_USA_En_Fr_Es_d5a8tk.mp4' }
-    },
-    { 
-      name: 'No More Heroes', desc: 'Acompaña a Travis Touchdown en su ascenso para convertirse en el asesino número uno. Estilo visual punk, humor ácido y combates con Beam Katana.', detailsTitle: 'Género', details: 'Acción / Hack and Slash', year: '2007', developer: 'Grasshopper Manufacture', players: '1 Jugador', price: '$40.000', 
-      img: 'https://images.launchbox-app.com//be2f6e29-316b-4c51-81c4-092c776f4d5a.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//26ec9eb3-e742-4b68-b5f4-affdead2ef2f.png', cart: 'https://images.launchbox-app.com//3715806d-af2c-49d8-bd85-f277f8a9f567.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031197/No_More_Heroes_USA_En_Fr_Es_otbw2d.mp4' }
+  }
+});
+
+watch(() => props.preselectedGame, (newVal) => {
+  if (newVal) {
+    for (const row of shelves.value) {
+      const match = row.find(g => g.name === newVal);
+      if (match) {
+        selectItem(match);
+        break;
+      }
     }
-  ],
-  [
-    { 
-      name: 'Super Paper Mario', desc: 'Una aventura que desafía las dimensiones. Cambia entre el 2D y el 3D para resolver puzles y descubrir secretos en una de las historias más profundas de Mario.', detailsTitle: 'Género', details: 'Plataformas / RPG', year: '2007', developer: 'Intelligent Systems', players: '1 Jugador', price: '$35.000', 
-      img: 'https://images.launchbox-app.com//5c0ffd3f-c840-488b-95a5-92e9306b3d2c.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//2e8ef862-5fc8-4ad4-9222-273b1c672440.png', cart: 'https://images.launchbox-app.com//4c09a41e-7d30-4944-96fa-b3a0f182d04e.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031188/Super_Paper_Mario_USA_Rev_2_yj8upz.mp4' }
-    },
-    { 
-      name: 'Kirby Epic Yarn', desc: 'Kirby ha sido transportado a un mundo de hilos y telas. Una experiencia visualmente deslumbrante y relajante con una jugabilidad llena de ingenio.', detailsTitle: 'Género', details: 'Plataformas', year: '2010', developer: 'Good-Feel / HAL Lab', players: '1-2 Jugadores', price: '$25.000', 
-      img: 'https://images.launchbox-app.com//31fa4b76-5261-4cdb-b914-7bd50648bb5a.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//64e7d550-719b-4508-9efd-11a28d1f4599.png', cart: 'https://images.launchbox-app.com//e2c951d7-cf80-4f49-9bce-71737c4eeb38.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031191/Kirby_s_Epic_Yarn_USA_En_Fr_Es_b1pore.mp4' }
-    },
-    { 
-      name: 'Mario Party 8', desc: 'La fiesta llega a las pantallas panorámicas. Girar, agitar y apuntar con el Wii Remote en una gala llena de mini-juegos locos y tableros temáticos.', detailsTitle: 'Género', details: 'Party Game', year: '2007', developer: 'Hudson Soft', players: '1-4 Jugadores', price: '$35.000', 
-      img: 'https://images.launchbox-app.com//3a375b62-3bb3-4d0f-b055-e647e5e7bbd4.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//ce7a21b4-4870-4861-a926-a36cf8994b7d.png', cart: 'https://images.launchbox-app.com//c00d84a2-345e-428c-a705-18c8b859710c.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031185/Mario_Party_8_USA_Asia_Rev_2_t5e4kk.mp4' }
-    },
-    { 
-      name: 'Animal Crossing: City Folk', desc: 'Vive la vida a tu ritmo en tu propio pueblo. Ahora puedes tomar el bus hacia la gran ciudad para ir de compras, ir al teatro o visitar a tus amigos.', detailsTitle: 'Género', details: 'Simulación de vida', year: '2008', developer: 'Nintendo EAD', players: '1 Jugador', price: '$45.000', 
-      img: 'https://images.launchbox-app.com//4e05331d-51e5-415d-9da6-c0f3185c82d2.jpg',
-      media: { box3d: 'https://images.launchbox-app.com//460bd00c-25f8-4403-ae6d-c76c13647efb.png', cart: 'https://images.launchbox-app.com//d9209e88-fb85-4ce7-81aa-07299e2d57a9.png', video: 'https://res.cloudinary.com/dabfglubl/video/upload/v1774031179/Animal_Crossing_-_City_Folk_USA_Asia_En_Fr_Es_Rev_1_in6hhz.mp4' }
-    }
-  ]
-]);
+  }
+});
 </script>
 
 <style scoped>

@@ -6,7 +6,7 @@ import WiiShelf from './components/WiiShelf.vue';
 import PS1Shelf from './components/PS1Shelf.vue';
 import PS2Shelf from './components/PS2Shelf.vue';
 import PS3Shelf from './components/PS3Shelf.vue';
-
+import Footer from './components/Footer.vue';
 
 const currentView = ref('store');
 
@@ -92,17 +92,6 @@ const isDragging = ref(false);
 const startX = ref(0);
 const startY = ref(0);
 
-const handleWheel = (e) => {
-  const zoomFactor = 0.05;
-  if (e.deltaY < 0) {
-    // Scroll up -> zoom in
-    scale.value = Math.min(scale.value + zoomFactor, 1.5);
-  } else {
-    // Scroll down -> zoom out
-    scale.value = Math.max(scale.value - zoomFactor, 0.4);
-  }
-};
-
 const startDrag = (e) => {
   isDragging.value = true;
   startX.value = e.clientX;
@@ -162,7 +151,6 @@ const imageTransform = computed(() => {
       <!-- Main Content (Área de la tienda 3D isómetrica) -->
       <template v-if="currentView === 'store'">
         <main class="store-interactive-area"
-              @wheel.prevent="handleWheel"
               @mousedown="startDrag"
               @mousemove="onDrag"
               @mouseup="endDrag"
@@ -210,6 +198,38 @@ const imageTransform = computed(() => {
             </li>
           </ul>
         </aside>
+
+        <!-- Sidebar Recomendaciones Flotante -->
+        <aside class="floating-recommendations" @mousedown.stop @wheel.stop>
+          <h2 class="sidebar-title">RECOMENDACIONES DE LA SEMANA:</h2>
+          <div class="recommendations-grid">
+            <div class="rec-game-box">
+              <img src="https://images.launchbox-app.com//a4e83ba3-f4dc-4f1c-83c3-35cce554b7e1.png" alt="The Last of Us" title="The Last of Us" />
+            </div>
+            <div class="rec-game-box">
+              <img src="https://images.launchbox-app.com//6dc2b29f-8f6f-4ea1-9a0f-aa9229a586e8.png" alt="God of War III" title="God of War III" />
+            </div>
+            <div class="rec-game-box">
+              <img src="https://images.launchbox-app.com//5ad0822a-2f48-41f9-97a1-c04de55daf52.png" alt="Uncharted 2: Among Thieves" title="Uncharted 2: Among Thieves" />
+            </div>
+            <div class="rec-game-box">
+              <img src="https://images.launchbox-app.com//4f91a4b6-d6c1-44b6-8d6b-4170b7d860a5.png" alt="Red Dead Redemption" title="Red Dead Redemption" />
+            </div>
+            <div class="rec-game-box">
+              <img src="https://images.launchbox-app.com//42b017b5-2f16-4819-8e20-1108507958ef.png" alt="Metal Gear Solid 4" title="Metal Gear Solid 4" />
+            </div>
+            <div class="rec-game-box">
+              <img src="https://images.launchbox-app.com//c9282931-c28c-4350-9624-33d59d0c3aeb.png" alt="Grand Theft Auto IV" title="Grand Theft Auto IV" />
+            </div>
+          </div>
+        </aside>
+
+          <!-- Zoom Control Flotante -->
+          <div class="zoom-control-container" @mousedown.stop @wheel.stop>
+            <i class="fas fa-search-minus"></i>
+            <input type="range" class="zoom-slider" min="0.4" max="1.5" step="0.01" v-model.number="scale" />
+            <i class="fas fa-search-plus"></i>
+          </div>
 
           <!-- Imagen de la tienda interactiva -->
           <div class="store-image-container">
@@ -298,6 +318,7 @@ const imageTransform = computed(() => {
         </div>
       </div>
     </Transition>
+    <Footer />
   </div>
 </template>
 
@@ -315,7 +336,8 @@ body {
 
 <style scoped>
 .app-container {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   background-color: #1a273b; /* Dark blue background from the image */
   color: #e2e8f0;
   font-family: 'Roboto', sans-serif;
@@ -411,6 +433,53 @@ body {
   display: flex;
   flex: 1;
   padding: 0;
+  overflow: hidden;
+}
+
+/* --- Zoom Control --- */
+.zoom-control-container {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  background-color: #212c42;
+  border: 2px solid #334155;
+  border-radius: 12px;
+  padding: 10px 20px;
+  box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #94a3b8;
+}
+
+.zoom-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 150px;
+  height: 6px;
+  background: #334155;
+  border-radius: 3px;
+  outline: none;
+}
+
+.zoom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fbbf24;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.zoom-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.zoom-control-container i {
+  font-size: 1.1rem;
 }
 
 /* --- Menu Flotante (Sidebar) --- */
@@ -486,6 +555,59 @@ body {
   object-fit: contain;
 }
 
+/* --- Menu Flotante Derecho (Recomendaciones) --- */
+.floating-recommendations {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 220px;
+  background-color: #212c42; /* Azul oscuro */
+  border: 2px solid #334155;
+  border-radius: 12px;
+  padding: 20px 15px;
+  box-shadow: -4px 6px 15px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.floating-recommendations .sidebar-title {
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.rec-game-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  transition: transform 0.2s, background-color 0.2s;
+  cursor: pointer;
+}
+
+.rec-game-box:hover {
+  transform: scale(1.05) translateY(-2px);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.rec-game-box img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+}
+
 /* --- Main Interactive Area --- */
 .store-interactive-area {
   flex: 1;
@@ -494,7 +616,7 @@ body {
   display: flex;
   align-items: center; /* Centrado para no desfasar el paneo */
   justify-content: center;
-  min-height: calc(100vh - 110px);
+  height: 100%;
   overflow: hidden; /* Evita que panear el mouse cree barras de scroll del navegador */
   user-select: none; /* Previene la selección accidental del menú o la imagen */
 }

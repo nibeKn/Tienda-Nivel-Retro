@@ -1,0 +1,826 @@
+<script setup>
+import { ref, computed } from 'vue';
+import N64Shelf from './components/N64Shelf.vue';
+import GCShelf from './components/GCShelf.vue';
+import WiiShelf from './components/WiiShelf.vue';
+import PS1Shelf from './components/PS1Shelf.vue';
+import PS2Shelf from './components/PS2Shelf.vue';
+import PS3Shelf from './components/PS3Shelf.vue';
+
+
+const currentView = ref('store');
+
+const cart = ref([]);
+const showCart = ref(false);
+
+const parsePrice = (priceStr) => {
+  if (!priceStr) return 0;
+  return parseInt(priceStr.replace(/[^0-9]/g, ''), 10);
+};
+
+const formatPrice = (value) => {
+  return '$' + value.toLocaleString('es-CL');
+};
+
+const addToCart = (product) => {
+  const existing = cart.value.find(p => p.name === product.name);
+  if (existing) {
+    existing.quantity++;
+  } else {
+    cart.value.push({ ...product, quantity: 1, priceNum: parsePrice(product.price) });
+  }
+  alert(`¡${product.name} agregado al carrito!`);
+};
+
+const removeFromCart = (productName) => {
+  cart.value = cart.value.filter(p => p.name !== productName);
+};
+
+const updateQuantity = (productName, delta) => {
+  const item = cart.value.find(p => p.name === productName);
+  if (item) {
+    item.quantity += delta;
+    if (item.quantity <= 0) removeFromCart(productName);
+  }
+};
+
+const cartTotal = computed(() => {
+  return cart.value.reduce((total, item) => total + (item.priceNum * item.quantity), 0);
+});
+
+const checkout = () => {
+  if (cart.value.length === 0) return;
+  alert('Gracias por tu compra');
+  cart.value = [];
+  showCart.value = false;
+};
+
+const goToN64 = () => {
+  currentView.value = 'n64';
+};
+
+const goToGC = () => {
+  currentView.value = 'gc';
+};
+
+const goToWii = () => {
+  currentView.value = 'wii';
+};
+
+const goToPS1 = () => {
+  currentView.value = 'ps1';
+};
+
+const goToPS2 = () => {
+  currentView.value = 'ps2';
+};
+
+const goToPS3 = () => {
+  currentView.value = 'ps3';
+};
+
+
+
+const goBack = () => {
+  currentView.value = 'store';
+};
+
+const scale = ref(0.7);
+const panX = ref(0);
+const panY = ref(0);
+const isDragging = ref(false);
+const startX = ref(0);
+const startY = ref(0);
+
+const handleWheel = (e) => {
+  const zoomFactor = 0.05;
+  if (e.deltaY < 0) {
+    // Scroll up -> zoom in
+    scale.value = Math.min(scale.value + zoomFactor, 1.5);
+  } else {
+    // Scroll down -> zoom out
+    scale.value = Math.max(scale.value - zoomFactor, 0.4);
+  }
+};
+
+const startDrag = (e) => {
+  isDragging.value = true;
+  startX.value = e.clientX;
+  startY.value = e.clientY;
+};
+
+const onDrag = (e) => {
+  if (!isDragging.value) return;
+  const dx = e.clientX - startX.value;
+  const dy = e.clientY - startY.value;
+  
+  // Dividimos por la escala para que el paneo se sienta 1:1 independiente del zoom
+  panX.value += dx / scale.value;
+  panY.value += dy / scale.value;
+  
+  startX.value = e.clientX;
+  startY.value = e.clientY;
+};
+
+const endDrag = () => {
+  isDragging.value = false;
+};
+
+const imageTransform = computed(() => {
+  return {
+    transform: `scale(${scale.value}) translate(${panX.value}px, ${panY.value}px)`,
+    transition: isDragging.value ? 'none' : 'transform 0.1s ease-out',
+    cursor: isDragging.value ? 'grabbing' : 'grab'
+  };
+});
+</script>
+
+<template>
+  <div class="app-container">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="navbar-left">
+         <img src="./assets/img/Nivel Retro 2.png" alt="Nivel Retro" class="navbar-logo" />
+      </div>
+      <nav class="navbar-right-menu">
+        <ul>
+          <li><a href="#" class="active">TIENDA</a></li>
+          <li><a href="#">CATÁLOGO</a></li>
+          <li><a href="#">OFERTAS</a></li>
+          <li><a href="#" class="account-link"><i class="fas fa-user"></i> CUENTA</a></li>
+          <li><a href="#" class="cart-link" @click.prevent="showCart = true"><i class="fas fa-shopping-cart"></i> CARRITO <span v-if="cart.length" class="cart-badge">{{ cart.reduce((acc, item) => acc + item.quantity, 0) }}</span></a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Barra pequeña -->
+    <div class="sub-navbar">
+      <p><i class="fas fa-star"></i> Explora nuestra tienda - Haz click en un stand para ver nuestras categorías</p>
+    </div>
+
+    <div class="main-layout">
+      <!-- Main Content (Área de la tienda 3D isómetrica) -->
+      <template v-if="currentView === 'store'">
+        <main class="store-interactive-area"
+              @wheel.prevent="handleWheel"
+              @mousedown="startDrag"
+              @mousemove="onDrag"
+              @mouseup="endDrag"
+              @mouseleave="endDrag">
+          
+        <!-- Sidebar Menu Flotante -->
+        <aside class="floating-menu" @mousedown.stop @wheel.stop>
+          <h2 class="sidebar-title">CATEGORÍAS:</h2>
+          <ul class="filter-list">
+            <li>
+              <button class="filter-btn" @click="goToN64">
+                 <span class="icon-placeholder"><img src="./assets/img/Logo N64.png" alt="N64" class="console-logo" /></span> N64
+              </button>
+            </li>
+            <li>
+              <button class="filter-btn" @click="goToGC">
+                 <span class="icon-placeholder"><img src="./assets/img/Logo GC.png" alt="GC" class="console-logo" /></span> GC
+              </button>
+            </li>
+            <li>
+              <button class="filter-btn" @click="goToWii">
+                 <span class="icon-placeholder"><img src="./assets/img/Logo Wii.png" alt="Wii" class="console-logo" /></span> Wii
+              </button>
+            </li>
+
+            <li>
+              <button class="filter-btn" @click="goToPS1">
+                 <span class="icon-placeholder"><img src="./assets/img/Logo PS1.png" alt="PS1" class="console-logo" /></span> PS1
+              </button>
+            </li>
+            <li>
+              <button class="filter-btn" @click="goToPS2">
+                <span class="icon-placeholder"><img src="./assets/img/Logo PS2.png" alt="PS2" class="console-logo" /></span> PS2
+              </button>
+            </li>
+            <li>
+              <button class="filter-btn" @click="goToPS3">
+                 <span class="icon-placeholder"><img src="./assets/img/Logo PS3.png" alt="PS3" class="console-logo" /></span> PS3
+              </button>
+            </li>
+            <li>
+              <button class="filter-btn">
+                 <span class="icon-placeholder"><i class="fas fa-tshirt" style="color: #64748b;"></i></span> MERCH
+              </button>
+            </li>
+          </ul>
+        </aside>
+
+          <!-- Imagen de la tienda interactiva -->
+          <div class="store-image-container">
+             <img src="./assets/imagenes-tienda/Base Pagina web.png" alt="Interior Tienda Retro" class="store-background-img" :style="imageTransform" draggable="false" />
+          </div>
+        </main>
+      </template>
+
+      <!-- Vista del estante N64 -->
+      <template v-else-if="currentView === 'n64'">
+        <N64Shelf @back="goBack" @add-to-cart="addToCart" />
+      </template>
+
+      <!-- Vista del estante GC -->
+      <template v-else-if="currentView === 'gc'">
+        <GCShelf @back="goBack" @add-to-cart="addToCart" />
+      </template>
+
+      <!-- Vista del estante Wii -->
+      <template v-else-if="currentView === 'wii'">
+        <WiiShelf @back="goBack" @add-to-cart="addToCart" />
+      </template>
+
+      <!-- Vista del estante PS1 -->
+      <template v-else-if="currentView === 'ps1'">
+        <PS1Shelf @back="goBack" @add-to-cart="addToCart" />
+      </template>
+
+      <!-- Vista del estante PS2 -->
+      <template v-else-if="currentView === 'ps2'">
+        <PS2Shelf @back="goBack" @add-to-cart="addToCart" />
+      </template>
+
+      <!-- Vista del estante PS3 -->
+      <template v-else-if="currentView === 'ps3'">
+        <PS3Shelf @back="goBack" @add-to-cart="addToCart" />
+      </template>
+
+    </div>
+
+    <!-- Cart Modal -->
+    <Transition name="fade">
+      <div class="cart-overlay" v-if="showCart" @click="showCart = false">
+        <div class="cart-modal" @click.stop>
+          <div class="cart-header">
+            <h2><i class="fas fa-shopping-cart"></i> Tu Carrito</h2>
+            <button class="close-cart-btn" @click="showCart = false"><i class="fas fa-times"></i></button>
+          </div>
+          
+          <div class="cart-body" v-if="cart.length > 0">
+            <div class="cart-items">
+              <div class="cart-item" v-for="item in cart" :key="item.name">
+                <img :src="item.img" :alt="item.name" class="cart-item-img" />
+                <div class="cart-item-details">
+                  <h4 class="cart-item-name">{{ item.name }}</h4>
+                  <p class="cart-item-price">{{ formatPrice(item.priceNum) }} c/u</p>
+                  <div class="cart-item-controls">
+                    <button @click="updateQuantity(item.name, -1)" class="qty-btn" title="Disminuir"><i class="fas fa-minus"></i></button>
+                    <span class="qty-value">{{ item.quantity }}</span>
+                    <button @click="updateQuantity(item.name, 1)" class="qty-btn" title="Aumentar"><i class="fas fa-plus"></i></button>
+                  </div>
+                </div>
+                <div class="cart-item-subtotal">
+                  <button @click="removeFromCart(item.name)" class="remove-btn" title="Eliminar"><i class="fas fa-trash"></i></button>
+                  <div class="subtotal-container">
+                    <span class="subtotal-label">Subtotal</span>
+                    <span class="subtotal-value">{{ formatPrice(item.priceNum * item.quantity) }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cart-empty" v-else>
+            <i class="fas fa-box-open"></i>
+            <p>Tu carrito está vacío</p>
+            <button class="continue-shopping-btn" @click="showCart = false">Seguir Comprando</button>
+          </div>
+
+          <div class="cart-footer" v-if="cart.length > 0">
+            <div class="cart-total-container">
+              <span class="total-label">Total General:</span>
+              <span class="total-value">{{ formatPrice(cartTotal) }}</span>
+            </div>
+            <button class="checkout-btn" @click="checkout">Finalizar Compra</button>
+          </div>
+        </div>
+      </div>
+    </Transition>
+  </div>
+</template>
+
+<style>
+/* Reset and fonts - global styles for this component */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Oswald:wght@600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1a273b;
+}
+</style>
+
+<style scoped>
+.app-container {
+  min-height: 100vh;
+  background-color: #1a273b; /* Dark blue background from the image */
+  color: #e2e8f0;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Navbar --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #212c42; /* Updated navbar color based on image */
+  padding: 0 30px;
+  height: 70px;
+  border-bottom: 2px solid #2a3a50;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+
+.navbar-right-menu ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 30px;
+}
+
+.navbar-right-menu a {
+  text-decoration: none;
+  color: #e2e8f0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s, border-bottom 0.2s;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+}
+
+.navbar-right-menu a:hover, .navbar-right-menu a.active {
+  color: #fbd38d;
+  border-bottom: 2px solid #fbd38d;
+}
+
+.navbar-right-menu a i {
+  font-size: 1.1rem;
+}
+
+/* --- Sub Navbar --- */
+.sub-navbar {
+  background-color: #141f2e;
+  color: #cbd5e1;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #1e293b;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.sub-navbar p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.sub-navbar i {
+  color: #fbbf24;
+}
+
+/* --- Main Layout --- */
+.main-layout {
+  display: flex;
+  flex: 1;
+  padding: 0;
+}
+
+/* --- Menu Flotante (Sidebar) --- */
+.floating-menu {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 180px; /* Increased from 170px to accommodate larger icons and text */
+  background-color: #212c42; /* Azul oscuro */
+  border: 2px solid #334155;
+  border-radius: 12px;
+  padding: 20px 15px;
+  box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sidebar-title {
+  font-size: 0.95rem;
+  color: #e2e8f0;
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.filter-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.filter-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 18px; /* Incremented from 12px for better spacing with larger icons */
+  font-size: 1.05rem; /* Slightly larger text */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: all 0.2s;
+  width: 100%;
+  text-align: left;
+}
+
+.filter-btn:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+}
+
+.icon-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 35px;
+  flex-shrink: 0;
+}
+
+.console-logo {
+  width: 100%;
+  height: auto;
+  max-height: 90px;
+  object-fit: contain;
+}
+
+/* --- Main Interactive Area --- */
+.store-interactive-area {
+  flex: 1;
+  background-color: #1a273b;
+  position: relative;
+  display: flex;
+  align-items: center; /* Centrado para no desfasar el paneo */
+  justify-content: center;
+  min-height: calc(100vh - 110px);
+  overflow: hidden; /* Evita que panear el mouse cree barras de scroll del navegador */
+  user-select: none; /* Previene la selección accidental del menú o la imagen */
+}
+
+.store-image-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.store-background-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform-origin: center center;
+}
+
+/* --- Cart Modal --- */
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(5px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.cart-modal {
+  width: 100%;
+  max-width: 480px;
+  height: 100vh;
+  background-color: #1e293b;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.6);
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.cart-header {
+  padding: 25px 20px;
+  border-bottom: 2px solid #334155;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0f172a;
+}
+
+.cart-header h2 {
+  margin: 0;
+  font-family: 'Oswald', sans-serif;
+  color: #fff;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.close-cart-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.close-cart-btn:hover {
+  color: #ef4444;
+  transform: scale(1.1);
+}
+
+.cart-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-item {
+  background-color: #334155;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  gap: 15px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  border-left: 6px solid #3b82f6;
+}
+
+.cart-item-img {
+  width: 75px;
+  height: auto;
+  max-height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+}
+
+.cart-item-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item-name {
+  margin: 0 0 5px 0;
+  font-size: 1.15rem;
+  font-family: 'Oswald', sans-serif;
+  color: #f1f5f9;
+  line-height: 1.2;
+}
+
+.cart-item-price {
+  margin: 0 0 15px 0;
+  font-size: 0.95rem;
+  color: #94a3b8;
+}
+
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.qty-btn {
+  background-color: #475569;
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.qty-btn:hover {
+  background-color: #64748b;
+}
+
+.qty-value {
+  font-weight: bold;
+  font-size: 1.1rem;
+  min-width: 20px;
+  text-align: center;
+}
+
+.cart-item-subtotal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  min-width: 90px;
+  border-left: 1px solid #475569;
+  padding-left: 15px;
+}
+
+.subtotal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.remove-btn {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.remove-btn:hover {
+  background-color: #ef4444;
+  color: white;
+}
+
+.subtotal-label {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  margin-bottom: -2px;
+}
+
+.subtotal-value {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  color: #10b981;
+}
+
+.cart-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+}
+
+.cart-empty i {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.cart-empty p {
+  font-size: 1.4rem;
+  font-family: 'Oswald', sans-serif;
+  margin-bottom: 30px;
+  color: #94a3b8;
+}
+
+.continue-shopping-btn {
+  background-color: #3b82f6;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+
+.continue-shopping-btn:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px);
+}
+
+.cart-footer {
+  padding: 25px 20px;
+  background-color: #0f172a;
+  border-top: 2px solid #334155;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-total-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  color: #e2e8f0;
+  text-transform: uppercase;
+}
+
+.total-value {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.2rem;
+  color: #10b981;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.checkout-btn {
+  background-color: #10b981;
+  border: none;
+  color: white;
+  padding: 18px;
+  border-radius: 12px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+  transition: all 0.2s;
+  letter-spacing: 1px;
+}
+
+.checkout-btn:hover {
+  background-color: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4);
+}
+
+.cart-badge {
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+</style>

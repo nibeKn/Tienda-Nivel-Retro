@@ -105,6 +105,8 @@ const goToCatalog = () => {
 };
 
 const targetAboutSection = ref(null);
+const hoveredStand = ref(null);
+const isNightMode = ref(false);
 
 const goToAbout = (section) => {
   currentView.value = 'about';
@@ -176,6 +178,22 @@ const imageTransform = computed(() => {
       </div>
       <nav class="navbar-right-menu">
         <ul>
+          <li class="theme-switch-wrapper">
+            <label class="theme-switch" title="Alternar Modo Día/Noche">
+              <input type="checkbox" v-model="isNightMode" />
+              <div class="slider round">
+                 <div class="slider-thumb">
+                    <i class="fas fa-sun sun-icon" v-if="!isNightMode"></i>
+                    <template v-else>
+                      <i class="fas fa-moon moon-icon"></i>
+                      <span class="star-icon s1">✦</span>
+                      <span class="star-icon s2">✦</span>
+                      <span class="star-icon s3">✦</span>
+                    </template>
+                 </div>
+              </div>
+            </label>
+          </li>
           <li><a href="#" :class="{ active: currentView === 'store' }" @click.prevent="goBack">TIENDA</a></li>
           <li><a href="#" :class="{ active: currentView === 'catalog' }" @click.prevent="goToCatalog">CATÁLOGO</a></li>
           <li><a href="#" class="account-link"><i class="fas fa-user"></i> CUENTA</a></li>
@@ -192,7 +210,7 @@ const imageTransform = computed(() => {
     <div class="main-layout">
       <!-- Main Content (Área de la tienda 3D isómetrica) -->
       <template v-if="currentView === 'store'">
-        <main class="store-interactive-area"
+        <main class="store-interactive-area" :class="{ 'night-mode': isNightMode }"
               @mousedown="startDrag"
               @mousemove="onDrag"
               @mouseup="endDrag"
@@ -204,33 +222,33 @@ const imageTransform = computed(() => {
           <h2 class="sidebar-title">CATEGORÍAS:</h2>
           <ul class="filter-list">
             <li>
-              <button class="filter-btn" @click="goToN64">
+              <button class="filter-btn" @click="goToN64" @mouseenter="hoveredStand = 'n64'" @mouseleave="hoveredStand = null">
                  <span class="icon-placeholder"><img src="./assets/img/Logo N64.png" alt="N64" class="console-logo" /></span> N64
               </button>
             </li>
             <li>
-              <button class="filter-btn" @click="goToGC">
+              <button class="filter-btn" @click="goToGC" @mouseenter="hoveredStand = 'gc'" @mouseleave="hoveredStand = null">
                  <span class="icon-placeholder"><img src="./assets/img/Logo GC.png" alt="GC" class="console-logo" /></span> GC
               </button>
             </li>
             <li>
-              <button class="filter-btn" @click="goToWii">
+              <button class="filter-btn" @click="goToWii" @mouseenter="hoveredStand = 'wii'" @mouseleave="hoveredStand = null">
                  <span class="icon-placeholder"><img src="./assets/img/Logo Wii.png" alt="Wii" class="console-logo" /></span> Wii
               </button>
             </li>
 
             <li>
-              <button class="filter-btn" @click="goToPS1">
+              <button class="filter-btn" @click="goToPS1" @mouseenter="hoveredStand = 'ps1'" @mouseleave="hoveredStand = null">
                  <span class="icon-placeholder"><img src="./assets/img/Logo PS1.png" alt="PS1" class="console-logo" /></span> PS1
               </button>
             </li>
             <li>
-              <button class="filter-btn" @click="goToPS2">
+              <button class="filter-btn" @click="goToPS2" @mouseenter="hoveredStand = 'ps2'" @mouseleave="hoveredStand = null">
                 <span class="icon-placeholder"><img src="./assets/img/Logo PS2.png" alt="PS2" class="console-logo" /></span> PS2
               </button>
             </li>
             <li>
-              <button class="filter-btn" @click="goToPS3">
+              <button class="filter-btn" @click="goToPS3" @mouseenter="hoveredStand = 'ps3'" @mouseleave="hoveredStand = null">
                  <span class="icon-placeholder"><img src="./assets/img/Logo PS3.png" alt="PS3" class="console-logo" /></span> PS3
               </button>
             </li>
@@ -254,41 +272,56 @@ const imageTransform = computed(() => {
             <i class="fas fa-search-plus"></i>
           </div>
 
-          <!-- Imagen de la tienda interactiva -->
+          <!-- Imagen de la tienda interactiva por capas -->
           <div class="store-image-container">
-             <img src="./assets/imagenes-tienda/Base Pagina web.png" alt="Interior Tienda Retro" class="store-background-img" :style="imageTransform" draggable="false" />
+             <div class="store-layers-wrapper" :style="imageTransform" draggable="false">
+               <img src="./assets/imagenes-tienda/Tienda Base.png" alt="Interior Tienda Retro Base" class="store-layer base-layer" draggable="false" />
+               <img src="./assets/imagenes-tienda/Deco1.png" class="store-layer" draggable="false" />
+               
+               <img src="./assets/imagenes-tienda/Cartel1.png" class="store-layer poster" draggable="false" />
+               <img src="./assets/imagenes-tienda/Cartel2.png" class="store-layer poster" draggable="false" />
+               <img src="./assets/imagenes-tienda/Cartel3.png" class="store-layer poster" draggable="false" />
+               <img src="./assets/imagenes-tienda/Cartel4.png" class="store-layer poster" draggable="false" />
+               
+               <img src="./assets/imagenes-tienda/Stand1.png" class="store-layer stand stand-1" :class="{ 'simulated-hover': hoveredStand === 'ps1' }" draggable="false" @click.stop="goToPS1" title="Ver catálogo de PlayStation 1" />
+               <img src="./assets/imagenes-tienda/Stand2.png" class="store-layer stand stand-2" :class="{ 'simulated-hover': hoveredStand === 'ps2' }" draggable="false" @click.stop="goToPS2" title="Ver catálogo de PlayStation 2" />
+               <img src="./assets/imagenes-tienda/Stand3.png" class="store-layer stand stand-3" :class="{ 'simulated-hover': hoveredStand === 'ps3' }" draggable="false" @click.stop="goToPS3" title="Ver catálogo de PlayStation 3" />
+               <img src="./assets/imagenes-tienda/Stand4.png" class="store-layer stand stand-4" :class="{ 'simulated-hover': hoveredStand === 'n64' }" draggable="false" @click.stop="goToN64" title="Ver catálogo de Nintendo 64" />
+               <img src="./assets/imagenes-tienda/Stand5.png" class="store-layer stand stand-5" :class="{ 'simulated-hover': hoveredStand === 'gc' }" draggable="false" @click.stop="goToGC" title="Ver catálogo de Nintendo GameCube" />
+               <img src="./assets/imagenes-tienda/Stand6.png" class="store-layer stand stand-6" :class="{ 'simulated-hover': hoveredStand === 'wii' }" draggable="false" @click.stop="goToWii" title="Ver catálogo de Nintendo Wii" />
+             </div>
           </div>
         </main>
       </template>
 
       <!-- Vista del estante N64 -->
       <template v-else-if="currentView === 'n64'">
-        <N64Shelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" />
+        <N64Shelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" :isNightMode="isNightMode" />
       </template>
 
       <!-- Vista del estante GC -->
       <template v-else-if="currentView === 'gc'">
-        <GCShelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" />
+        <GCShelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" :isNightMode="isNightMode" />
       </template>
 
       <!-- Vista del estante Wii -->
       <template v-else-if="currentView === 'wii'">
-        <WiiShelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" />
+        <WiiShelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" :isNightMode="isNightMode" />
       </template>
 
       <!-- Vista del estante PS1 -->
       <template v-else-if="currentView === 'ps1'">
-        <PS1Shelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" />
+        <PS1Shelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" :isNightMode="isNightMode" />
       </template>
 
       <!-- Vista del estante PS2 -->
       <template v-else-if="currentView === 'ps2'">
-        <PS2Shelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" />
+        <PS2Shelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" :isNightMode="isNightMode" />
       </template>
 
       <!-- Vista del estante PS3 -->
       <template v-else-if="currentView === 'ps3'">
-        <PS3Shelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" />
+        <PS3Shelf @back="goBack" @add-to-cart="addToCart" :preselectedGame="selectedGameName" :isNightMode="isNightMode" />
       </template>
 
       <!-- Vista del catálogo global -->
@@ -444,6 +477,86 @@ body {
 .navbar-right-menu a i {
   font-size: 1.1rem;
 }
+
+/* --- Theme Switch Toggle (Neumorphic Day/Night) --- */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.theme-switch {
+  display: inline-block;
+  height: 38px;
+  position: relative;
+  width: 80px;
+  margin: 0;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background-color: #f1f5f9;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+  border-radius: 38px;
+  box-shadow: inset 2px 4px 6px rgba(0,0,0,0.1), inset -2px -2px 4px rgba(255,255,255,0.8);
+}
+
+.slider-thumb {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+  box-shadow: 2px 4px 6px rgba(0,0,0,0.15), -1px -1px 3px rgba(255,255,255,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input:checked + .slider {
+  background-color: #0b1120;
+  box-shadow: inset 3px 5px 8px rgba(0,0,0,0.7), inset -2px -2px 5px rgba(255,255,255,0.05);
+}
+
+input:checked + .slider .slider-thumb {
+  transform: translateX(42px); /* 80 - 30 - 8 = 42px movement */
+  background-color: #273759;
+  box-shadow: 2px 4px 6px rgba(0,0,0,0.6), -1px -1px 3px rgba(255,255,255,0.05);
+}
+
+.sun-icon {
+  color: #fbbf24;
+  font-size: 18px;
+}
+
+.moon-icon {
+  color: #f8fafc;
+  font-size: 15px;
+  margin-right: 4px;
+  text-shadow: 0 0 4px rgba(255,255,255,0.6);
+}
+
+.star-icon {
+  position: absolute;
+  color: #fef08a; /* Amarillo suave */
+  opacity: 0.9;
+  user-select: none;
+}
+.star-icon.s1 { top: 4px; left: 16px; font-size: 6px; }
+.star-icon.s2 { top: 12px; right: 4px; font-size: 8px; }
+.star-icon.s3 { bottom: 6px; left: 8px; font-size: 7px; }
 
 /* --- Sub Navbar --- */
 .sub-navbar {
@@ -657,7 +770,7 @@ body {
 /* --- Main Interactive Area --- */
 .store-interactive-area {
   flex: 1;
-  background-color: #1a273b;
+  background-color: #f8f9ff;
   position: relative;
   display: flex;
   align-items: center; /* Centrado para no desfasar el paneo */
@@ -665,6 +778,11 @@ body {
   height: 100%;
   overflow: hidden; /* Evita que panear el mouse cree barras de scroll del navegador */
   user-select: none; /* Previene la selección accidental del menú o la imagen */
+  transition: background-color 0.4s ease; /* Transición suave del modo día a noche */
+}
+
+.store-interactive-area.night-mode {
+  background-color: #0f172a; /* Azul oscuro */
 }
 
 .store-image-container {
@@ -679,12 +797,50 @@ body {
   justify-content: center;
 }
 
-.store-background-img {
+.store-layers-wrapper {
   width: 100%;
-  height: auto;
+  position: relative;
   display: block;
   transform-origin: center center;
 }
+
+.store-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none; /* Deja pasar los eventos de drag del contenedor padre */
+  user-select: none;
+}
+
+.store-layer.base-layer {
+  position: relative; /* Otorga las dimensiones físicas al contenedor wrapper */
+  height: auto;
+  display: block;
+}
+
+.store-layer.stand {
+  pointer-events: auto; /* Reactiva los clics en los stands */
+  cursor: pointer;
+  transition: filter 0.2s ease;
+  width: 18.24%; /* 912px / 5000px natural scale */
+  height: auto;
+}
+
+.store-layer.stand:hover,
+.store-layer.stand.simulated-hover {
+  filter: brightness(1.2) drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+}
+
+/* Coordenadas Isométricas Responsivas de cada Consola */
+.stand-1 { left: 37.5%; top: 35.0%; z-index: 10; } /* PS1  (Fila atras, medio) */
+.stand-2 { left: 50.7%; top: 43.2%; z-index: 11; } /* PS2  (Fila atras, derecha) */
+.stand-3 { left: 63.2%; top: 51.2%; z-index: 16; } /* PS3  (Fila frente, derecha) */
+.stand-4 { left: 18.0%; top: 48.0%; z-index: 10; } /* N64  (Fila atras, izq) */
+.stand-5 { left: 31.2%; top: 57.0%; z-index: 15; } /* GC   (Fila frente, izq) */
+.stand-6 { left: 44.5%; top: 66.0%; z-index: 20; } /* Wii  (Fila frente, medio) */
 
 /* --- Cart Modal --- */
 .cart-overlay {

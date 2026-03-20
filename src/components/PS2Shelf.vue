@@ -1,5 +1,5 @@
 <template>
-  <div class="gc-shelf-container">
+  <div class="ps2-shelf-container" :class="{ 'night-mode': isNightMode }">
     <button class="back-btn" @click="$emit('back')">
       <i class="fas fa-arrow-left"></i> Volver a la Tienda
     </button>
@@ -170,7 +170,7 @@
 import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue';
 import { ps2Games } from '../data/gamesData.js';
 
-const props = defineProps(['preselectedGame']);
+const props = defineProps(['preselectedGame', 'isNightMode']);
 defineEmits(['back', 'add-to-cart']);
 
 
@@ -220,7 +220,7 @@ watch(() => props.preselectedGame, (newVal) => {
 </script>
 
 <style scoped>
-.gc-shelf-container {
+.ps2-shelf-container {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -229,6 +229,14 @@ watch(() => props.preselectedGame, (newVal) => {
   position: relative;
   overflow: hidden; /* CORTA el patrón de fondo, pero deja que el navegador haga el scroll */
   width: 100%;
+  transition: background-color 0.4s ease;
+}
+
+.ps2-shelf-container.night-mode {
+  background-color: #0f172a;
+}
+.ps2-shelf-container.night-mode .pattern-bg {
+  opacity: 0.15;
 }
 
 .gc-content {

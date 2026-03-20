@@ -1,5 +1,5 @@
 <template>
-  <div class="wii-shelf-container">
+  <div class="wii-shelf-container" :class="{ 'night-mode': isNightMode }">
     <button class="back-btn" @click="$emit('back')">
       <i class="fas fa-arrow-left"></i> Volver a la Tienda
     </button>
@@ -169,7 +169,7 @@ import { wiiGames } from '../data/gamesData.js';
 
 const shelves = ref(wiiGames);
 
-const props = defineProps(['preselectedGame']);
+const props = defineProps(['preselectedGame', 'isNightMode']);
 defineEmits(['back', 'add-to-cart']);
 
 const libretroWii = 'https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Wii/master/Named_Boxarts/';
@@ -227,6 +227,14 @@ watch(() => props.preselectedGame, (newVal) => {
   position: relative;
   overflow: hidden; /* CORTA el patrón de fondo, pero deja que el navegador haga el scroll */
   width: 100%;
+  transition: background-color 0.4s ease;
+}
+
+.wii-shelf-container.night-mode {
+  background-color: #0f172a;
+}
+.wii-shelf-container.night-mode .pattern-bg {
+  opacity: 0.15;
 }
 
 .wii-content {

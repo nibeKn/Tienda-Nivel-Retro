@@ -1,13 +1,13 @@
-# 🎮 Tienda Nivel Retro
+# Tienda Nivel Retro
 
 ¡Bienvenido a **Tienda Nivel Retro**! Un nostálgico viaje virtual a la época dorada de los videojuegos.
 
-## 📌 Temática
+## Temática
 **Tienda Nivel Retro** no es solo un catálogo plano de juegos; es una experiencia interactiva diseñada para rescatar la magia de vitrinear en tu tienda física favorita un viernes por la tarde durante la era de los 2000s. 
 
 A través de un entorno visual isométrico 3D, puedes pasear (hacer paneo y zoom) por diferentes estantes dinámicos, seleccionar tus consolas preferidas, inspeccionar las cajas originales, leer detalles técnicos inmersivos y agregar títulos clásicos a tu carrito de compras interactivo.
 
-### 🌟 Características Principales
+### Características Principales
 - **Exploración Isométrica Interactiva:** Haz paneo y zoom a través de una tienda 3D dinámica construida usando un sistema de capas (Layers).
 - **Estantes Personalizados:** Catálogos completos, fichas técnicas y galerías multimedia (Caja 3D y Discos/Cartuchos) de las siguientes consolas clásicas:
   - Nintendo 64
@@ -22,7 +22,7 @@ A través de un entorno visual isométrico 3D, puedes pasear (hacer paneo y zoom
 
 ---
 
-## 💻 Tecnologías Usadas
+## Tecnologías Usadas
 Este proyecto está construido mediante un sólido stack Front-End reactivo, puramente enfocado en el rendimiento y estilo estético sin dependencias UI externas pesadas.
 
 - **[Vue 3](https://vuejs.org/) (Composition API):** Motor lógico y sistema de enrutamiento basado en estados de componentes (Single Page Application SPA) que gestiona ágilmente tus interacciones.
@@ -33,7 +33,7 @@ Este proyecto está construido mediante un sólido stack Front-End reactivo, pur
 
 ---
 
-## 🚀 Instrucciones de Uso
+## Instrucciones de Uso
 
 Sigue estos pasos para poder instalar, ejecutar y aportar al proyecto de la Tienda Nivel Retro en tu entorno local.
 

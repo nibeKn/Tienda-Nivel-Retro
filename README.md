@@ -1,174 +1,174 @@
 <h1 align="center">Nivel Retro</h1>
 
 <p align="center">
-  Una tienda de videojuegos de los 2000 recreada como un entorno isométrico explorable.
+  A 2000s video game store, rebuilt as an explorable isometric world.
 </p>
 
 <p align="center">
-  <a href="https://tienda-nivel-retro.netlify.app/"><strong>Ver demo en vivo →</strong></a>
+  <a href="https://tienda-nivel-retro.netlify.app/"><strong>View live demo →</strong></a>
 </p>
 
 <p align="center">
   <img alt="Vue 3" src="https://img.shields.io/badge/Vue-3-42b883?logo=vue.js&logoColor=white">
   <img alt="Vite" src="https://img.shields.io/badge/Vite-8-646cff?logo=vite&logoColor=white">
   <img alt="Vue Router" src="https://img.shields.io/badge/Vue_Router-5-42b883?logo=vue.js&logoColor=white">
-  <img alt="CSS vanilla" src="https://img.shields.io/badge/CSS-vanilla-264de4">
-  <img alt="Licencia MIT" src="https://img.shields.io/badge/licencia-MIT-blue">
+  <img alt="Vanilla CSS" src="https://img.shields.io/badge/CSS-vanilla-264de4">
+  <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue">
 </p>
 
-> **English:** An interactive single-page app that recreates a 2000s video game
-> store as an explorable isometric scene. Built with Vue 3 and Vite, with no UI
-> framework — the layered scene, the pan/zoom navigation and every component are
-> hand-written CSS. The interface and content are in Spanish.
+> **Note:** the site's interface and content are in Spanish. This document is in
+> English so the project is easy to review for anyone.
 
 ---
 
-## Qué es
+## What it is
 
-No es una landing con un catálogo. Es una tienda que se recorre: el visitante
-entra a una escena isométrica construida por capas, la desplaza y hace zoom, y al
-acercarse a una estantería entra a la sección correspondiente.
+Not a landing page with a product grid. It's a store you walk through: you arrive
+in a layered isometric scene, pan and zoom around it, and stepping up to a shelf
+takes you into that section.
 
-El resultado es un catálogo navegable de seis consolas (Nintendo 64, GameCube,
-Wii, PS1, PS2 y PS3) montado sobre una metáfora espacial en vez de un menú.
+The result is a browsable catalogue of six consoles — Nintendo 64, GameCube, Wii,
+PS1, PS2 and PS3 — built on a spatial metaphor instead of a menu.
 
-**Es un proyecto de portfolio.** Los productos, precios, pedidos y el proceso de
-compra son simulados; no hay pasarela de pago ni backend.
+**This is a portfolio project.** Products, prices, orders and the checkout flow
+are simulated. There is no payment gateway and no backend.
 
-## Características
+## Features
 
-- **Escena isométrica navegable** — paneo con mouse y con el dedo, zoom con rueda
-  y con gesto de pellizco, con límites recalculados según el nivel de zoom.
-- **Carga progresiva por capas** — cada mueble y estantería empieza como una
-  miniatura borrosa y se sustituye por su versión en alta resolución cuando
-  termina de descargar, coordinada por un manifiesto de posiciones.
-- **Zonas interactivas** — las estanterías responden al cursor con `clip-path`
-  recortado a la silueta del mueble, no a un rectángulo.
-- **Catálogo detallado** — fichas técnicas, galerías de cajas 3D, discos y
-  cartuchos, y vídeo de cada título.
-- **Carrito funcional** — cantidades, totales, código promocional y resumen de
-  compra, resuelto con un composable reutilizable.
-- **Secciones temáticas** — arcades enlazados, museo de consolas, reproductor de
-  música, hemeroteca de revistas y sección de merchandising.
-- **Onboarding contextual** — la primera visita recibe una guía de gestos
-  distinta en escritorio y en móvil.
+- **Navigable isometric scene** — pan with a mouse or a finger, zoom with the
+  wheel or a pinch gesture, with bounds recalculated for the current zoom level.
+- **Progressive layer loading** — every shelf and cabinet starts as a blurred
+  thumbnail and cross-fades to its full-resolution version once it downloads,
+  coordinated by a position manifest.
+- **Shaped hit zones** — shelves respond to the cursor through a `clip-path`
+  traced to the furniture's silhouette, not a bounding box.
+- **Detailed catalogue** — spec sheets, galleries of 3D boxes, discs and
+  cartridges, plus gameplay video for each title.
+- **Working cart** — quantities capped at 10 per product, running totals, a promo
+  code and an order summary, all handled by a reusable composable.
+- **Themed sections** — arcade cabinets, a console museum, a music player, a
+  magazine archive and a merchandise aisle.
+- **Contextual onboarding** — first-time visitors get a gesture guide that differs
+  between desktop and mobile.
 
 ## Stack
 
-| Herramienta | Rol |
+| Tool | Role |
 |---|---|
-| **Vue 3** (Composition API, `<script setup>`) | Componentes y estado |
-| **Vue Router 5** | Una URL por sección, con carga diferida por ruta |
-| **Vite 8** | Build, servidor de desarrollo y plugin propio de preload |
-| **CSS3 puro** | Maquetación isométrica, animaciones y transiciones |
-| **tsParticles** | Partículas ambientales de la escena |
-| **ESLint + Prettier** | Linting y formato (`eslint.config.js` plano) |
+| **Vue 3** (Composition API, `<script setup>`) | Components and state |
+| **Vue Router 5** | One URL per section, with per-route lazy loading |
+| **Vite 8** | Build, dev server, and a custom preload plugin |
+| **Plain CSS3** | Isometric layout, animations and transitions |
+| **tsParticles** | Ambient particles in the scene |
+| **ESLint + Prettier** | Linting and formatting (flat `eslint.config.js`) |
 
-Sin Tailwind, sin Bootstrap y sin librería de componentes: todo el diseño está
-escrito a mano.
+No Tailwind, no Bootstrap, no component library — every piece of the design is
+hand-written.
 
-## Arquitectura
+## Architecture
 
 ```
 src/
 ├── components/
-│   ├── StoreMap.vue        Escena isométrica, capas, zonas y navegación
-│   ├── BaseShelf.vue       Estantería genérica; las 6 consolas la configuran
-│   ├── Base*.vue           Vistas temáticas (arcade, museo, música, revistas…)
+│   ├── StoreMap.vue        Isometric scene, layers, hit zones, navigation
+│   ├── BaseShelf.vue       Generic shelf; the 6 consoles configure it
+│   ├── Base*.vue           Themed views (arcade, museum, music, magazines…)
 │   └── …
 ├── composables/
-│   ├── useStoreMap.js      Paneo, zoom, pinch, parallax y límites
-│   ├── useCart.js          Carrito, totales y promociones
-│   └── useNavigation.js    Traduce claves de sección a rutas
+│   ├── useStoreMap.js      Pan, zoom, pinch, parallax and bounds
+│   ├── useCart.js          Cart, totals, quantity ceiling and promos
+│   └── useNavigation.js    Translates section keys into routes
 ├── router/
-│   └── index.js            Rutas, carga diferida y transición entre vistas
-├── data/                   Catálogos de juegos y merchandising
+│   └── index.js            Routes, lazy loading, inter-view transition
+├── data/                   Game and merchandise catalogues
 └── assets/
-    └── imagenes-tienda/    Capas de la tienda + layers-manifest.json
+    └── imagenes-tienda/    Store layers + layers-manifest.json
 ```
 
-Tres decisiones que vale la pena destacar:
+Three decisions worth calling out:
 
-**Cada sección tiene su propia URL.** `/consola/ps2`, `/museo`, `/nosotros/faq`
-o `/arcade/pacman` se pueden compartir, recargar y recorrer con el botón atrás
-del navegador. La transición de bloques entre secciones vive en los guards del
-router, así que ninguna vista tiene que orquestarla. Salvo el mapa de la tienda,
-todas las rutas se cargan bajo demanda.
+**Every section has its own URL.** `/consola/ps2`, `/museo`, `/nosotros/faq` and
+`/arcade/pacman` can be shared, refreshed, and walked back through with the
+browser's back button. The block-wipe transition between sections lives in the
+router guards, so no view has to orchestrate it — and those guards time it out,
+so a misbehaving animation can never strand a visitor mid-navigation. Every route
+except the store map loads on demand.
 
-**Las estanterías comparten un solo componente.** `BaseShelf.vue` recibe colores,
-espaciados, logo y configuración de botones por props, y el contenido descriptivo
-por slot. `N64Shelf.vue` y sus cinco hermanos son sólo configuración.
+**The shelves share one component.** `BaseShelf.vue` takes colours, spacing, logo
+and button configuration as props, and its descriptive copy through a slot.
+`N64Shelf.vue` and its five siblings are configuration only.
 
-**La escena se describe en un manifiesto.** `layers-manifest.json` guarda la
-posición, el tamaño y el placeholder de cada capa, así que añadir un mueble a la
-tienda es añadir una entrada al JSON, no tocar el CSS.
+**The scene is described by a manifest.** `layers-manifest.json` holds each
+layer's position, size and placeholder, so adding a new piece of furniture means
+adding a JSON entry rather than touching CSS. The same manifest supplies the
+intrinsic dimensions that keep layout shift near zero.
 
-### Sobre las imágenes del catálogo
+### About the catalogue images
 
-Las ~380 fotos de producto y carátulas se sirven desde el Cloudinary propio del
-proyecto, no desde los sitios donde se encontraron originalmente. Enlazarlas en
-caliente consumía ancho de banda de tiendas que nunca lo autorizaron, y dejaba el
-catálogo a merced de que cualquiera de esos hosts rotara una URL. Todas se
-entregan con `f_auto,q_auto`, así que el navegador recibe WebP o AVIF según lo
-que soporte, en la resolución que corresponde.
+The ~380 product photos and box arts are served from the project's own Cloudinary
+account rather than from the sites they were originally found on. Hotlinking them
+consumed bandwidth from stores that never agreed to it, and left the catalogue at
+the mercy of any of those hosts rotating a URL. Everything is delivered with
+`f_auto,q_auto`, so browsers receive WebP or AVIF at an appropriate resolution.
 
-## Rendimiento
+## Performance
 
-La escena es el producto, así que el trabajo estuvo en servir la misma imagen
-pesando mucho menos, no en recortarla.
+The scene *is* the product, so the work went into shipping the same artwork for a
+fraction of the bytes rather than cutting it down.
 
-| | Antes | Después |
+| | Before | After |
 |---|---|---|
-| Peso total de la página | 11.761 KB | **1.549 KB** |
-| Largest Contentful Paint | 49,5 s | **10,7 s** |
-| First Contentful Paint | 4,0 s | **2,2 s** |
-| Speed Index | 4,0 s | **2,5 s** |
-| Cumulative Layout Shift | 0,047 | **0,006** |
+| Total page weight | 11,761 KB | **1,549 KB** |
+| Largest Contentful Paint | 49.5 s | **10.7 s** |
+| First Contentful Paint | 4.0 s | **2.2 s** |
+| Speed Index | 4.0 s | **2.5 s** |
+| Cumulative Layout Shift | 0.047 | **0.006** |
 
-Y las cuatro categorías de Lighthouse:
+And across the four Lighthouse categories:
 
-| Categoría | Antes | Después |
+| Category | Before | After |
 |---|---|---|
-| Rendimiento | 65 | **71** |
-| Accesibilidad | 79 | **100** |
-| Buenas prácticas | — | **96** |
+| Performance | 65 | **71** |
+| Accessibility | 79 | **100** |
+| Best Practices | — | **96** |
 | SEO | — | **100** |
 
-<sub>Lighthouse 12, perfil móvil con throttling simulado, sobre el build de producción.</sub>
+<sub>Lighthouse 12, mobile profile with simulated throttling, against the production build.</sub>
 
-Qué se hizo:
+What changed:
 
-- **Imágenes servidas al tamaño en que se usan.** El fondo se emite en tres
-  anchos (1400/2200/3200) y se declara con `srcset`, así que un teléfono descarga
-  87 KB donde un escritorio toma 451 KB. Las capas se reencodearon a WebP q82:
-  indistinguibles al máximo zoom, a menos de la mitad del peso.
-- **El LCP se descubre desde el HTML.** Un plugin de Vite lee el nombre hasheado
-  del fondo tras el build e inyecta su `<link rel="preload" imagesrcset>`, para
-  que la descarga arranque junto al JavaScript y no después de que Vue monte.
-- **App shell en `index.html`.** La pantalla de carga se pinta en el primer
-  frame, antes de parsear el bundle, en lugar de dejar una página en blanco.
-- **Nada bloquea el render.** Las fuentes y los iconos se cargan como `preload`
-  promovido a hoja de estilo; antes eran `@import` dentro del CSS empaquetado, lo
-  que los encadenaba detrás del bundle.
-- **Las capas HD entran después del fondo**, para no competir por ancho de banda
-  con el elemento que define el LCP.
-- **Dimensiones intrínsecas en cada capa**, tomadas del manifiesto, que es lo que
-  llevó el CLS a 0,006.
-- **Los tres iconos de marca son SVG inline**, lo que eliminó un webfont de
-  106 KB que existía sólo para ellos.
+- **Images served at the size they're used.** The background ships at three widths
+  (1400/2200/3200) behind a `srcset`, so a phone downloads 87 KB where a desktop
+  takes the full 451 KB. The scene layers were re-encoded to WebP q82 —
+  indistinguishable at maximum zoom, at less than half the weight.
+- **The LCP element is discoverable from the HTML.** A small Vite plugin reads the
+  background's hashed filename out of the build and injects its
+  `<link rel="preload" imagesrcset>`, so the download starts alongside the
+  JavaScript instead of after Vue mounts.
+- **An app shell in `index.html`.** The loading screen paints on the first frame,
+  before the bundle is parsed, instead of leaving a blank page.
+- **Nothing blocks rendering.** Fonts and icon CSS load as a `preload` promoted to
+  a stylesheet; they used to be `@import` rules inside the bundled CSS, which
+  chained them behind the bundle.
+- **HD layers load after the background**, so they do not compete for bandwidth
+  with the element that defines the LCP.
+- **Intrinsic dimensions on every layer**, taken from the manifest — the change
+  that brought CLS down to 0.006.
+- **The three brand icons are inline SVG**, which dropped a 106 KB webfont that
+  existed for those glyphs alone.
 
-En accesibilidad, lo que llevó la categoría de 79 a 100: los controles que eran
-`<div>` con `@click` pasaron a ser `<button>` reales —alcanzables por teclado y
-con nombre accesible—, la navegación usa enlaces de verdad en vez de `href="#"`,
-el slider de zoom se etiquetó, y se corrigieron los contrastes y las áreas de
-toque que no llegaban al mínimo de 24 px.
+On accessibility, what took the category from 79 to 100: controls that were
+`<div>`s with `@click` became real `<button>`s — keyboard-reachable and with
+accessible names — navigation uses genuine links instead of `href="#"`, the zoom
+slider was labelled, and contrast ratios and tap targets below the 24 px minimum
+were corrected.
 
-El techo real está en los ~800 KB de ilustración original de la tienda. Bajar de
-ahí significaría degradar el arte, que es justamente lo que sostiene el proyecto.
+The real floor is the ~800 KB of original store artwork. Going below it would mean
+degrading the art, which is the thing the project rests on.
 
-## Ejecutar el proyecto
+## Running the project
 
-Requiere Node.js `^20.19.0` o `>=22.12.0` (lo que exige Vite 8).
+Requires Node.js `^20.19.0` or `>=22.12.0` (what Vite 8 expects).
 
 ```bash
 git clone https://github.com/nibeKn/Tienda-Nivel-Retro.git
@@ -182,40 +182,38 @@ npm install
 npm run dev
 ```
 
-El servidor de desarrollo queda en `http://localhost:5173/`.
+The dev server runs at `http://localhost:5173/`.
 
 ### Scripts
 
-| Comando | Qué hace |
+| Command | What it does |
 |---|---|
-| `npm run dev` | Servidor de desarrollo con recarga en caliente |
-| `npm run build` | Build de producción en `dist/` |
-| `npm run preview` | Sirve el build de producción localmente |
-| `npm run lint` | ESLint sobre todo el proyecto |
-| `npm run lint:fix` | Corrige automáticamente lo que se pueda |
-| `npm run format` | Formatea con Prettier |
+| `npm run dev` | Dev server with hot reload |
+| `npm run build` | Production build into `dist/` |
+| `npm run preview` | Serves the production build locally |
+| `npm run lint` | ESLint across the project |
+| `npm run lint:fix` | Auto-fixes what it can |
+| `npm run format` | Formats with Prettier |
 
+## Disclaimer
 
-## Aviso legal
+A personal portfolio project. Non-commercial, and unconnected to any real store.
 
-Proyecto personal de portfolio, sin fines comerciales y sin relación con ninguna
-tienda real.
+- The products, prices, stock, orders and users shown on the site are
+  **fictional**. No payments are processed and no data is collected from anyone.
+- Nintendo, PlayStation, Nintendo 64, GameCube, Wii, and the names, logos and box
+  arts of the games shown are **trademarks of their respective owners**. They
+  appear here illustratively and educationally, without authorisation from or
+  sponsorship by those holders.
+- If you hold rights to any of this material and would like it removed, please
+  open an issue on the repository.
 
-- Los productos, precios, stock, pedidos y usuarios que aparecen en el sitio son
-  **ficticios**. No se procesan pagos ni se recogen datos de nadie.
-- Nintendo, PlayStation, Nintendo 64, GameCube, Wii, y los nombres, logotipos y
-  carátulas de los videojuegos mostrados son **marcas registradas de sus
-  respectivos propietarios**. Se usan de forma ilustrativa y educativa, sin
-  autorización ni patrocinio de dichos titulares.
-- Si eres titular de alguno de los materiales y quieres que se retire, abre un
-  issue en el repositorio.
+## License
 
-## Licencia
+The **source code** is published under the [MIT license](LICENSE): you may use,
+modify and redistribute it while keeping the copyright notice and attribution.
 
-El **código fuente** se publica bajo licencia [MIT](LICENSE): puedes usarlo,
-modificarlo y redistribuirlo manteniendo el aviso de copyright y la atribución.
-
-Las **ilustraciones originales** de la tienda (`src/assets/imagenes-tienda/`,
-`src/assets/posters/` y `src/assets/ico/`) son © 2026 nibeKn, todos los derechos
-reservados, y quedan fuera de la licencia MIT: no se autoriza su reutilización en
-otros proyectos.
+The **original store artwork** (`src/assets/imagenes-tienda/`,
+`src/assets/posters/` and `src/assets/ico/`) is © 2026 nibeKn, all rights
+reserved, and falls outside the MIT license — it is not licensed for reuse in
+other projects.

@@ -201,10 +201,27 @@
               <div class="qty-selector">
                 <span class="qty-label">CANTIDAD</span>
                 <div class="qty-controls">
-                  <button @click="qty > 1 ? qty-- : null"><i class="fas fa-minus"></i></button>
-                  <span class="qty-number">{{ qty }}</span>
-                  <button @click="qty++"><i class="fas fa-plus"></i></button>
+                  <button
+                    type="button"
+                    :disabled="qty <= 1"
+                    aria-label="Disminuir cantidad"
+                    @click="qty = Math.max(1, qty - 1)"
+                  >
+                    <i class="fas fa-minus" aria-hidden="true"></i>
+                  </button>
+                  <span class="qty-number" aria-live="polite">{{ qty }}</span>
+                  <button
+                    type="button"
+                    :disabled="qty >= MAX_QUANTITY_PER_PRODUCT"
+                    aria-label="Aumentar cantidad"
+                    @click="qty = Math.min(MAX_QUANTITY_PER_PRODUCT, qty + 1)"
+                  >
+                    <i class="fas fa-plus" aria-hidden="true"></i>
+                  </button>
                 </div>
+                <span v-if="qty >= MAX_QUANTITY_PER_PRODUCT" class="qty-limit-note">
+                  Máximo {{ MAX_QUANTITY_PER_PRODUCT }} por producto
+                </span>
               </div>
               <button class="add-cart-btn" @click="addToCart(selectedProduct)">
                 AÑADIR AL CARRITO
@@ -243,6 +260,7 @@
 import { ref, onMounted, onUnmounted, watch } from 'vue';
 import BaseBackground from './BaseBackground.vue';
 import { merchCategories, destacados } from '../data/merchData.js';
+import { MAX_QUANTITY_PER_PRODUCT } from '../composables/useCart.js';
 
 const props = defineProps({
   preselectedId: { type: String, default: null },
@@ -899,6 +917,13 @@ onUnmounted(() => {
   border: 1px solid #334155;
 }
 
+.qty-limit-note {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.72rem;
+  color: #fbbf24;
+}
+
 .qty-controls button {
   background: transparent;
   border: none;
@@ -907,6 +932,11 @@ onUnmounted(() => {
   height: 44px;
   cursor: pointer;
   transition: background-color 0.2s;
+}
+
+.qty-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .qty-controls button:hover {

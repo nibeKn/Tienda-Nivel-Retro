@@ -24,21 +24,31 @@
                 <p class="cart-item-price">{{ formatPrice(item.priceNum) }} c/u</p>
                 <div class="cart-item-controls">
                   <button
-                    @click="$emit('update-quantity', item.name, -1)"
                     class="qty-btn"
+                    :aria-label="`Quitar una unidad de ${item.name}`"
                     title="Disminuir"
+                    @click="$emit('update-quantity', item.name, -1)"
                   >
-                    <i class="fas fa-minus"></i>
+                    <i class="fas fa-minus" aria-hidden="true"></i>
                   </button>
                   <span class="qty-value">{{ item.quantity }}</span>
                   <button
-                    @click="$emit('update-quantity', item.name, 1)"
                     class="qty-btn"
-                    title="Aumentar"
+                    :disabled="item.quantity >= MAX_QUANTITY_PER_PRODUCT"
+                    :aria-label="`Añadir una unidad de ${item.name}`"
+                    :title="
+                      item.quantity >= MAX_QUANTITY_PER_PRODUCT
+                        ? `Máximo ${MAX_QUANTITY_PER_PRODUCT} unidades`
+                        : 'Aumentar'
+                    "
+                    @click="$emit('update-quantity', item.name, 1)"
                   >
-                    <i class="fas fa-plus"></i>
+                    <i class="fas fa-plus" aria-hidden="true"></i>
                   </button>
                 </div>
+                <p v-if="item.quantity >= MAX_QUANTITY_PER_PRODUCT" class="qty-limit-note">
+                  Máximo {{ MAX_QUANTITY_PER_PRODUCT }} unidades por producto
+                </p>
               </div>
               <div class="cart-item-subtotal">
                 <button
@@ -96,6 +106,8 @@
 
 <script setup>
 import { ref } from 'vue';
+
+import { MAX_QUANTITY_PER_PRODUCT } from '../composables/useCart.js';
 
 defineProps({
   show: Boolean,
@@ -280,6 +292,17 @@ const handleApplyPromo = () => {
   background-color: #3b82f6;
   border-color: #60a5fa;
   transform: scale(1.1);
+}
+
+.qty-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.qty-limit-note {
+  margin: 6px 0 0;
+  font-size: 0.75rem;
+  color: #fbbf24;
 }
 
 .qty-value {

@@ -1,0 +1,5 @@
+# Nivel Retro — proyecto de portfolio
+User-agent: *
+Allow: /
+
+Sitemap: https://tienda-nivel-retro.netlify.app/sitemap.xml

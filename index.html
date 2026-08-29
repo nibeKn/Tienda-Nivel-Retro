@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Nivel Retro — Tienda de videojuegos retro isométrica</title>
+    <meta
+      name="description"
+      content="Experiencia web interactiva que recrea una tienda de videojuegos de los 2000 en un entorno isométrico explorable: catálogo de N64, GameCube, Wii, PS1, PS2 y PS3, galerías 3D y carrito funcional."
+    />
+    <meta name="author" content="nibeKn" />
+    <meta name="theme-color" content="#1a273b" />
+    <link rel="canonical" href="https://tienda-nivel-retro.netlify.app/" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <!-- Open Graph / social previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nivel Retro" />
+    <meta property="og:title" content="Nivel Retro — Tienda de videojuegos retro isométrica" />
+    <meta
+      property="og:description"
+      content="Explora una tienda de videojuegos de los 2000 recreada como un entorno isométrico interactivo. Proyecto de portfolio construido con Vue 3 y Vite."
+    />
+    <meta property="og:url" content="https://tienda-nivel-retro.netlify.app/" />
+    <meta property="og:locale" content="es_CL" />
+    <meta
+      property="og:image"
+      content="https://res.cloudinary.com/dabfglubl/image/upload/v1786409010/Nivel_Retro_1_t5qg6m.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nivel Retro — Tienda de videojuegos retro isométrica" />
+    <meta
+      name="twitter:description"
+      content="Explora una tienda de videojuegos de los 2000 recreada como un entorno isométrico interactivo. Proyecto de portfolio construido con Vue 3 y Vite."
+    />
+    <meta
+      name="twitter:image"
+      content="https://res.cloudinary.com/dabfglubl/image/upload/v1786409010/Nivel_Retro_1_t5qg6m.png"
+    />
+
+    <!--
+      Third-party origins are resolved early so the font and icon requests below
+      do not pay for DNS + TLS on the critical path.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://res.cloudinary.com" />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
+    <!--
+      Fonts and icons load without blocking the first render: the stylesheet is
+      fetched as a preload and promoted to a stylesheet once it arrives. Text
+      paints immediately in the fallback face (font-display: swap) instead of
+      waiting on a round trip to two external CDNs.
+    -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Oswald:wght@600&family=Press+Start+2P&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <link
+      rel="preload"
+      as="style"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Oswald:wght@600&family=Press+Start+2P&display=swap"
+      />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      />
+    </noscript>
+
+    <style>
+      /* Critical styles for the app shell above — inlined so the first paint
+         costs no extra round trip. */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #0f172a;
+      }
+      .boot-screen {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        background-color: #0f172a;
+        color: #94a3b8;
+        font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+      }
+      .boot-spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid #334155;
+        border-top-color: #fbbf24;
+        border-radius: 50%;
+        animation: boot-spin 0.9s linear infinite;
+      }
+      .boot-text {
+        margin: 0;
+        letter-spacing: 1px;
+        font-size: 0.95rem;
+      }
+      @keyframes boot-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .boot-spinner {
+          animation-duration: 3s;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      App shell. Vue clears #app when it mounts, so this markup is throwaway —
+      but it paints on the very first frame, before any JavaScript is parsed,
+      instead of leaving the visitor on a blank page until the bundle arrives.
+      It mirrors the in-app loading screen so the handover is invisible.
+    -->
+    <div id="app">
+      <div class="boot-screen">
+        <div class="boot-spinner"></div>
+        <p class="boot-text">Cargando tienda...</p>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

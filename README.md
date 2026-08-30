@@ -53,14 +53,14 @@ are simulated. There is no payment gateway and no backend.
 
 ## Stack
 
-| Tool | Role |
-|---|---|
-| **Vue 3** (Composition API, `<script setup>`) | Components and state |
-| **Vue Router 5** | One URL per section, with per-route lazy loading |
-| **Vite 8** | Build, dev server, and a custom preload plugin |
-| **Plain CSS3** | Isometric layout, animations and transitions |
-| **tsParticles** | Ambient particles in the scene |
-| **ESLint + Prettier** | Linting and formatting (flat `eslint.config.js`) |
+| Tool                                          | Role                                             |
+| --------------------------------------------- | ------------------------------------------------ |
+| **Vue 3** (Composition API, `<script setup>`) | Components and state                             |
+| **Vue Router 5**                              | One URL per section, with per-route lazy loading |
+| **Vite 8**                                    | Build, dev server, and a custom preload plugin   |
+| **Plain CSS3**                                | Isometric layout, animations and transitions     |
+| **tsParticles**                               | Ambient particles in the scene                   |
+| **ESLint + Prettier**                         | Linting and formatting (flat `eslint.config.js`) |
 
 No Tailwind, no Bootstrap, no component library — every piece of the design is
 hand-written.
@@ -103,69 +103,6 @@ layer's position, size and placeholder, so adding a new piece of furniture means
 adding a JSON entry rather than touching CSS. The same manifest supplies the
 intrinsic dimensions that keep layout shift near zero.
 
-### About the catalogue images
-
-The ~380 product photos and box arts are served from the project's own Cloudinary
-account rather than from the sites they were originally found on. Hotlinking them
-consumed bandwidth from stores that never agreed to it, and left the catalogue at
-the mercy of any of those hosts rotating a URL. Everything is delivered with
-`f_auto,q_auto`, so browsers receive WebP or AVIF at an appropriate resolution.
-
-## Performance
-
-The scene *is* the product, so the work went into shipping the same artwork for a
-fraction of the bytes rather than cutting it down.
-
-| | Before | After |
-|---|---|---|
-| Total page weight | 11,761 KB | **1,549 KB** |
-| Largest Contentful Paint | 49.5 s | **10.7 s** |
-| First Contentful Paint | 4.0 s | **2.2 s** |
-| Speed Index | 4.0 s | **2.5 s** |
-| Cumulative Layout Shift | 0.047 | **0.006** |
-
-And across the four Lighthouse categories:
-
-| Category | Before | After |
-|---|---|---|
-| Performance | 65 | **71** |
-| Accessibility | 79 | **100** |
-| Best Practices | — | **96** |
-| SEO | — | **100** |
-
-<sub>Lighthouse 12, mobile profile with simulated throttling, against the production build.</sub>
-
-What changed:
-
-- **Images served at the size they're used.** The background ships at three widths
-  (1400/2200/3200) behind a `srcset`, so a phone downloads 87 KB where a desktop
-  takes the full 451 KB. The scene layers were re-encoded to WebP q82 —
-  indistinguishable at maximum zoom, at less than half the weight.
-- **The LCP element is discoverable from the HTML.** A small Vite plugin reads the
-  background's hashed filename out of the build and injects its
-  `<link rel="preload" imagesrcset>`, so the download starts alongside the
-  JavaScript instead of after Vue mounts.
-- **An app shell in `index.html`.** The loading screen paints on the first frame,
-  before the bundle is parsed, instead of leaving a blank page.
-- **Nothing blocks rendering.** Fonts and icon CSS load as a `preload` promoted to
-  a stylesheet; they used to be `@import` rules inside the bundled CSS, which
-  chained them behind the bundle.
-- **HD layers load after the background**, so they do not compete for bandwidth
-  with the element that defines the LCP.
-- **Intrinsic dimensions on every layer**, taken from the manifest — the change
-  that brought CLS down to 0.006.
-- **The three brand icons are inline SVG**, which dropped a 106 KB webfont that
-  existed for those glyphs alone.
-
-On accessibility, what took the category from 79 to 100: controls that were
-`<div>`s with `@click` became real `<button>`s — keyboard-reachable and with
-accessible names — navigation uses genuine links instead of `href="#"`, the zoom
-slider was labelled, and contrast ratios and tap targets below the 24 px minimum
-were corrected.
-
-The real floor is the ~800 KB of original store artwork. Going below it would mean
-degrading the art, which is the thing the project rests on.
-
 ## Running the project
 
 Requires Node.js `^20.19.0` or `>=22.12.0` (what Vite 8 expects).
@@ -184,17 +121,6 @@ npm run dev
 
 The dev server runs at `http://localhost:5173/`.
 
-### Scripts
-
-| Command | What it does |
-|---|---|
-| `npm run dev` | Dev server with hot reload |
-| `npm run build` | Production build into `dist/` |
-| `npm run preview` | Serves the production build locally |
-| `npm run lint` | ESLint across the project |
-| `npm run lint:fix` | Auto-fixes what it can |
-| `npm run format` | Formats with Prettier |
-
 ## Disclaimer
 
 A personal portfolio project. Non-commercial, and unconnected to any real store.
@@ -212,8 +138,3 @@ A personal portfolio project. Non-commercial, and unconnected to any real store.
 
 The **source code** is published under the [MIT license](LICENSE): you may use,
 modify and redistribute it while keeping the copyright notice and attribution.
-
-The **original store artwork** (`src/assets/imagenes-tienda/`,
-`src/assets/posters/` and `src/assets/ico/`) is © 2026 nibeKn, all rights
-reserved, and falls outside the MIT license — it is not licensed for reuse in
-other projects.

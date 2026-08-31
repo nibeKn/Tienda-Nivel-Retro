@@ -99,7 +99,6 @@ defineEmits(['back', 'add-to-cart']);
   color: #1e293b;
 }
 
-/* Fix N64 boxes sticking out & alignment */
 :deep(.game-box) {
   max-width: calc(190 * var(--m-scale, 1px)) !important;
   max-height: calc(160 * var(--m-scale, 1px));

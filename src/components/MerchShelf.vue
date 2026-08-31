@@ -618,7 +618,7 @@ onUnmounted(() => {
   transform: scale(1.02);
 }
 
-/* Destacados Section */
+/* Featured Section */
 .destacados-section {
   margin-top: 25px;
   background-color: #1e293b;
@@ -787,7 +787,6 @@ onUnmounted(() => {
 }
 
 .grid-item.selected {
-  /* Dynamic border substituted with inset box-shadow ensuring 0 size distortion */
   box-shadow:
     inset 0 0 0 4px #fbbf24,
     0 5px 15px rgba(251, 191, 36, 0.4);
@@ -1052,7 +1051,7 @@ onUnmounted(() => {
   z-index: 10;
 }
 
-/* MOBILE RESPONSIVE */
+/* Mobile Responsive */
 .mobile-only {
   display: none;
 }
@@ -1082,7 +1081,7 @@ onUnmounted(() => {
     gap: 0;
   }
 
-  /* 1. Barra de Navegación Superior (Sidebar transformado) */
+  /* 1. Top Navigation Bar (Transformed Sidebar) */
   .merch-sidebar {
     display: flex;
     position: static;
@@ -1142,7 +1141,7 @@ onUnmounted(() => {
     border-bottom: 2px solid #fbbf24;
   }
 
-  /* 2. Vista por Defecto */
+  /* 2. Default View */
   .merch-grid {
     display: none;
   }
@@ -1173,7 +1172,7 @@ onUnmounted(() => {
     background-color: #ffffff;
   }
 
-  /* 3. Grilla de Productos por Categoría (Imagen 1) */
+  /* 3. Product Grid by Category (Image 1) */
   .category-detail-view {
     flex-direction: column;
     gap: 0;
@@ -1227,7 +1226,7 @@ onUnmounted(() => {
     display: none !important;
   }
 
-  /* 4. Detalle de Producto a Pantalla Completa (Imagen 2) */
+  /* 4. Full Screen Product Detail (Image 2) */
   .product-detail-panel {
     position: static;
     width: 100%;
@@ -1241,7 +1240,7 @@ onUnmounted(() => {
     animation: fadeIn 0.3s ease;
   }
 
-  /* Header Detalle Móvil */
+  /* Mobile Detail Header */
   .mobile-detail-header {
     display: flex;
     justify-content: flex-start;
@@ -1270,7 +1269,7 @@ onUnmounted(() => {
     padding-bottom: 2px;
   }
 
-  /* Galería (Imagen 2) */
+  /* Gallery (Image 2) */
   .detail-gallery-area {
     display: flex;
     flex-direction: row;
@@ -1304,7 +1303,7 @@ onUnmounted(() => {
     border-width: 1px;
   }
 
-  /* Información del Producto */
+  /* Product Information */
   .detail-info-area {
     display: flex;
     flex-direction: column;

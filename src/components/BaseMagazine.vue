@@ -204,7 +204,7 @@ const stopReading = () => {
   letter-spacing: 1px;
 }
 
-/* --- RACK CONTAINER --- */
+/* --- Rack Container --- */
 .rack-container {
   flex: 1;
   position: relative;
@@ -318,7 +318,7 @@ const stopReading = () => {
   box-shadow: 5px -5px 25px rgba(0, 0, 0, 0.8);
 }
 
-/* --- PUERTAS CORREDIZAS --- */
+/* --- Sliding Doors --- */
 .doors-area {
   height: 200px;
   background-color: #8c6742;
@@ -373,7 +373,7 @@ const stopReading = () => {
   right: 30px;
 }
 
-/* --- MODALES / VISORES --- */
+/* --- Modals / Viewers --- */
 
 .zoom-overlay {
   position: fixed;
@@ -500,7 +500,7 @@ const stopReading = () => {
   align-items: center;
 }
 
-/* Animaciones */
+/* Animations */
 .zoom-enter-active,
 .zoom-leave-active {
   transition:
@@ -524,7 +524,7 @@ const stopReading = () => {
   opacity: 0;
 }
 
-/* MOBILE RESPONSIVE */
+/* Mobile Responsive */
 .mobile-only {
   display: none;
 }

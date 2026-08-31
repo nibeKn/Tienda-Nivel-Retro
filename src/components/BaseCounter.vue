@@ -259,10 +259,10 @@ const orders = [
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: calc(100vh - 140px); /* Altura fija para evitar scroll doble y fugas del fondo */
+  height: calc(100vh - 140px);
   background-color: #0d1526;
   color: #f8fafc;
-  overflow: hidden; /* Corta el fondo de 300vh y evita scroll exterior */
+  overflow: hidden;
   position: relative;
   z-index: 2;
 }
@@ -298,14 +298,14 @@ const orders = [
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 80px; /* Mas espacio entre sidebars y el monitor central */
+  gap: 80px;
   padding: 60px 40px;
   position: relative;
   z-index: 10;
   overflow-y: auto;
 }
 
-/* LEFT SIDEBAR */
+/* Left Sidebar */
 .left-sidebar {
   display: flex;
   flex-direction: column;
@@ -361,24 +361,24 @@ const orders = [
   line-height: 1.1;
 }
 
-/* CENTER MONITOR */
+/* Center Monitor */
 .monitor-container {
-  width: 950px; /* Mas ancho */
-  height: 650px; /* Mas alto */
-  background-color: transparent; /* Eliminado el borde de plastico */
+  width: 950px;
+  height: 650px;
+  background-color: transparent;
   border-radius: 15px;
-  padding: 0; /* Sin padding para que el contenido sea el borde */
-  box-shadow: none; /* Sin sombra exterior de plastico */
+  padding: 0;
+  box-shadow: none;
   position: relative;
 }
 
 .monitor-screen {
-  background-color: #0d1526; /* Fondo estandarizado */
+  background-color: #0d1526;
   width: 100%;
   height: 100%;
-  border-radius: 16px; /* Radio estandarizado */
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Sombra estandarizada */
-  border: 1px solid #1e293b; /* Borde estandarizado */
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid #1e293b;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -386,7 +386,7 @@ const orders = [
 
 .monitor-header {
   padding: 25px;
-  background-color: #161f31; /* Un poco mas claro para distinguir el header */
+  background-color: #161f31;
   border-bottom: 1px solid #1e293b;
 }
 
@@ -550,7 +550,7 @@ const orders = [
   object-fit: cover;
   border: 4px solid #3b82f6;
   margin-bottom: 20px;
-  border-radius: 8px; /* Cuadrado con bordes suaves */
+  border-radius: 8px;
 }
 .profile-view h3 {
   font-family: 'Oswald';
@@ -755,7 +755,7 @@ const orders = [
   gap: 6px;
 }
 
-/* RIGHT SIDEBAR */
+/* Right Sidebar */
 .right-sidebar {
   display: flex;
   flex-direction: column;
@@ -764,9 +764,9 @@ const orders = [
 }
 
 .summary-card {
-  background: #0d1526; /* Fondo estandarizado */
-  border: 1px solid #1e293b; /* Borde estandarizado */
-  border-radius: 16px; /* Radio estandarizado */
+  background: #0d1526;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
   padding: 25px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   position: relative;
@@ -844,7 +844,7 @@ const orders = [
 }
 
 .highlight-btn {
-  background-color: #8b5cf6; /* Morado por defecto / dorado según diseño */
+  background-color: #8b5cf6;
   color: white;
   border: none;
   background: linear-gradient(180deg, #6d42da, #4a27a0);
@@ -865,7 +865,7 @@ const orders = [
   border-radius: 4px;
 }
 
-/* MOBILE RESPONSIVE */
+/* Mobile Responsive */
 @media (max-width: 768px) {
   .counter-view {
     height: auto;
@@ -935,7 +935,7 @@ const orders = [
     min-height: auto;
   }
 
-  /* ======== MONITOR CONTAINER BASE ======== */
+  /* ======== Monitor Container Base ======== */
   .monitor-screen {
     padding: 15px 10px;
   }
@@ -944,7 +944,7 @@ const orders = [
     margin-bottom: 15px;
   }
 
-  /* ======== ORDERS SECTION ======== */
+  /* ======== Orders Section ======== */
   .order-card {
     padding: 15px;
     width: 100%;
@@ -1005,7 +1005,7 @@ const orders = [
     margin-top: 10px;
   }
 
-  /* ======== PROFILE SECTION ======== */
+  /* ======== Profile Section ======== */
   .profile-img {
     width: 100px;
     height: 100px;
@@ -1038,7 +1038,7 @@ const orders = [
     margin-top: 10px;
   }
 
-  /* ======== CART SECTION ======== */
+  /* ======== Cart Section ======== */
   .cart-items-list {
     gap: 15px;
   }

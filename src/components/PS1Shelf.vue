@@ -98,7 +98,6 @@ defineEmits(['back', 'add-to-cart']);
   color: #1e293b;
 }
 
-/* Fix PS1 boxes sticking out, alignment & spacing */
 :deep(.game-box) {
   max-width: calc(140 * var(--m-scale, 1px)) !important;
   max-height: calc(140 * var(--m-scale, 1px));

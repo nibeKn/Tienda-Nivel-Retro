@@ -1,0 +1,897 @@
+[
+  {
+    "file": "src/components/BaseMagazine.vue",
+    "line": 207,
+    "text": "/* --- RACK CONTAINER --- */"
+  },
+  {
+    "file": "src/components/BaseMagazine.vue",
+    "line": 217,
+    "text": "/* Wood Texture Variables - Oak/Pine natural tone */"
+  },
+  {
+    "file": "src/components/BaseMagazine.vue",
+    "line": 321,
+    "text": "/* --- PUERTAS CORREDIZAS --- */"
+  },
+  {
+    "file": "src/components/BaseMagazine.vue",
+    "line": 376,
+    "text": "/* --- MODALES / VISORES --- */"
+  },
+  {
+    "file": "src/components/BaseMagazine.vue",
+    "line": 503,
+    "text": "/* Animaciones */"
+  },
+  {
+    "file": "src/components/BaseMagazine.vue",
+    "line": 527,
+    "text": "/* MOBILE RESPONSIVE */"
+  },
+  {
+    "file": "src/components/BaseMuseum.vue",
+    "line": 356,
+    "text": "/* LEFT SIDE - CABINET */"
+  },
+  {
+    "file": "src/components/BaseMuseum.vue",
+    "line": 510,
+    "text": "/* RIGHT SIDE - INFO PANELS */"
+  },
+  {
+    "file": "src/components/BaseMuseum.vue",
+    "line": 673,
+    "text": "/* Responsiveness */"
+  },
+  {
+    "file": "src/components/BaseMuseum.vue",
+    "line": 766,
+    "text": "/* GAME MODAL */"
+  },
+  {
+    "file": "src/components/BaseMuseum.vue",
+    "line": 863,
+    "text": "/* CONSOLE SPEC MODAL */"
+  },
+  {
+    "file": "src/components/BaseMusic.vue",
+    "line": 830,
+    "text": "// Duplicate CDs to fill the hexagon carousel (24 discs = 6 sides x 4 discs)"
+  },
+  {
+    "file": "src/components/BaseMusic.vue",
+    "line": 842,
+    "text": "// Generate the 6 faces of the hexagon"
+  },
+  {
+    "file": "src/components/BaseMusic.vue",
+    "line": 955,
+    "text": "// Only notify on real playback attempt, not fast manual switching"
+  },
+  {
+    "file": "src/components/BaseMusic.vue",
+    "line": 957,
+    "text": "// Could emit an event or use a global toast here"
+  },
+  {
+    "file": "src/components/BaseMusic.vue",
+    "line": 958,
+    "text": "// For now log for debug and stop playback"
+  },
+  {
+    "file": "src/components/BaseMusic.vue",
+    "line": 966,
+    "text": "// URL changed (track or CD changed)"
+  },
+  {
+    "file": "src/components/BaseMusic.vue",
+    "line": 971,
+    "text": "// Force load of new resource"
+  },
+  {
+    "file": "src/components/BaseMusic.vue",
+    "line": 974,
+    "text": "// Wait for next tick to ensure DOM processed src before playing"
+  },
+  {
+    "file": "src/components/BaseMusic.vue",
+    "line": 982,
+    "text": "// Playback state changed manually"
+  },
+  {
+    "file": "src/components/BaseShelf.vue",
+    "line": 203,
+    "text": "<!--"
+  },
+  {
+    "file": "src/components/BaseShelf.vue",
+    "line": 281,
+    "text": "// Array of strings for row heights. Ex: ['200px', '180px']"
+  },
+  {
+    "file": "src/components/BaseShelf.vue",
+    "line": 282,
+    "text": "// If not defined, fallback to shelfSpacing"
+  },
+  {
+    "file": "src/components/BaseShelf.vue",
+    "line": 345,
+    "text": "// Calculate relative luminance"
+  },
+  {
+    "file": "src/components/BaseShelf.vue",
+    "line": 349,
+    "text": "// Very light color (like #e2e8f0). Darken significantly"
+  },
+  {
+    "file": "src/components/BaseShelf.vue",
+    "line": 352,
+    "text": "// Medium color. Darken moderately"
+  },
+  {
+    "file": "src/components/BaseShelf.vue",
+    "line": 355,
+    "text": "// Already dark. Darken slightly for better contrast on white card"
+  },
+  {
+    "file": "src/components/BaseShelf.vue",
+    "line": 1023,
+    "text": "/* Shelf Top Banner */"
+  },
+  {
+    "file": "src/components/BaseShelf.vue",
+    "line": 1055,
+    "text": "/* Shelf Body */"
+  },
+  {
+    "file": "src/components/BaseShelf.vue",
+    "line": 1122,
+    "text": "/* Specific heights are generally scaled well via flex layout, but let's assure images fit */"
+  },
+  {
+    "file": "src/components/BaseShelf.vue",
+    "line": 1160,
+    "text": "/* Lightbox */"
+  },
+  {
+    "file": "src/components/BaseShelf.vue",
+    "line": 1233,
+    "text": "/* --- Mobile Responsive Rules --- */"
+  },
+  {
+    "file": "src/components/BaseShelf.vue",
+    "line": 1274,
+    "text": "/* Make the shelf fluid and proportional */"
+  },
+  {
+    "file": "src/components/BaseShelf.vue",
+    "line": 1350,
+    "text": "/* ===== MOBILE INFO PANEL (Replaces shelf, full-page scroll) ===== */"
+  },
+  {
+    "file": "src/components/BaseShelf.vue",
+    "line": 1494,
+    "text": "/* Tabs at the bottom */"
+  },
+  {
+    "file": "src/components/BlockTransition.vue",
+    "line": 13,
+    "text": "// Never fall to zero: a 0x0 viewport would build an empty grid, and an empty"
+  },
+  {
+    "file": "src/components/BlockTransition.vue",
+    "line": 14,
+    "text": "// grid schedules no timers — leaving cover()/reveal() permanently pending."
+  },
+  {
+    "file": "src/components/BlockTransition.vue",
+    "line": 30,
+    "text": "// Shuffle helper for random stagger order"
+  },
+  {
+    "file": "src/components/BlockTransition.vue",
+    "line": 40,
+    "text": "/**"
+  },
+  {
+    "file": "src/components/BlockTransition.vue",
+    "line": 52,
+    "text": "// Reset all to invisible first"
+  },
+  {
+    "file": "src/components/BlockTransition.vue",
+    "line": 62,
+    "text": "// The router awaits this promise, so it must settle even if the per-block"
+  },
+  {
+    "file": "src/components/BlockTransition.vue",
+    "line": 63,
+    "text": "// timers never run."
+  },
+  {
+    "file": "src/components/BlockTransition.vue",
+    "line": 69,
+    "text": "// Resolve when last block becomes visible"
+  },
+  {
+    "file": "src/components/BlockTransition.vue",
+    "line": 71,
+    "text": "// Small extra buffer to ensure the last block renders"
+  },
+  {
+    "file": "src/components/BlockTransition.vue",
+    "line": 79,
+    "text": "/**"
+  },
+  {
+    "file": "src/components/CartModal.vue",
+    "line": 543,
+    "text": "/* --- Mobile --- */"
+  },
+  {
+    "file": "src/components/Catalog.vue",
+    "line": 89,
+    "text": "// Flatten the game arrays since they are nested arrays of shelves"
+  },
+  {
+    "file": "src/components/Catalog.vue",
+    "line": 134,
+    "text": "// Filter by search query"
+  },
+  {
+    "file": "src/components/Catalog.vue",
+    "line": 139,
+    "text": "// Filter by player count"
+  },
+  {
+    "file": "src/components/Catalog.vue",
+    "line": 373,
+    "text": "/* --- Mobile Responsive --- */"
+  },
+  {
+    "file": "src/components/Footer.vue",
+    "line": 51,
+    "text": "// Decorative only. This is a mock storefront with no real accounts behind it, so"
+  },
+  {
+    "file": "src/components/Footer.vue",
+    "line": 52,
+    "text": "// the icons are rendered as inert marks rather than links to nowhere — and they"
+  },
+  {
+    "file": "src/components/Footer.vue",
+    "line": 53,
+    "text": "// stay out of the accessibility tree instead of announcing themselves as"
+  },
+  {
+    "file": "src/components/Footer.vue",
+    "line": 54,
+    "text": "// actionable. Inline SVG rather than Font Awesome's brand set, which pulled a"
+  },
+  {
+    "file": "src/components/Footer.vue",
+    "line": 55,
+    "text": "// 106 KB webfont for these three glyphs alone."
+  },
+  {
+    "file": "src/components/Footer.vue",
+    "line": 125,
+    "text": "/* Lifts the tap target to the 24px minimum without changing the layout. */"
+  },
+  {
+    "file": "src/components/Footer.vue",
+    "line": 145,
+    "text": "/* #64748b only reached 3.81:1 against #0c1627; this clears AA at 5.23:1. */"
+  },
+  {
+    "file": "src/components/Footer.vue",
+    "line": 171,
+    "text": "/* Inert marks, so no pointer cursor and no hover affordance promising a click"
+  },
+  {
+    "file": "src/components/Footer.vue",
+    "line": 198,
+    "text": "/* --- Mobile Responsive --- */"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 306,
+    "text": "// Modal Gallery Lightbox State"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 310,
+    "text": "// Active main image state - separate from product data to avoid mutation-based resizing"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 404,
+    "text": "// The route keeps this component mounted when only `?producto=` changes, so the"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 405,
+    "text": "// selection has to follow the prop rather than only the initial mount."
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 487,
+    "text": "/* Sidebar */"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 557,
+    "text": "/* Main Content */"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 621,
+    "text": "/* Destacados Section */"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 722,
+    "text": "/* Category Detail View */"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 790,
+    "text": "/* Dynamic border substituted with inset box-shadow ensuring 0 size distortion */"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 978,
+    "text": "/* Lightbox Carousel CSS */"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 1055,
+    "text": "/* MOBILE RESPONSIVE */"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 1085,
+    "text": "/* 1. Barra de Navegación Superior (Sidebar transformado) */"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 1145,
+    "text": "/* 2. Vista por Defecto */"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 1176,
+    "text": "/* 3. Grilla de Productos por Categoría (Imagen 1) */"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 1230,
+    "text": "/* 4. Detalle de Producto a Pantalla Completa (Imagen 2) */"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 1244,
+    "text": "/* Header Detalle Móvil */"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 1273,
+    "text": "/* Galería (Imagen 2) */"
+  },
+  {
+    "file": "src/components/MerchShelf.vue",
+    "line": 1307,
+    "text": "/* Información del Producto */"
+  },
+  {
+    "file": "src/components/N64Shelf.vue",
+    "line": 102,
+    "text": "/* Fix N64 boxes sticking out & alignment */"
+  },
+  {
+    "file": "src/components/NavBar.vue",
+    "line": 24,
+    "text": "<!--"
+  },
+  {
+    "file": "src/components/NavBar.vue",
+    "line": 194,
+    "text": "/* Hamburger */"
+  },
+  {
+    "file": "src/components/NavBar.vue",
+    "line": 224,
+    "text": "/* Mobile cart button */"
+  },
+  {
+    "file": "src/components/NavBar.vue",
+    "line": 244,
+    "text": "/* Mobile Styles */"
+  },
+  {
+    "file": "src/components/PS1Shelf.vue",
+    "line": 101,
+    "text": "/* Fix PS1 boxes sticking out, alignment & spacing */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 341,
+    "text": "<!--"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 511,
+    "text": "// Particles Configuration"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 538,
+    "text": "// Loading state"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 556,
+    "text": "// Base layer sources"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 560,
+    "text": "// The background ships at three widths, so a phone downloads ~87 KB of artwork"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 561,
+    "text": "// where a desktop takes the full 451 KB."
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 571,
+    "text": "// Layer HD loading status"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 579,
+    "text": "// Intrinsic dimensions let the browser reserve the right box before the image"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 580,
+    "text": "// arrives, which keeps the layered store from shifting as each layer decodes."
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 739,
+    "text": "// Poster Lightbox"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 779,
+    "text": "// Hit zones use the same dimensions as the layer images"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 788,
+    "text": "// Z-index based on layer order: furniture first, then posters on top"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 877,
+    "text": "// The store is presentable as soon as the background is sharp: every shelf and"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 878,
+    "text": "// furniture layer already renders its low-resolution placeholder immediately and"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 879,
+    "text": "// cross-fades to HD through `layerHdStatus`. Blocking the loading screen on all"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 880,
+    "text": "// ~20 HD layers meant holding the first paint hostage to ~2.2 MB of artwork that"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 881,
+    "text": "// the progressive swap was built to stream in anyway."
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 921,
+    "text": "// Safety net: a stalled or blocked background image must never strand the"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 922,
+    "text": "// visitor on the loading screen."
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 928,
+    "text": "/* --- Main Interactive Area --- */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 943,
+    "text": "/* --- Store Layers --- */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 968,
+    "text": "/* --- Base Layer: Placeholder + HD --- */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 998,
+    "text": "/* --- Interactive Layers: Placeholder + HD --- */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1003,
+    "text": "/* Placeholder: visible, blurred, fades out when HD loads */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1017,
+    "text": "/* HD: invisible until loaded, then fades in */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1030,
+    "text": "/* Hover effect for furniture: brightness glow + subtle lift + expanded shadow */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1038,
+    "text": "/* Base realistic shadow for furniture (isometric light from top-right) */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1046,
+    "text": "/* Hover effect for posters: glow + slight scale + wall shadow */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1054,
+    "text": "/* Base subtle shadow for posters on the wall */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1061,
+    "text": "/* Override hover for placeholder layers that have HD loaded — keep them invisible */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1066,
+    "text": "/* --- Hit Zones & Interactions --- */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1069,
+    "text": "/* Uncomment below to see hit zones for debugging */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1070,
+    "text": "/* background: rgba(255, 0, 0, 0.3); */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1109,
+    "text": "/* --- Particles Layer --- */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1120,
+    "text": "/* --- Global Tooltip --- */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1149,
+    "text": "/* --- Zoom Control --- */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1215,
+    "text": "/* --- Floating Menu (Sidebar) --- */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1234,
+    "text": "/* Custom scrollbar for sidebar */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1336,
+    "text": "/* --- Floating Recommendations (Right Sidebar) --- */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1391,
+    "text": "/* --- Loading Overlay --- */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1457,
+    "text": "/* --- Poster Lightbox --- */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1527,
+    "text": "/* Lightbox transitions */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1539,
+    "text": "/* --- Mobile Utilities --- */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1544,
+    "text": "/* --- Mobile Responsive --- */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1669,
+    "text": "/* Hardware acceleration removed to prevent memory limits on mobile */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1672,
+    "text": "/* Removed translateZ and backface-visibility that cause elements to disappear */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1675,
+    "text": "/* Remove all shadows on mobile for performance and prevent filter recalculation flickering */"
+  },
+  {
+    "file": "src/components/StoreMap.vue",
+    "line": 1693,
+    "text": "/* Scale down the pulsing indicator circles */"
+  },
+  {
+    "file": "src/composables/useCart.js",
+    "line": 1,
+    "text": "/**"
+  },
+  {
+    "file": "src/composables/useCart.js",
+    "line": 8,
+    "text": "/**"
+  },
+  {
+    "file": "src/composables/useCart.js",
+    "line": 33,
+    "text": "/**"
+  },
+  {
+    "file": "src/composables/useCart.js",
+    "line": 47,
+    "text": "/**"
+  },
+  {
+    "file": "src/composables/useNavigation.js",
+    "line": 1,
+    "text": "/**"
+  },
+  {
+    "file": "src/composables/useNavigation.js",
+    "line": 12,
+    "text": "/** Section key → route name. */"
+  },
+  {
+    "file": "src/composables/useNavigation.js",
+    "line": 48,
+    "text": "/**"
+  },
+  {
+    "file": "src/composables/useStoreMap.js",
+    "line": 1,
+    "text": "/**"
+  },
+  {
+    "file": "src/composables/useStoreMap.js",
+    "line": 18,
+    "text": "// Drag origin and pinch distance tracking (non-rendered state)"
+  },
+  {
+    "file": "src/composables/useStoreMap.js",
+    "line": 51,
+    "text": "// Apply a very small factor so the parallax is subtle"
+  },
+  {
+    "file": "src/composables/useStoreMap.js",
+    "line": 112,
+    "text": "// Tracked in a ref rather than read inside a computed: `window.innerWidth` is"
+  },
+  {
+    "file": "src/composables/useStoreMap.js",
+    "line": 113,
+    "text": "// not reactive, so a computed over it would cache the first result forever"
+  },
+  {
+    "file": "src/composables/useStoreMap.js",
+    "line": 114,
+    "text": "// and leave the zoom limits stale after a rotate or resize."
+  },
+  {
+    "file": "src/composables/useStoreMap.js",
+    "line": 136,
+    "text": "// The image is `width: 100%; height: auto`, so at scale = 1 it spans the"
+  },
+  {
+    "file": "src/composables/useStoreMap.js",
+    "line": 137,
+    "text": "// viewport width. PAN_ENVELOPE_RATIO is a tuning value, not the artwork's"
+  },
+  {
+    "file": "src/composables/useStoreMap.js",
+    "line": 138,
+    "text": "// true aspect ratio (the base layer is ~0.82) — it was dialled in by hand"
+  },
+  {
+    "file": "src/composables/useStoreMap.js",
+    "line": 139,
+    "text": "// against how the shelves sit in frame, so changing it changes the feel."
+  },
+  {
+    "file": "src/composables/useStoreMap.js",
+    "line": 147,
+    "text": "// Strictly lock horizontal to image bounds (prevent left/right edges from entering)"
+  },
+  {
+    "file": "src/composables/useStoreMap.js",
+    "line": 150,
+    "text": "// For vertical, increase the mobility limit significantly."
+  },
+  {
+    "file": "src/composables/useStoreMap.js",
+    "line": 151,
+    "text": "// Adding half the viewport height as a buffer allows users to pan"
+  },
+  {
+    "file": "src/composables/useStoreMap.js",
+    "line": 152,
+    "text": "// past the strict image bounds to comfortably see the top/bottom shelves."
+  },
+  {
+    "file": "src/data/arcadeData.js",
+    "line": 1,
+    "text": "/**"
+  },
+  {
+    "file": "src/main.js",
+    "line": 10,
+    "text": "// The particle engine is decorative, so its ~50 KB of plugins are pulled in"
+  },
+  {
+    "file": "src/main.js",
+    "line": 11,
+    "text": "// as a separate chunk instead of riding along in the initial bundle."
+  },
+  {
+    "file": "src/router/index.js",
+    "line": 1,
+    "text": "/**"
+  },
+  {
+    "file": "src/router/index.js",
+    "line": 15,
+    "text": "/**"
+  },
+  {
+    "file": "src/router/index.js",
+    "line": 34,
+    "text": "// The isometric map owns the whole viewport and handles its own panning, so"
+  },
+  {
+    "file": "src/router/index.js",
+    "line": 35,
+    "text": "// the shell locks page scrolling while it is on screen."
+  },
+  {
+    "file": "src/router/index.js",
+    "line": 92,
+    "text": "// Anything unrecognised drops the visitor at the front door rather than on a"
+  },
+  {
+    "file": "src/router/index.js",
+    "line": 93,
+    "text": "// blank screen."
+  },
+  {
+    "file": "src/router/index.js",
+    "line": 101,
+    "text": "// Going back should land where the visitor left off; a fresh view starts at"
+  },
+  {
+    "file": "src/router/index.js",
+    "line": 102,
+    "text": "// the top. `About` scrolls itself to the requested section."
+  },
+  {
+    "file": "src/router/index.js",
+    "line": 109,
+    "text": "/*"
+  },
+  {
+    "file": "src/router/index.js",
+    "line": 120,
+    "text": "/**"
+  },
+  {
+    "file": "src/router/index.js",
+    "line": 128,
+    "text": "// No wipe on the very first paint — there is nothing to wipe away yet."
+  },
+  {
+    "file": "src/router/index.js",
+    "line": 133,
+    "text": "// Swallow: a failed wipe is a visual glitch, not a reason to strand the"
+  },
+  {
+    "file": "src/router/index.js",
+    "line": 134,
+    "text": "// visitor on the page they were leaving."
+  },
+  {
+    "file": "src/router/index.js",
+    "line": 141,
+    "text": "// Let the incoming view paint underneath the cover before lifting it."
+  },
+  {
+    "file": "src/router/index.js",
+    "line": 147,
+    "text": "// Same reasoning: never leave the overlay stuck over the new view."
+  },
+  {
+    "file": "src/style.css",
+    "line": 1,
+    "text": "/* Estilos globales básicos (limpiados de template por defecto de Vite) */"
+  },
+  {
+    "file": "vite.config.js",
+    "line": 4,
+    "text": "/**"
+  },
+  {
+    "file": "vite.config.js",
+    "line": 25,
+    "text": "// Mirror the srcset declared on the <img> so the preload picks the same"
+  },
+  {
+    "file": "vite.config.js",
+    "line": 26,
+    "text": "// candidate the renderer will; preloading a single width would download"
+  },
+  {
+    "file": "vite.config.js",
+    "line": 27,
+    "text": "// the background twice on every device that resolves to another one."
+  },
+  {
+    "file": "vite.config.js",
+    "line": 60,
+    "text": "// Separate vendor chunk for Vue runtime"
+  },
+  {
+    "file": "vite.config.js",
+    "line": 64,
+    "text": "// Separate data chunk for game/merch catalogs"
+  },
+  {
+    "file": "vite.config.js",
+    "line": 72,
+    "text": "// Only inline assets smaller than 4 KB; anything larger stays a separate,"
+  },
+  {
+    "file": "vite.config.js",
+    "line": 73,
+    "text": "// cacheable request instead of a base64 blob inside the JS bundle."
+  }
+]

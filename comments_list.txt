@@ -1,0 +1,290 @@
+dist\assets\vendor-CBIo0zmG.js:2: `))),e[rs]=es(i);let a=r||i.props&&i.props.type===`number`;zo(e,t?`change`:`input`,t=>{t.target.composing||e[rs](as(e.value,n,a))}),(n||a)&&zo(e,`change`,()=>{e.value=as(e.value,n,a)}),t||(zo(e,`compositionstart`,ts),zo(e,`compositionend`,ns),zo(e,`change`,ns))},mounted(e,{value:t,modifiers:{trim:n,number:r}}){let i=t??``,a=e[is];delete e[is],a!==void 0&&(e.type===`text`||e.type===`textarea`)&&e.value!==a?e[rs](as(e.value,n,r)):e.value=i},beforeUpdate(e,{value:t,oldValue:n,modifiers:{lazy:r,trim:i,number:a}},o){if(e[rs]=es(o),e.composing)return;let s=(a||e.type===`number`)&&!/^0\d/.test(e.value)?ae(e.value):e.value,c=t??``;if(s===c)return;let l=e.getRootNode();(l instanceof Document||l instanceof ShadowRoot)&&l.activeElement===e&&e.type!==`range`&&(r&&t===n||i&&e.value.trim()===c)||(e.value=c)}},ss={deep:!0,created(e,{value:t,modifiers:{number:n}},r){e._modelValue=t,zo(e,`change`,()=>{let t=Array.prototype.filter.call(e.options,e=>e.selected).map(e=>n?ae(us(e)):us(e)),r=e.multiple,i=r?p(e._modelValue)?new Set(t):t:t[0],a=e._pendingValue=[r,r?d(i)?t.slice():t:i];try{e[rs](i)}finally{hn(()=>{e._pendingValue===a&&(e._pendingValue=void 0)})}}),e[rs]=es(r)},mounted(e,{value:t}){ls(e,t)},beforeUpdate(e,{value:t},n){e._modelValue=t,e[rs]=es(n)},updated(e,{value:t}){let n=e._pendingValue;e._pendingValue=void 0,(!n||n[0]!==e.multiple||!cs(t,n[1],n[0]))&&ls(e,t)}};function cs(e,t,n){if(!n||d(e))return ye(e,t);if(p(e)){if(e.size!==t.length)return!1;for(let n of t)if(!e.has(n))return!1;return!0}return!1}function ls(e,t){let n=e.multiple,r=d(t);if(!(n&&!r&&!p(t))){for(let i=0,a=e.options.length;i<a;i++){let a=e.options[i],o=us(a);if(n){if(r){let e=typeof o;a.selected=e===`string`||e===`number`?t.some(e=>String(e)===String(o)):be(t,o)>-1}else a.selected=t.has(o)}else if(ye(us(a),t)){e.selectedIndex!==i&&(e.selectedIndex=i);return}}!n&&e.selectedIndex!==-1&&(e.selectedIndex=-1)}}function us(e){return`_value`in e?e._value:e.value}var ds=[`ctrl`,`shift`,`alt`,`meta`],fs={stop:e=>e.stopPropagation(),prevent:e=>e.preventDefault(),self:e=>e.target!==e.currentTarget,ctrl:e=>!e.ctrlKey,shift:e=>!e.shiftKey,alt:e=>!e.altKey,meta:e=>!e.metaKey,left:e=>`button`in e&&e.button!==0,middle:e=>`button`in e&&e.button!==1,right:e=>`button`in e&&e.button!==2,exact:(e,t)=>ds.some(n=>e[`${n}Key`]&&!t.includes(n))},ps=(e,t)=>{if(!e)return e;let n=e._withMods||={},r=t.join(`.`);return n[r]||(n[r]=((n,...r)=>{for(let e=0;e<t.length;e++){let r=fs[t[e]];if(r&&r(n,t))return}return e(n,...r)}))},ms={esc:`escape`,space:` `,up:`arrow-up`,left:`arrow-left`,right:`arrow-right`,down:`arrow-down`,delete:`backspace`},hs=(e,t)=>{let n=e._withKeys||={},r=t.join(`.`);return n[r]||(n[r]=(n=>{if(!(`key`in n))return;let r=D(n.key);if(t.some(e=>e===r||ms[e]===r))return e(n)}))},gs=s({patchProp:Zo},eo),_s;function vs(){return _s||=Hi(gs)}var ys=((...e)=>{let t=vs().createApp(...e),{mount:n}=t;return t.mount=e=>{let r=xs(e);if(!r)return;let i=t._component;!h(i)&&!i.render&&!i.template&&(i.template=r.innerHTML),r.nodeType===1&&(r.textContent=``);let a=n(r,!1,bs(r));return r instanceof Element&&(r.removeAttribute(`v-cloak`),r.setAttribute(`data-v-app`,``)),a},t});function bs(e){if(e instanceof SVGElement)return`svg`;if(typeof MathMLElement==`function`&&e instanceof MathMLElement)return`mathml`}function xs(e){return g(e)?document.querySelector(e):e}var Ss=e=>e.startsWith(`/`);function Cs(e){return typeof e==`object`||`displayName`in e||`props`in e||`__vccOpts`in e}function ws(e){return e.__esModule||e[Symbol.toStringTag]===`Module`||e.default&&Cs(e.default)}var $=Object.assign;function Ts(e,t){let n={};for(let r in t){let i=t[r];n[r]=Ds(i)?i.map(e):e(i)}return n}var Es=()=>{},Ds=Array.isArray;function Os(e,t){let n={};for(let r in e)n[r]=r in t?t[r]:e[r];return n}var ks=Symbol(``);function As(e,t){return $(Error(),{type:e,[ks]:!0},t)}function js(e,t){return e instanceof Error&&ks in e&&(t==null||!!(e.type&t))}var Ms=Symbol(``),Ns=Symbol(``),Ps=Symbol(``),Fs=Symbol(``),Is=Symbol(``);function Ls(){return H(Ps)}function Rs(e){return H(Fs)}var zs=typeof document<`u`,Bs=/#/g,Vs=/&/g,Hs=/\//g,Us=/=/g,Ws=/\?/g,Gs=/\+/g,Ks=/%5B/g,qs=/%5D/g,Js=/%5E/g,Ys=/%60/g,Xs=/%7B/g,Zs=/%7C/g,Qs=/%7D/g,$s=/%20/g;function ec(e){return e==null?``:encodeURI(``+e).replace(Zs,`|`).replace(Ks,`[`).replace(qs,`]`)}function tc(e){return ec(e).replace(Xs,`{`).replace(Qs,`}`).replace(Js,`^`)}function nc(e){return ec(e).replace(Gs,`%2B`).replace($s,`+`).replace(Bs,`%23`).replace(Vs,`%26`).replace(Ys,"`").replace(Xs,`{`).replace(Qs,`}`).replace(Js,`^`)}function rc(e){return nc(e).replace(Us,`%3D`)}function ic(e){return ec(e).replace(Bs,`%23`).replace(Ws,`%3F`)}function ac(e){return ic(e).replace(Hs,`%2F`)}function oc(e){if(e==null)return null;try{return decodeURIComponent(``+e)}catch{}return``+e}var sc=/\/$/,cc=e=>e.replace(sc,``);function lc(e,t,n=`/`){let r,i={},a=``,o=``,s=t.indexOf(`#`),c=t.indexOf(`?`);return c=s>=0&&c>s?-1:c,c>=0&&(r=t.slice(0,c),a=t.slice(c,s>0?s:t.length),i=e(a.slice(1))),s>=0&&(r||=t.slice(0,s),o=t.slice(s,t.length)),r=_c(r??t,n),{fullPath:r+a+o,path:r,query:i,hash:oc(o)}}function uc(e,t){let n=t.query?e(t.query):``;return t.path+(n&&`?`)+n+(t.hash||``)}function dc(e,t){return!t||!e.toLowerCase().startsWith(t.toLowerCase())?e:e.slice(t.length)||`/`}function fc(e,t,n){let r=t.matched.length-1,i=n.matched.length-1;return r>-1&&r===i&&pc(t.matched[r],n.matched[i])&&mc(t.params,n.params)&&e(t.query)===e(n.query)&&t.hash===n.hash}function pc(e,t){return(e.aliasOf||e)===(t.aliasOf||t)}function mc(e,t){if(Object.keys(e).length!==Object.keys(t).length)return!1;for(var n in e)if(!hc(e[n],t[n]))return!1;return!0}function hc(e,t){return Ds(e)?gc(e,t):Ds(t)?gc(t,e):(e&&e.valueOf())===(t&&t.valueOf())}function gc(e,t){return Ds(t)?e.length===t.length&&e.every((e,n)=>e===t[n]):e.length===1&&e[0]===t}function _c(e,t){if(Ss(e))return e;if(!e)return t;let n=t.split(`/`),r=e.split(`/`),i=r[r.length-1];(i===`..`||i===`.`)&&r.push(``);let a=n.length-1,o,s;for(o=0;o<r.length;o++)if(s=r[o],s!==`.`){if(s===`..`)a>1&&a--;else break}return n.slice(0,a).join(`/`)+`/`+r.slice(o).join(`/`)}var vc={path:`/`,name:void 0,params:{},query:{},hash:``,fullPath:`/`,matched:[],meta:{},redirectedFrom:void 0};function yc(e){if(!e){if(zs){let t=document.querySelector(`base`);e=t&&t.getAttribute(`href`)||`/`,e=e.replace(/^\w+:\/\/[^/]+/,``)}else e=`/`}return e[0]!==`/`&&e[0]!==`#`&&(e=`/`+e),cc(e)}var bc=/^[^#]+#/;function xc(e,t){return e.replace(bc,`#`)+t}function Sc(e,t){let n=document.documentElement.getBoundingClientRect(),r=e.getBoundingClientRect();return{behavior:t.behavior,left:r.left-n.left-(t.left||0),top:r.top-n.top-(t.top||0)}}var Cc=()=>history.scrollRestoration===`manual`?{left:window.scrollX,top:window.scrollY}:null;function wc(e){let t;if(`el`in e){let n=e.el,r=typeof n==`string`&&n.startsWith(`#`),i=typeof n==`string`?r?document.getElementById(n.slice(1)):document.querySelector(n):n;if(!i)return;t=Sc(i,e)}else t=e;`scrollBehavior`in document.documentElement.style?window.scrollTo(t):window.scrollTo(t.left==null?window.scrollX:t.left,t.top==null?window.scrollY:t.top)}function Tc(e,t){return(history.state?history.state.position-t:-1)+e}var Ec=new Map;function Dc(e){Ec.set(e,Cc())}function Oc(e){let t=Ec.get(e);return Ec.delete(e),t}function kc(e){return typeof e==`string`||e&&typeof e==`object`}function Ac(e){return typeof e==`string`||typeof e==`symbol`}function jc(e){let t={};if(e===``||e===`?`)return t;let n=(e[0]===`?`?e.slice(1):e).split(`&`);for(let e=0;e<n.length;++e){let r=n[e].replace(Gs,` `),i=r.indexOf(`=`),a=oc(i<0?r:r.slice(0,i)),o=i<0?null:oc(r.slice(i+1));if(a in t){let e=t[a];Ds(e)||(e=t[a]=[e]),e.push(o)}else t[a]=o}return t}function Mc(e){let t=``;for(let n in e){let r=e[n];if(n=rc(n),r==null){r!==void 0&&(t+=(t.length?`&`:``)+n);continue}(Ds(r)?r.map(e=>e&&nc(e)):[r&&nc(r)]).forEach(e=>{e!==void 0&&(t+=(t.length?`&`:``)+n,e!=null&&(t+=`=`+e))})}return t}function Nc(e){let t={};for(let n in e){let r=e[n];r!==void 0&&(t[n]=Ds(r)?r.map(e=>e==null?null:``+e):r==null?r:``+r)}return t}function Pc(){let e=[];function t(t){return e.push(t),()=>{let n=e.indexOf(t);n>-1&&e.splice(n,1)}}function n(){e=[]}return{add:t,list:()=>e.slice(),reset:n}}function Fc(e,t,n,r,i,a=e=>e()){let o=r&&(r.enterCallbacks[i]=r.enterCallbacks[i]||[]);return()=>new Promise((s,c)=>{let l=e=>{e===!1?c(As(4,{from:n,to:t})):e instanceof Error?c(e):kc(e)?c(As(2,{from:t,to:e})):(o&&r.enterCallbacks[i]===o&&typeof e==`function`&&o.push(e),s())},u=a(()=>e.call(r&&r.instances[i],t,n,l)),d=Promise.resolve(u);e.length<3&&(d=d.then(l)),d.catch(e=>c(e))})}function Ic(e,t,n,r,i=e=>e()){let a=[];for(let o of e)for(let e in o.components){let s=o.components[e];if(!(t!==`beforeRouteEnter`&&!o.instances[e])){if(Cs(s)){let c=(s.__vccOpts||s)[t];c&&a.push(Fc(c,n,r,o,e,i))}else{let c=s();a.push(()=>c.then(a=>{if(!a)throw Error(`Couldn't resolve component "${e}" at "${o.path}"`);let s=ws(a)?a.default:a;o.mods[e]=a,o.components[e]=s;let c=(s.__vccOpts||s)[t];return c&&Fc(c,n,r,o,e,i)()}))}}}return a}function Lc(e,t){let n=[],r=[],i=[],a=Math.max(t.matched.length,e.matched.length);for(let o=0;o<a;o++){let a=t.matched[o];a&&(e.matched.find(e=>pc(e,a))?r.push(a):n.push(a));let s=e.matched[o];s&&(t.matched.find(e=>pc(e,s))||i.push(s))}return[n,r,i]}var Rc=()=>location.protocol+`//`+location.host;function zc(e,t){let{pathname:n,search:r,hash:i}=t,a=e.indexOf(`#`);if(a>-1){let t=i.includes(e.slice(a))?e.slice(a).length:1,n=i.slice(t);return n[0]!==`/`&&(n=`/`+n),dc(n,``)}return dc(n,e)+r+i}function Bc(e,t,n,r){let i=[],a=[],o=null,s=({state:a})=>{let s=zc(e,location),c=n.value,l=t.value,u=0;if(a){if(n.value=s,t.value=a,o&&o===c){o=null;return}u=l?a.position-l.position:0}else r(s);i.forEach(e=>{e(n.value,c,{delta:u,type:`pop`,direction:u?u>0?`forward`:`back`:``})})};function c(){o=n.value}function l(e){i.push(e);let t=()=>{let t=i.indexOf(e);t>-1&&i.splice(t,1)};return a.push(t),t}function u(){let{history:e}=window;e.state&&e.replaceState($({},e.state,{scroll:Cc()}),``)}function d(){for(let e of a)e();a=[],window.removeEventListener(`popstate`,s),window.removeEventListener(`pagehide`,u)}return window.addEventListener(`popstate`,s),window.addEventListener(`pagehide`,u),{pauseListeners:c,listen:l,destroy:d}}function Vc(e,t,n,r=!1){return{back:e,current:t,forward:n,replaced:r,position:window.history.length,scroll:null}}function Hc(e){let{history:t,location:n}=window,r={value:zc(e,n)},i={value:t.state};i.value||a(r.value,{back:null,current:r.value,forward:null,position:t.length-1,replaced:!0,scroll:null},!0);function a(r,a,o){let s=e.indexOf(`#`),c=s>-1?(n.host&&document.querySelector(`base`)?e:e.slice(s))+r:Rc()+e+r;try{t[o?`replaceState`:`pushState`](a,``,c),i.value=a}catch(e){console.error(e),n[o?`replace`:`assign`](c)}}function o(e,n){a(e,$({},t.state,Vc(i.value.back,e,i.value.forward,!0),n,{position:i.value.position}),!0),r.value=e}function s(e,n){let o=$({},i.value,t.state,{forward:e,scroll:Cc()});a(o.current,o,!0),a(e,$({},Vc(r.value,e,null),{position:o.position+1},n),!1),r.value=e}return{location:r,state:i,push:s,replace:o}}function Uc(e){e=yc(e);let t=Hc(e),n=Bc(e,t.state,t.location,t.replace);function r(e,t=!0){t||n.pauseListeners(),history.go(e)}let i=$({location:``,base:e,go:r,createHref:xc.bind(null,e)},t,n);return Object.defineProperty(i,"location",{enumerable:!0,get:()=>t.location.value}),Object.defineProperty(i,"state",{enumerable:!0,get:()=>t.state.value}),i}var Wc={type:0,value:``},Gc=/[a-zA-Z0-9_]/;function Kc(e){if(!e)return[[]];if(e===`/`)return[[Wc]];if(!Ss(e))throw Error(`Invalid path "${e}"`);function t(e){throw Error(`ERR (${n})/"${l}": ${e}`)}let n=0,r=n,i=[],a;function o(){a&&i.push(a),a=[]}let s=0,c,l=``,u=``;function d(){l&&=(n===0?a.push({type:0,value:l}):n===1||n===2||n===3?(a.length>1&&(c===`*`||c===`+`)&&t(`A repeatable param (${l}) must be alone in its segment. eg: '/:ids+.`),a.push({type:1,value:l,regexp:u,repeatable:c===`*`||c===`+`,optional:c===`*`||c===`?`})):t(`Invalid state to consume buffer`),``)}function f(){l+=c}for(;s<e.length;)switch(c=e[s++],n){case 0:c===`\\`?(r=n,n=4):c===`/`?(l&&d(),o()):c===`:`?(d(),n=1):f();break;case 4:f(),n=r;break;case 1:c===`(`?n=2:Gc.test(c)?f():(d(),n=0,c!==`*`&&c!==`?`&&c!==`+`&&s--);break;case 2:c===`)`?u[u.length-1]==`\\`?u=u.slice(0,-1)+c:n=3:u+=c;break;case 3:d(),n=0,c!==`*`&&c!==`?`&&c!==`+`&&s--,u=``;break;default:t(`Unknown state`)}return n===2&&t(`Unfinished custom RegExp for param "${l}"`),d(),o(),i}var qc=`[^/]+?`,Jc={sensitive:!1,strict:!1,start:!0,end:!0},Yc=/[.+*?^${}()[\]/\\]/g;function Xc(e,t){let n=$({},Jc,t),r=[],i=n.start?`^`:``,a=[];for(let t of e){let e=t.length?[]:[90];n.strict&&!t.length&&(i+=`/`);for(let r=0;r<t.length;r++){let o=t[r],s=40+(n.sensitive?.25:0);if(o.type===0)r||(i+=`/`),i+=o.value.replace(Yc,`\\$&`),s+=40;else if(o.type===1){let{value:e,repeatable:n,optional:c,regexp:l}=o;a.push({name:e,repeatable:n,optional:c});let u=l||qc;if(u!==qc){s+=10;try{RegExp(`(${u})`)}catch(t){throw Error(`Invalid custom RegExp for param "${e}" (${u}): `+t.message)}}let d=n?`((?:${u})(?:/(?:${u}))*)`:`(${u})`;r||(d=c&&t.length<2?`(?:/${d})`:`/`+d),c&&(d+=`?`),i+=d,s+=20,c&&(s+=-8),n&&(s+=-20),u===`.*`&&(s+=-50)}e.push(s)}r.push(e)}if(n.strict&&n.end){let e=r.length-1;r[e][r[e].length-1]+=.7000000000000001}n.strict||(i+=`/?`),n.end?i+=`$`:n.strict&&!i.endsWith(`/`)&&(i+=`(?:/|$)`);let o=new RegExp(i,n.sensitive?``:`i`);function s(e){let t=e.match(o),n={};if(!t)return null;for(let e=1;e<t.length;e++){let r=t[e]||``,i=a[e-1];n[i.name]=r&&i.repeatable?r.split(`/`):r}return n}function c(t){let n=``,r=!1;for(let i of e){(!r||!n.endsWith(`/`))&&(n+=`/`),r=!1;for(let e of i)if(e.type===0)n+=e.value;else if(e.type===1){let{value:a,repeatable:o,optional:s}=e,c=a in t?t[a]:``;if(Ds(c)&&!o)throw Error(`Provided param "${a}" is an array but it is not repeatable (* or + modifiers)`);let l=Ds(c)?c.join(`/`):c;if(!l){if(s)i.length<2&&(n.endsWith(`/`)?n=n.slice(0,-1):r=!0);else throw Error(`Missing required param "${a}"`)}n+=l}}return n||`/`}return{re:o,score:r,keys:a,parse:s,stringify:c}}function Zc(e,t){let n=0;for(;n<e.length&&n<t.length;){let r=t[n]-e[n];if(r)return r;n++}return e.length<t.length?e.length===1&&e[0]===80?-1:1:e.length>t.length?t.length===1&&t[0]===80?1:-1:0}function Qc(e,t){let n=0,r=e.score,i=t.score;for(;n<r.length&&n<i.length;){let e=Zc(r[n],i[n]);if(e)return e;n++}if(Math.abs(i.length-r.length)===1){if($c(r))return 1;if($c(i))return-1}return i.length-r.length}function $c(e){let t=e[e.length-1];return e.length>0&&t[t.length-1]<0}var el={strict:!1,end:!0,sensitive:!1};function tl(e,t,n){let r=$(Xc(Kc(e.path),n),{record:e,parent:t,children:[],alias:[]});return t&&!r.record.aliasOf==!t.record.aliasOf&&t.children.push(r),r}function nl(e,t){let n=[],r=new Map;t=Os(el,t);function i(e){return r.get(e)}function a(e,n,r){let i=!r,s=il(e);s.aliasOf=r&&r.record;let l=Os(t,e),u=[s];if(`alias`in e){let t=typeof e.alias==`string`?[e.alias]:e.alias;for(let e of t)u.push(il($({},s,{components:r?r.record.components:s.components,path:e,aliasOf:r?r.record:s})))}let d,f;for(let t of u){let{path:u}=t;if(n&&!Ss(u)){let e=n.record.path,r=e[e.length-1]===`/`?``:`/`;t.path=n.record.path+(u&&r+u)}if(d=tl(t,n,l),r?r.alias.push(d):(f||=d,f!==d&&f.alias.push(d),i&&e.name&&!ol(d)&&o(e.name)),ul(d)&&c(d),s.children){let e=s.children;for(let t=0;t<e.length;t++)a(e[t],d,r&&r.children[t])}r||=d}return f?()=>{o(f)}:Es}function o(e){if(Ac(e)){let t=r.get(e);t&&(r.delete(e),n.splice(n.indexOf(t),1),t.children.forEach(o),t.alias.forEach(o))}else{let t=n.indexOf(e);t>-1&&(n.splice(t,1),e.record.name&&r.delete(e.record.name),e.children.forEach(o),e.alias.forEach(o))}}function s(){return n}function c(e){let t=cl(e,n);n.splice(t,0,e),e.record.name&&!ol(e)&&r.set(e.record.name,e)}function l(e,t){let i,a={},o,s;if(`name`in e&&e.name){if(i=r.get(e.name),!i)throw As(1,{location:e});s=i.record.name,a=$(rl(t.params,i.keys.filter(e=>!e.optional).concat(i.parent?i.parent.keys.filter(e=>e.optional):[]).map(e=>e.name)),e.params&&rl(e.params,i.keys.map(e=>e.name))),o=i.stringify(a)}else if(e.path!=null)o=e.path,i=n.find(e=>e.re.test(o)),i&&(a=i.parse(o),s=i.record.name,i.keys.forEach(e=>{e.optional&&!a[e.name]&&delete a[e.name]}));else{if(i=t.name?r.get(t.name):n.find(e=>e.re.test(t.path)),!i)throw As(1,{location:e,currentLocation:t});s=i.record.name,a=$({},t.params,e.params),o=i.stringify(a)}let c=[],l=i;for(;l;)c.unshift(l.record),l=l.parent;return{name:s,path:o,params:a,matched:c,meta:sl(c)}}e.forEach(e=>a(e));function u(){n.length=0,r.clear()}return{addRoute:a,resolve:l,removeRoute:o,clearRoutes:u,getRoutes:s,getRecordMatcher:i}}function rl(e,t){let n={};for(let r of t)r in e&&(n[r]=e[r]);return n}function il(e){let t={path:e.path,redirect:e.redirect,name:e.name,meta:e.meta||{},aliasOf:e.aliasOf,beforeEnter:e.beforeEnter,props:al(e),children:e.children||[],instances:{},leaveGuards:new Set,updateGuards:new Set,enterCallbacks:{},components:`components`in e?e.components||null:e.component&&{default:e.component}};return Object.defineProperty(t,"mods",{value:{}}),t}function al(e){let t={},n=e.props||!1;if(`component`in e)t.default=n;else for(let r in e.components)t[r]=typeof n==`object`?n[r]:n;return t}function ol(e){for(;e;){if(e.record.aliasOf)return!0;e=e.parent}return!1}function sl(e){return e.reduce((e,t)=>$(e,t.meta),{})}function cl(e,t){let n=0,r=t.length;for(;n!==r;){let i=n+r>>1;Qc(e,t[i])<0?r=i:n=i+1}let i=ll(e);return i&&(r=t.lastIndexOf(i,r-1)),r}function ll(e){let t=e;for(;t=t.parent;)if(ul(t)&&Qc(e,t)===0)return t}function ul({record:e}){return!!(e.name||e.components&&Object.keys(e.components).length||e.redirect)}function dl(e){let t=H(Ps),n=H(Fs),r=Q(()=>{let n=Jt(e.to);return t.resolve(n)}),i=Q(()=>{let{matched:e}=r.value,{length:t}=e,i=e[t-1],a=n.matched;if(!i||!a.length)return-1;let o=a.findIndex(pc.bind(null,i));if(o>-1)return o;let s=gl(e[t-2]);return t>1&&gl(i)===s&&a[a.length-1].path!==s?a.findIndex(pc.bind(null,e[t-2])):o}),a=Q(()=>i.value>-1&&hl(n.params,r.value.params)),o=Q(()=>i.value>-1&&i.value===n.matched.length-1&&mc(n.params,r.value.params));function s(n={}){if(ml(n)){let n=t[Jt(e.replace)?`replace`:`push`](Jt(e.to)).catch(Es);return e.viewTransition&&typeof document<`u`&&`startViewTransition`in document&&document.startViewTransition(()=>n),n}return Promise.resolve()}return{route:r,href:Q(()=>r.value.href),isActive:a,isExactActive:o,navigate:s}}function fl(e){return e.length===1?e[0]:e}var pl=lr({name:`RouterLink`,compatConfig:{MODE:3},props:{to:{type:[String,Object],required:!0},replace:Boolean,activeClass:String,exactActiveClass:String,custom:Boolean,ariaCurrentValue:{type:String,default:`page`},viewTransition:Boolean},useLink:dl,setup(e,{slots:t}){let n=Ft(dl(e)),{options:r}=H(Ps),i=Q(()=>({[_l(e.activeClass,r.linkActiveClass,`router-link-active`)]:n.isActive,[_l(e.exactActiveClass,r.linkExactActiveClass,`router-link-exact-active`)]:n.isExactActive}));return()=>{let r=t.default&&fl(t.default(n));return e.custom?r:Ga(`a`,{"aria-current":n.isExactActive?e.ariaCurrentValue:null,href:n.href,onClick:n.navigate,class:i.value},r)}}});function ml(e){if(!(e.metaKey||e.altKey||e.ctrlKey||e.shiftKey)&&!e.defaultPrevented&&(e.button===void 0||e.button===0)){if(e.currentTarget&&e.currentTarget.getAttribute){let t=e.currentTarget.getAttribute(`target`);if(/\b_blank\b/i.test(t))return}return e.preventDefault&&e.preventDefault(),!0}}function hl(e,t){for(let n in t){let r=t[n],i=e[n];if(typeof r==`string`){if(r!==i)return!1}else if(!Ds(i)||i.length!==r.length||r.some((e,t)=>e.valueOf()!==i[t].valueOf()))return!1}return!0}function gl(e){return e?e.aliasOf?e.aliasOf.path:e.path:``}var _l=(e,t,n)=>e??t??n,vl=lr({name:`RouterView`,inheritAttrs:!1,props:{name:{type:String,default:`default`},route:Object},compatConfig:{MODE:3},setup(e,{attrs:t,slots:n}){let r=H(Is),i=Q(()=>e.route||r.value),a=H(Ns,0),o=Q(()=>{let e=Jt(a),{matched:t}=i.value,n;for(;(n=t[e])&&!n.components;)e++;return e}),s=Q(()=>i.value.matched[o.value]);kn(Ns,Q(()=>o.value+1)),kn(Ms,s),kn(Is,i);let c=Wt();return Mn(()=>[c.value,s.value,e.name],([e,t,n],[r,i,a])=>{t&&(t.instances[n]=e,i&&i!==t&&e&&e===r&&(t.leaveGuards.size||(t.leaveGuards=i.leaveGuards),t.updateGuards.size||(t.updateGuards=i.updateGuards))),e&&t&&(!i||!pc(t,i)||!r)&&(t.enterCallbacks[n]||[]).forEach(t=>t(e))},{flush:`post`}),()=>{let r=i.value,a=e.name,o=s.value,l=o&&o.components[a];if(!l)return yl(n.default,{Component:l,route:r});let u=o.props[a],d=Ga(l,$({},u?u===!0?r.params:typeof u==`function`?u(r):u:null,t,{onVnodeUnmounted:e=>{e.component.isUnmounted&&(o.instances[a]=null)},ref:c}));return yl(n.default,{Component:d,route:r})||d}}});function yl(e,t){if(!e)return null;let n=e(t);return n.length===1?n[0]:n}var bl=vl;function xl(e){let t=nl(e.routes,e),n=e.parseQuery||jc,r=e.stringifyQuery||Mc,i=e.history,a=Pc(),o=Pc(),s=Pc(),c=Gt(vc),l=Gt(0),u=vc;zs&&e.scrollBehavior&&`scrollRestoration`in history&&(history.scrollRestoration=`manual`);let d=Ts.bind(null,e=>``+e),f=Ts.bind(null,ac),p=Ts.bind(null,oc);function m(e,n){let r,i;Ac(e)?(r=t.getRecordMatcher(e),i=n):i=e;let a=t.addRoute(i,r);return l.value++,()=>{a(),l.value++}}function h(e){let n=t.getRecordMatcher(e);n&&(t.removeRoute(n),l.value++)}function g(){t.clearRoutes(),l.value++}function _(){return t.getRoutes().map(e=>e.record)}function v(e){return!!t.getRecordMatcher(e)}function y(e,a){if(l.value,typeof e==`string`){a||=e.startsWith(`/`)?vc:c.value;let r=lc(n,e,a.path),o=t.resolve({path:r.path},a),s=i.createHref(r.fullPath);return $(r,o,{params:p(o.params),redirectedFrom:void 0,href:s})}a=$({},a||(e.path!=null&&e.path.startsWith(`/`)&&!(`name`in e&&e.name)?vc:c.value));let o;if(e.path!=null)o=$({},e,{path:lc(n,e.path,a.path).path});else{let t=$({},e.params);for(let e in t)t[e]??delete t[e];o=$({},e,{params:f(t)}),a.params=f(a.params)}let s=t.resolve(o,a),u=e.hash||``;s.params=d(p(s.params));let m=uc(r,$({},e,{hash:tc(u),path:s.path})),h=i.createHref(m);return $({fullPath:m,hash:u,query:r===Mc?Nc(e.query):e.query||{}},s,{redirectedFrom:void 0,href:h})}function b(e){return typeof e==`string`?lc(n,e,c.value.path):$({},e)}function x(e,t){if(u!==e)return As(8,{from:t,to:e})}function S(e){return T(e)}function C(e){return S($(b(e),{replace:!0}))}function w(e,t){let n=e.matched[e.matched.length-1];if(n&&n.redirect){let{redirect:r}=n,i=typeof r==`function`?r(e,t):r;return typeof i==`string`&&(i=i.includes(`?`)||i.includes(`#`)?i=b(i):{path:i},i.params={}),$({query:e.query,hash:e.hash,params:i.path==null?e.params:{}},i)}}function T(e,t){let n=u=y(e),i=c.value,a=e.state,o=e.force,s=e.replace===!0,l=w(n,i);if(l)return T($(b(l),{state:typeof l==`object`?$({},a,l.state):a,force:o,replace:s}),t||n);let d=n;d.redirectedFrom=t;let f;return!o&&fc(r,i,n)&&(f=As(16,{to:d,from:i}),ce(i,i,!0,!1)),(f?Promise.resolve(f):E(d,i)).catch(e=>js(e)?js(e,2)?e:se(e):ae(e,d,i)).then(e=>{if(e){if(js(e,2))return T($({replace:s},b(e.to),{state:typeof e.to==`object`?$({},a,e.to.state):a,force:o}),t||d)}else e=D(d,i,!0,s,a);return ne(d,i,e),e})}function ee(e,t){let n=x(e,t);return n?Promise.reject(n):Promise.resolve()}function te(e){let t=de.values().next().value;return t&&typeof t.runWithContext==`function`?t.runWithContext(e):e()}function E(e,t){let n,[r,i,s]=Lc(e,t);n=Ic(r.reverse(),`beforeRouteLeave`,e,t);for(let i of r)i.leaveGuards.forEach(r=>{n.push(Fc(r,e,t))});let c=ee.bind(null,e,t);return n.push(c),j(n).then(()=>{n=[];for(let r of a.list())n.push(Fc(r,e,t));return n.push(c),j(n)}).then(()=>{n=Ic(i,`beforeRouteUpdate`,e,t);for(let r of i)r.updateGuards.forEach(r=>{n.push(Fc(r,e,t))});return n.push(c),j(n)}).then(()=>{n=[];for(let r of s)if(r.beforeEnter){if(Ds(r.beforeEnter))for(let i of r.beforeEnter)n.push(Fc(i,e,t));else n.push(Fc(r.beforeEnter,e,t))}return n.push(c),j(n)}).then(()=>(e.matched.forEach(e=>e.enterCallbacks={}),n=Ic(s,`beforeRouteEnter`,e,t,te),n.push(c),j(n))).then(()=>{n=[];for(let r of o.list())n.push(Fc(r,e,t));return n.push(c),j(n)}).catch(e=>js(e,8)?e:Promise.reject(e))}function ne(e,t,n){s.list().forEach(r=>te(()=>r(e,t,n)))}function D(e,t,n,r,a){let o=x(e,t);if(o)return o;let s=t===vc,l=zs?history.state:{};n&&(r||s?i.replace(e.fullPath,$({scroll:s&&l&&l.scroll},a)):i.push(e.fullPath,a)),c.value=e,ce(e,t,n,s),se()}let O;function re(){O||=i.listen((e,t,n)=>{if(!fe.listening)return;let r=y(e),a=w(r,fe.currentRoute.value);if(a){T($(a,{replace:!0,force:!0}),r).catch(Es);return}u=r;let o=c.value;zs&&n.delta&&Dc(Tc(o.fullPath,n.delta)),E(r,o).catch(e=>js(e,12)?e:js(e,2)?(T($(b(e.to),{force:!0}),r).then(e=>{js(e,20)&&!n.delta&&n.type===`pop`&&i.go(-1,!1)}).catch(Es),Promise.reject()):(n.delta&&i.go(-n.delta,!1),ae(e,r,o))).then(e=>{e||=D(r,o,!1),e&&(n.delta&&!js(e,8)?i.go(-n.delta,!1):n.type===`pop`&&js(e,20)&&i.go(-1,!1)),ne(r,o,e)}).catch(Es)})}let k=Pc(),ie=Pc(),A;function ae(e,t,n){se(e);let r=ie.list();return r.length?r.forEach(r=>r(e,t,n)):console.error(e),Promise.reject(e)}function oe(){return A&&c.value!==vc?Promise.resolve():new Promise((e,t)=>{k.add([e,t])})}function se(e){return A||(A=!e,re(),k.list().forEach(([t,n])=>e?n(e):t()),k.reset()),e}function ce(t,n,r,i){let{scrollBehavior:a}=e;if(!zs||!a)return Promise.resolve();let o=!r&&Oc(Tc(t.fullPath,0))||(i||!r)&&history.state&&history.state.scroll||null;return hn().then(()=>a(t,n,o)).then(e=>t===c.value&&e&&wc(e)).catch(e=>t===c.value&&ae(e,t,n))}let le=e=>i.go(e),ue,de=new Set,fe={currentRoute:c,listening:!0,addRoute:m,removeRoute:h,clearRoutes:g,hasRoute:v,getRoutes:_,resolve:y,options:e,push:S,replace:C,go:le,back:()=>le(-1),forward:()=>le(1),beforeEach:a.add,beforeResolve:o.add,afterEach:s.add,onError:ie.add,isReady:oe,install(e){e.component(`RouterLink`,pl),e.component(`RouterView`,bl),e.config.globalProperties.$router=fe,Object.defineProperty(e.config.globalProperties,"$route",{enumerable:!0,get:()=>Jt(c)}),zs&&!ue&&c.value===vc&&(ue=!0,S(i.location).catch(e=>{}));let t={};for(let e in vc)Object.defineProperty(t,e,{get:()=>c.value[e],enumerable:!0});e.provide(Ps,fe),e.provide(Fs,It(t)),e.provide(Is,c);let n=e.unmount;de.add(e),e.unmount=function(){de.delete(e),de.size<1&&(u=vc,O&&O(),O=null,c.value=vc,ue=!1,A=!1),n()}}};function j(e){return e.reduce((e,t)=>e.then(()=>te(t)),Promise.resolve())}return fe}export{Br as A,Ft as B,lr as C,Tr as D,hn as E,Mn as F,Se as G,Jt as H,En as I,Dn as L,Fr as M,Lr as N,kr as O,dr as P,R,X as S,wa as T,pe as U,Wt as V,le as W,la as _,Ls as a,ya as b,ss as c,hs as d,ps as f,ma as g,Q as h,Rs as i,Vr as j,ra as k,os as l,qn as m,xl as n,oo as o,q as p,Uc as r,ys as s,pl as t,To as u,ba as v,H as w,va as x,ca as y,De as z};
+dist\index.html:19: <!-- Open Graph / social previews -->
+dist\index.html:44: <!--
+dist\index.html:53: <!--
+dist\index.html:83: /* Critical styles for the app shell above — inlined so the first paint
+dist\index.html:135: <!--
+eslint.config.js:8: ignores: ['dist/**', 'node_modules/**'],
+eslint.config.js:15: files: ['**/*.{js,vue}'],
+eslint.config.js:25: // Single-word component names are fine here: the files are named after
+eslint.config.js:26: // what they are (Footer, Catalog) and there is no risk of colliding with
+eslint.config.js:27: // a native element, since Vue resolves components before HTML tags.
+eslint.config.js:30: // Templates in this project are laid out by hand for readability rather
+eslint.config.js:31: // than to a fixed attribute-per-line rule.
+eslint.config.js:44: // Node scripts run outside the browser.
+eslint.config.js:46: files: ['scripts/**/*.mjs', 'vite.config.js', 'eslint.config.js'],
+eslint.config.js:55: // Prettier owns formatting; disable the stylistic rules that would fight it.
+index.html:19: <!-- Open Graph / social previews -->
+index.html:44: <!--
+index.html:53: <!--
+index.html:83: /* Critical styles for the app shell above — inlined so the first paint
+index.html:129: <!--
+src\App.vue:31: // The router drives the pixel-block wipe between sections, so it needs a handle
+src\App.vue:32: // on the overlay that lives here.
+src\App.vue:50: <!-- Promo Bar / Marquee -->
+src\App.vue:93: <!--
+src\App.vue:131: <!-- Toast Notification -->
+src\App.vue:146: /* Fonts and icon CSS are linked from index.html so they never block the first
+src\App.vue:172: /* --- Promo Bar --- */
+src\App.vue:215: /* --- Main Layout --- */
+src\App.vue:226: /* Toast Notification Styles */
+src\App.vue:264: /* Toast Transitions */
+src\App.vue:295: /* --- Mobile --- */
+src\components\About.vue:100: <!--
+src\components\About.vue:518: /* MOBILE RESPONSIVE */
+src\components\BaseCounter.vue:47: // Sample orders for the demo account. Fictional, like the rest of the store —
+src\components\BaseCounter.vue:48: // but written so the panel reads as a finished screen rather than a stub.
+src\components\BaseCounter.vue:262: height: calc(100vh - 140px); /* Altura fija para evitar scroll doble y fugas del fondo */
+src\components\BaseCounter.vue:265: overflow: hidden; /* Corta el fondo de 300vh y evita scroll exterior */
+src\components\BaseCounter.vue:301: gap: 80px; /* Mas espacio entre sidebars y el monitor central */
+src\components\BaseCounter.vue:308: /* LEFT SIDEBAR */
+src\components\BaseCounter.vue:364: /* CENTER MONITOR */
+src\components\BaseCounter.vue:366: width: 950px; /* Mas ancho */
+src\components\BaseCounter.vue:367: height: 650px; /* Mas alto */
+src\components\BaseCounter.vue:368: background-color: transparent; /* Eliminado el borde de plastico */
+src\components\BaseCounter.vue:370: padding: 0; /* Sin padding para que el contenido sea el borde */
+src\components\BaseCounter.vue:371: box-shadow: none; /* Sin sombra exterior de plastico */
+src\components\BaseCounter.vue:376: background-color: #0d1526; /* Fondo estandarizado */
+src\components\BaseCounter.vue:379: border-radius: 16px; /* Radio estandarizado */
+src\components\BaseCounter.vue:380: box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Sombra estandarizada */
+src\components\BaseCounter.vue:381: border: 1px solid #1e293b; /* Borde estandarizado */
+src\components\BaseCounter.vue:389: background-color: #161f31; /* Un poco mas claro para distinguir el header */
+src\components\BaseCounter.vue:407: /* Order Cards */
+src\components\BaseCounter.vue:436: /* Tracking Timeline */
+src\components\BaseCounter.vue:542: /* Profile View */
+src\components\BaseCounter.vue:553: border-radius: 8px; /* Cuadrado con bordes suaves */
+src\components\BaseCounter.vue:586: /* Cart View */
+src\components\BaseCounter.vue:758: /* RIGHT SIDEBAR */
+src\components\BaseCounter.vue:767: background: #0d1526; /* Fondo estandarizado */
+src\components\BaseCounter.vue:768: border: 1px solid #1e293b; /* Borde estandarizado */
+src\components\BaseCounter.vue:769: border-radius: 16px; /* Radio estandarizado */
+src\components\BaseCounter.vue:847: background-color: #8b5cf6; /* Morado por defecto / dorado según diseño */
+src\components\BaseCounter.vue:856: /* Custom Scrolls */
+src\components\BaseCounter.vue:868: /* MOBILE RESPONSIVE */
+src\components\BaseCounter.vue:938: /* ======== MONITOR CONTAINER BASE ======== */
+src\components\BaseCounter.vue:947: /* ======== ORDERS SECTION ======== */
+src\components\BaseCounter.vue:1008: /* ======== PROFILE SECTION ======== */
+src\components\BaseCounter.vue:1041: /* ======== CART SECTION ======== */
+src\components\BaseMagazine.vue:156: zoomedMag.value = null; // Volver al mueble directamente
+src\components\BaseMagazine.vue:207: /* --- RACK CONTAINER --- */
+src\components\BaseMagazine.vue:217: /* Wood Texture Variables - Oak/Pine natural tone */
+src\components\BaseMagazine.vue:286: margin-bottom: 1px; /* Para que quede detras del labio */
+src\components\BaseMagazine.vue:321: /* --- PUERTAS CORREDIZAS --- */
+src\components\BaseMagazine.vue:376: /* --- MODALES / VISORES --- */
+src\components\BaseMagazine.vue:503: /* Animaciones */
+src\components\BaseMagazine.vue:527: /* MOBILE RESPONSIVE */
+src\components\BaseMuseum.vue:356: /* LEFT SIDE - CABINET */
+src\components\BaseMuseum.vue:510: /* RIGHT SIDE - INFO PANELS */
+src\components\BaseMuseum.vue:673: /* Responsiveness */
+src\components\BaseMuseum.vue:766: /* GAME MODAL */
+src\components\BaseMuseum.vue:863: /* CONSOLE SPEC MODAL */
+src\components\BaseMusic.vue:830: // Duplicate CDs to fill the hexagon carousel (24 discs = 6 sides x 4 discs)
+src\components\BaseMusic.vue:842: // Generate the 6 faces of the hexagon
+src\components\BaseMusic.vue:955: // Only notify on real playback attempt, not fast manual switching
+src\components\BaseMusic.vue:957: // Could emit an event or use a global toast here
+src\components\BaseMusic.vue:958: // For now log for debug and stop playback
+src\components\BaseMusic.vue:966: // URL changed (track or CD changed)
+src\components\BaseMusic.vue:971: // Force load of new resource
+src\components\BaseMusic.vue:974: // Wait for next tick to ensure DOM processed src before playing
+src\components\BaseMusic.vue:982: // Playback state changed manually
+src\components\BaseMusic.vue:1111: width: 154px; /* Ancho estimado caja CD + márgenes */
+src\components\BaseMusic.vue:1124: transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.1); /* Spring effect on rotation */
+src\components\BaseMusic.vue:1138: transform-style: preserve-3d; /* CRITICAL: allows CD hover effect to elevate */
+src\components\BaseMusic.vue:1183: transform: translateZ(5px); /* Detach discs from rack spine to prevent clipping */
+src\components\BaseMusic.vue:1191: border-left: 14px solid #111; /* Simulates black plastic hinge of classic CDs */
+src\components\BaseMusic.vue:1369: background: #232c3f; /* Darker blue-grey matching screenshot */
+src\components\BaseShelf.vue:203: <!--
+src\components\BaseShelf.vue:281: // Array of strings for row heights. Ex: ['200px', '180px']
+src\components\BaseShelf.vue:282: // If not defined, fallback to shelfSpacing
+src\components\BaseShelf.vue:345: // Calculate relative luminance
+src\components\BaseShelf.vue:349: // Very light color (like #e2e8f0). Darken significantly
+src\components\BaseShelf.vue:352: // Medium color. Darken moderately
+src\components\BaseShelf.vue:355: // Already dark. Darken slightly for better contrast on white card
+src\components\BaseShelf.vue:556: min-height: 850px; /* Base height for all shelves to look consistent even if empty */
+src\components\BaseShelf.vue:1023: /* Shelf Top Banner */
+src\components\BaseShelf.vue:1055: /* Shelf Body */
+src\components\BaseShelf.vue:1110: height: 100%; /* Height controlled mostly by shelf-spacing / image ratio */
+src\components\BaseShelf.vue:1111: max-height: calc(100% + 5px); /* Let it fill the shelf row */
+src\components\BaseShelf.vue:1122: /* Specific heights are generally scaled well via flex layout, but let's assure images fit */
+src\components\BaseShelf.vue:1124: max-height: 180px; /* Default max limit */
+src\components\BaseShelf.vue:1160: /* Lightbox */
+src\components\BaseShelf.vue:1233: /* --- Mobile Responsive Rules --- */
+src\components\BaseShelf.vue:1274: /* Make the shelf fluid and proportional */
+src\components\BaseShelf.vue:1350: /* ===== MOBILE INFO PANEL (Replaces shelf, full-page scroll) ===== */
+src\components\BaseShelf.vue:1357: display: none; /* No backdrop needed, shelf is replaced */
+src\components\BaseShelf.vue:1391: max-height: none; /* No clipping, content flows naturally */
+src\components\BaseShelf.vue:1399: overflow: visible; /* Full content visible, page scrolls */
+src\components\BaseShelf.vue:1494: /* Tabs at the bottom */
+src\components\BlockTransition.vue:9: const isActive = ref(false); // Whether the overlay is visible at all
+src\components\BlockTransition.vue:10: const animationPhase = ref('idle'); // 'idle' | 'covering' | 'covered' | 'revealing'
+src\components\BlockTransition.vue:13: // Never fall to zero: a 0x0 viewport would build an empty grid, and an empty
+src\components\BlockTransition.vue:14: // grid schedules no timers — leaving cover()/reveal() permanently pending.
+src\components\BlockTransition.vue:30: // Shuffle helper for random stagger order
+src\components\BlockTransition.vue:40: /**
+src\components\BlockTransition.vue:49: const staggerTotalMs = 350; // All blocks appear within this window
+src\components\BlockTransition.vue:52: // Reset all to invisible first
+src\components\BlockTransition.vue:62: // The router awaits this promise, so it must settle even if the per-block
+src\components\BlockTransition.vue:63: // timers never run.
+src\components\BlockTransition.vue:69: // Resolve when last block becomes visible
+src\components\BlockTransition.vue:71: // Small extra buffer to ensure the last block renders
+src\components\BlockTransition.vue:79: /**
+src\components\CartModal.vue:543: /* --- Mobile --- */
+src\components\Catalog.vue:89: // Flatten the game arrays since they are nested arrays of shelves
+src\components\Catalog.vue:134: // Filter by search query
+src\components\Catalog.vue:139: // Filter by player count
+src\components\Catalog.vue:373: /* --- Mobile Responsive --- */
+src\components\Footer.vue:51: // Decorative only. This is a mock storefront with no real accounts behind it, so
+src\components\Footer.vue:52: // the icons are rendered as inert marks rather than links to nowhere — and they
+src\components\Footer.vue:53: // stay out of the accessibility tree instead of announcing themselves as
+src\components\Footer.vue:54: // actionable. Inline SVG rather than Font Awesome's brand set, which pulled a
+src\components\Footer.vue:55: // 106 KB webfont for these three glyphs alone.
+src\components\Footer.vue:115: flex-wrap: nowrap; /* Asegura una sola fila */
+src\components\Footer.vue:124: white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+src\components\Footer.vue:125: /* Lifts the tap target to the 24px minimum without changing the layout. */
+src\components\Footer.vue:145: /* #64748b only reached 3.81:1 against #0c1627; this clears AA at 5.23:1. */
+src\components\Footer.vue:171: /* Inert marks, so no pointer cursor and no hover affordance promising a click
+src\components\Footer.vue:198: /* --- Mobile Responsive --- */
+src\components\Footer.vue:201: padding: 10px 5px 8px; /* Reducido drásticamente para menor altura */
+src\components\MerchShelf.vue:306: // Modal Gallery Lightbox State
+src\components\MerchShelf.vue:310: // Active main image state - separate from product data to avoid mutation-based resizing
+src\components\MerchShelf.vue:404: // The route keeps this component mounted when only `?producto=` changes, so the
+src\components\MerchShelf.vue:405: // selection has to follow the prop rather than only the initial mount.
+src\components\MerchShelf.vue:487: /* Sidebar */
+src\components\MerchShelf.vue:557: /* Main Content */
+src\components\MerchShelf.vue:580: height: 350px; /* Further shortened to crop just below images */
+src\components\MerchShelf.vue:621: /* Destacados Section */
+src\components\MerchShelf.vue:722: /* Category Detail View */
+src\components\MerchShelf.vue:728: max-height: 100%; /* Important for internal scrolling */
+src\components\MerchShelf.vue:756: background-color: #ffffff; /* White background forced */
+src\components\MerchShelf.vue:763: aspect-ratio: 1; /* Strict square format */
+src\components\MerchShelf.vue:767: box-sizing: border-box; /* Prevent border/padding modifying dimension */
+src\components\MerchShelf.vue:771: min-height: 0; /* Ensures content doesn't push height */
+src\components\MerchShelf.vue:772: min-width: 0; /* Ensures content doesn't push width */
+src\components\MerchShelf.vue:790: /* Dynamic border substituted with inset box-shadow ensuring 0 size distortion */
+src\components\MerchShelf.vue:866: gap: 5px; /* Reduced from 10px */
+src\components\MerchShelf.vue:881: margin: 0 0 4px 0; /* Reduced from 10px */
+src\components\MerchShelf.vue:889: margin-bottom: 8px; /* Reduced from 20px */
+src\components\MerchShelf.vue:895: margin-top: 10px; /* Changed from auto to a fixed small margin */
+src\components\MerchShelf.vue:901: gap: 3px; /* Reduced from 5px */
+src\components\MerchShelf.vue:978: /* Lightbox Carousel CSS */
+src\components\MerchShelf.vue:1055: /* MOBILE RESPONSIVE */
+src\components\MerchShelf.vue:1085: /* 1. Barra de Navegación Superior (Sidebar transformado) */
+src\components\MerchShelf.vue:1145: /* 2. Vista por Defecto */
+src\components\MerchShelf.vue:1176: /* 3. Grilla de Productos por Categoría (Imagen 1) */
+src\components\MerchShelf.vue:1230: /* 4. Detalle de Producto a Pantalla Completa (Imagen 2) */
+src\components\MerchShelf.vue:1244: /* Header Detalle Móvil */
+src\components\MerchShelf.vue:1273: /* Galería (Imagen 2) */
+src\components\MerchShelf.vue:1307: /* Información del Producto */
+src\components\N64Shelf.vue:102: /* Fix N64 boxes sticking out & alignment */
+src\components\NavBar.vue:24: <!--
+src\components\NavBar.vue:194: /* Hamburger */
+src\components\NavBar.vue:224: /* Mobile cart button */
+src\components\NavBar.vue:244: /* Mobile Styles */
+src\components\OnboardingOverlay.vue:144: overflow: hidden; /* For border radius */
+src\components\PS1Shelf.vue:101: /* Fix PS1 boxes sticking out, alignment & spacing */
+src\components\PS3Shelf.vue:102: /* Fix PS3 boxes sticking out, alignment & spacing */
+src\components\StoreMap.vue:341: <!--
+src\components\StoreMap.vue:511: // Particles Configuration
+src\components\StoreMap.vue:538: // Loading state
+src\components\StoreMap.vue:546: const allImages = import.meta.glob('../assets/imagenes-tienda/*.webp', {
+src\components\StoreMap.vue:556: // Base layer sources
+src\components\StoreMap.vue:560: // The background ships at three widths, so a phone downloads ~87 KB of artwork
+src\components\StoreMap.vue:561: // where a desktop takes the full 451 KB.
+src\components\StoreMap.vue:571: // Layer HD loading status
+src\components\StoreMap.vue:579: // Intrinsic dimensions let the browser reserve the right box before the image
+src\components\StoreMap.vue:580: // arrives, which keeps the layered store from shifting as each layer decodes.
+src\components\StoreMap.vue:739: // Poster Lightbox
+src\components\StoreMap.vue:779: // Hit zones use the same dimensions as the layer images
+src\components\StoreMap.vue:784: zIndex: 100, // Hit zones always on top
+src\components\StoreMap.vue:788: // Z-index based on layer order: furniture first, then posters on top
+src\components\StoreMap.vue:812: return idx >= 0 ? idx + 2 : 1; // +2 because base = 1
+src\components\StoreMap.vue:877: // The store is presentable as soon as the background is sharp: every shelf and
+src\components\StoreMap.vue:878: // furniture layer already renders its low-resolution placeholder immediately and
+src\components\StoreMap.vue:879: // cross-fades to HD through `layerHdStatus`. Blocking the loading screen on all
+src\components\StoreMap.vue:880: // ~20 HD layers meant holding the first paint hostage to ~2.2 MB of artwork that
+src\components\StoreMap.vue:881: // the progressive swap was built to stream in anyway.
+src\components\StoreMap.vue:921: // Safety net: a stalled or blocked background image must never strand the
+src\components\StoreMap.vue:922: // visitor on the loading screen.
+src\components\StoreMap.vue:928: /* --- Main Interactive Area --- */
+src\components\StoreMap.vue:940: touch-action: none; /* Prevent browser default gestures */
+src\components\StoreMap.vue:943: /* --- Store Layers --- */
+src\components\StoreMap.vue:968: /* --- Base Layer: Placeholder + HD --- */
+src\components\StoreMap.vue:998: /* --- Interactive Layers: Placeholder + HD --- */
+src\components\StoreMap.vue:1003: /* Placeholder: visible, blurred, fades out when HD loads */
+src\components\StoreMap.vue:1017: /* HD: invisible until loaded, then fades in */
+src\components\StoreMap.vue:1030: /* Hover effect for furniture: brightness glow + subtle lift + expanded shadow */
+src\components\StoreMap.vue:1038: /* Base realistic shadow for furniture (isometric light from top-right) */
+src\components\StoreMap.vue:1046: /* Hover effect for posters: glow + slight scale + wall shadow */
+src\components\StoreMap.vue:1054: /* Base subtle shadow for posters on the wall */
+src\components\StoreMap.vue:1061: /* Override hover for placeholder layers that have HD loaded — keep them invisible */
+src\components\StoreMap.vue:1066: /* --- Hit Zones & Interactions --- */
+src\components\StoreMap.vue:1069: /* Uncomment below to see hit zones for debugging */
+src\components\StoreMap.vue:1070: /* background: rgba(255, 0, 0, 0.3); */
+src\components\StoreMap.vue:1109: /* --- Particles Layer --- */
+src\components\StoreMap.vue:1120: /* --- Global Tooltip --- */
+src\components\StoreMap.vue:1149: /* --- Zoom Control --- */
+src\components\StoreMap.vue:1215: /* --- Floating Menu (Sidebar) --- */
+src\components\StoreMap.vue:1234: /* Custom scrollbar for sidebar */
+src\components\StoreMap.vue:1336: /* --- Floating Recommendations (Right Sidebar) --- */
+src\components\StoreMap.vue:1391: /* --- Loading Overlay --- */
+src\components\StoreMap.vue:1457: /* --- Poster Lightbox --- */
+src\components\StoreMap.vue:1527: /* Lightbox transitions */
+src\components\StoreMap.vue:1539: /* --- Mobile Utilities --- */
+src\components\StoreMap.vue:1544: /* --- Mobile Responsive --- */
+src\components\StoreMap.vue:1597: scrollbar-width: none; /* Hide scrollbar for Firefox */
+src\components\StoreMap.vue:1601: display: none; /* Hide scrollbar for Chrome/Safari */
+src\components\StoreMap.vue:1669: /* Hardware acceleration removed to prevent memory limits on mobile */
+src\components\StoreMap.vue:1672: /* Removed translateZ and backface-visibility that cause elements to disappear */
+src\components\StoreMap.vue:1675: /* Remove all shadows on mobile for performance and prevent filter recalculation flickering */
+src\components\StoreMap.vue:1693: /* Scale down the pulsing indicator circles */
+src\composables\useCart.js:1: /**
+src\composables\useCart.js:8: /**
+src\composables\useCart.js:33: /**
+src\composables\useCart.js:47: /**
+src\composables\useNavigation.js:1: /**
+src\composables\useNavigation.js:12: /** Section key → route name. */
+src\composables\useNavigation.js:48: /**
+src\composables\useStoreMap.js:1: /**
+src\composables\useStoreMap.js:11: const scale = ref(getIsMobile() ? 0.9 : 0.7); // Will be modified by triggerEntryAnimation on first load
+src\composables\useStoreMap.js:18: // Drag origin and pinch distance tracking (non-rendered state)
+src\composables\useStoreMap.js:51: // Apply a very small factor so the parallax is subtle
+src\composables\useStoreMap.js:71: scale.value = 1.35; // Target scale
+src\composables\useStoreMap.js:112: // Tracked in a ref rather than read inside a computed: `window.innerWidth` is
+src\composables\useStoreMap.js:113: // not reactive, so a computed over it would cache the first result forever
+src\composables\useStoreMap.js:114: // and leave the zoom limits stale after a rotate or resize.
+src\composables\useStoreMap.js:136: // The image is `width: 100%; height: auto`, so at scale = 1 it spans the
+src\composables\useStoreMap.js:137: // viewport width. PAN_ENVELOPE_RATIO is a tuning value, not the artwork's
+src\composables\useStoreMap.js:138: // true aspect ratio (the base layer is ~0.82) — it was dialled in by hand
+src\composables\useStoreMap.js:139: // against how the shelves sit in frame, so changing it changes the feel.
+src\composables\useStoreMap.js:147: // Strictly lock horizontal to image bounds (prevent left/right edges from entering)
+src\composables\useStoreMap.js:150: // For vertical, increase the mobility limit significantly.
+src\composables\useStoreMap.js:151: // Adding half the viewport height as a buffer allows users to pan
+src\composables\useStoreMap.js:152: // past the strict image bounds to comfortably see the top/bottom shelves.
+src\composables\useStoreMap.js:219: transition = 'transform 2.5s cubic-bezier(0.22, 1, 0.36, 1)'; // Smooth and cinematic
+src\data\arcadeData.js:1: /**
+src\main.js:10: // The particle engine is decorative, so its ~50 KB of plugins are pulled in
+src\main.js:11: // as a separate chunk instead of riding along in the initial bundle.
+src\router\index.js:1: /**
+src\router\index.js:15: /**
+src\router\index.js:34: // The isometric map owns the whole viewport and handles its own panning, so
+src\router\index.js:35: // the shell locks page scrolling while it is on screen.
+src\router\index.js:92: // Anything unrecognised drops the visitor at the front door rather than on a
+src\router\index.js:93: // blank screen.
+src\router\index.js:101: // Going back should land where the visitor left off; a fresh view starts at
+src\router\index.js:102: // the top. `About` scrolls itself to the requested section.
+src\router\index.js:109: /*
+src\router\index.js:120: /**
+src\router\index.js:128: // No wipe on the very first paint — there is nothing to wipe away yet.
+src\router\index.js:133: // Swallow: a failed wipe is a visual glitch, not a reason to strand the
+src\router\index.js:134: // visitor on the page they were leaving.
+src\router\index.js:141: // Let the incoming view paint underneath the cover before lifting it.
+src\router\index.js:147: // Same reasoning: never leave the overlay stuck over the new view.
+src\style.css:1: /* Estilos globales básicos (limpiados de template por defecto de Vite) */
+vite.config.js:4: /**
+vite.config.js:25: // Mirror the srcset declared on the <img> so the preload picks the same
+vite.config.js:26: // candidate the renderer will; preloading a single width would download
+vite.config.js:27: // the background twice on every device that resolves to another one.
+vite.config.js:60: // Separate vendor chunk for Vue runtime
+vite.config.js:64: // Separate data chunk for game/merch catalogs
+vite.config.js:72: // Only inline assets smaller than 4 KB; anything larger stays a separate,
+vite.config.js:73: // cacheable request instead of a base64 blob inside the JS bundle.

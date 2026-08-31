@@ -1666,13 +1666,10 @@ onMounted(() => {
     font-size: 0.85rem;
   }
 
-  /* Hardware acceleration removed to prevent memory limits on mobile */
   .store-layers-wrapper,
   .store-layer {
-    /* Removed translateZ and backface-visibility that cause elements to disappear */
   }
 
-  /* Remove all shadows on mobile for performance and prevent filter recalculation flickering */
   .store-layer.interactive-layer:not(.hovered),
   .store-layer.layer-hd:not(.hovered) {
     filter: none !important;
@@ -1690,7 +1687,6 @@ onMounted(() => {
     transform: scale(1.015);
   }
 
-  /* Scale down the pulsing indicator circles */
   .hotspot-pulse {
     width: 3px;
     height: 3px;

@@ -221,7 +221,7 @@ const openCart = () => {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Mobile cart button */
+/* Mobile Cart Button */
 .mobile-cart-btn {
   display: none;
   background: none;

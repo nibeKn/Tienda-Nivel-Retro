@@ -41,7 +41,7 @@ export default [
     },
   },
 
-  // Node scripts run outside the browser.
+
   {
     files: ['scripts/**/*.mjs', 'vite.config.js', 'eslint.config.js'],
     languageOptions: {

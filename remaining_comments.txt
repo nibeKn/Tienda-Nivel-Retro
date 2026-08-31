@@ -1,0 +1,152 @@
+src/components/BaseMagazine.vue: /* Wood Texture Variables - Oak/Pine natural tone */
+src/components/BaseMuseum.vue: /* Responsiveness */
+src/components/BaseMusic.vue: // Duplicate CDs to fill the hexagon carousel (24 discs = 6 sides x 4 discs)
+src/components/BaseMusic.vue: // Generate the 6 faces of the hexagon
+src/components/BaseMusic.vue: // Only notify on real playback attempt, not fast manual switching
+src/components/BaseMusic.vue: // Could emit an event or use a global toast here
+src/components/BaseMusic.vue: // For now log for debug and stop playback
+src/components/BaseMusic.vue: // URL changed (track or CD changed)
+src/components/BaseMusic.vue: // Force load of new resource
+src/components/BaseMusic.vue: // Wait for next tick to ensure DOM processed src before playing
+src/components/BaseMusic.vue: // Playback state changed manually
+src/components/BaseShelf.vue: <!--
+src/components/BaseShelf.vue: // Array of strings for row heights. Ex: ['200px', '180px']
+src/components/BaseShelf.vue: // If not defined, fallback to shelfSpacing
+src/components/BaseShelf.vue: // Calculate relative luminance
+src/components/BaseShelf.vue: // Very light color (like #e2e8f0). Darken significantly
+src/components/BaseShelf.vue: // Medium color. Darken moderately
+src/components/BaseShelf.vue: // Already dark. Darken slightly for better contrast on white card
+src/components/BaseShelf.vue: /* Shelf Top Banner */
+src/components/BaseShelf.vue: /* Shelf Body */
+src/components/BaseShelf.vue: /* Specific heights are generally scaled well via flex layout, but let's assure images fit */
+src/components/BaseShelf.vue: /* Lightbox */
+src/components/BaseShelf.vue: /* --- Mobile Responsive Rules --- */
+src/components/BaseShelf.vue: /* Make the shelf fluid and proportional */
+src/components/BaseShelf.vue: /* Tabs at the bottom */
+src/components/BlockTransition.vue: // Never fall to zero: a 0x0 viewport would build an empty grid, and an empty
+src/components/BlockTransition.vue: // grid schedules no timers — leaving cover()/reveal() permanently pending.
+src/components/BlockTransition.vue: // Shuffle helper for random stagger order
+src/components/BlockTransition.vue: /**
+src/components/BlockTransition.vue: // Reset all to invisible first
+src/components/BlockTransition.vue: // The router awaits this promise, so it must settle even if the per-block
+src/components/BlockTransition.vue: // timers never run.
+src/components/BlockTransition.vue: // Resolve when last block becomes visible
+src/components/BlockTransition.vue: // Small extra buffer to ensure the last block renders
+src/components/BlockTransition.vue: /**
+src/components/CartModal.vue: /* --- Mobile --- */
+src/components/Catalog.vue: // Flatten the game arrays since they are nested arrays of shelves
+src/components/Catalog.vue: // Filter by search query
+src/components/Catalog.vue: // Filter by player count
+src/components/Catalog.vue: /* --- Mobile Responsive --- */
+src/components/Footer.vue: // Decorative only. This is a mock storefront with no real accounts behind it, so
+src/components/Footer.vue: // the icons are rendered as inert marks rather than links to nowhere — and they
+src/components/Footer.vue: // stay out of the accessibility tree instead of announcing themselves as
+src/components/Footer.vue: // actionable. Inline SVG rather than Font Awesome's brand set, which pulled a
+src/components/Footer.vue: // 106 KB webfont for these three glyphs alone.
+src/components/Footer.vue: /* Lifts the tap target to the 24px minimum without changing the layout. */
+src/components/Footer.vue: /* #64748b only reached 3.81:1 against #0c1627; this clears AA at 5.23:1. */
+src/components/Footer.vue: /* Inert marks, so no pointer cursor and no hover affordance promising a click
+src/components/Footer.vue: /* --- Mobile Responsive --- */
+src/components/MerchShelf.vue: // Modal Gallery Lightbox State
+src/components/MerchShelf.vue: // Active main image state - separate from product data to avoid mutation-based resizing
+src/components/MerchShelf.vue: // The route keeps this component mounted when only `?producto=` changes, so the
+src/components/MerchShelf.vue: // selection has to follow the prop rather than only the initial mount.
+src/components/MerchShelf.vue: /* Sidebar */
+src/components/MerchShelf.vue: /* Main Content */
+src/components/MerchShelf.vue: /* Category Detail View */
+src/components/MerchShelf.vue: /* Lightbox Carousel CSS */
+src/components/NavBar.vue: <!--
+src/components/NavBar.vue: /* Hamburger */
+src/components/NavBar.vue: /* Mobile Styles */
+src/components/StoreMap.vue: <!--
+src/components/StoreMap.vue: // Particles Configuration
+src/components/StoreMap.vue: // Loading state
+src/components/StoreMap.vue: // Base layer sources
+src/components/StoreMap.vue: // The background ships at three widths, so a phone downloads ~87 KB of artwork
+src/components/StoreMap.vue: // where a desktop takes the full 451 KB.
+src/components/StoreMap.vue: // Layer HD loading status
+src/components/StoreMap.vue: // Intrinsic dimensions let the browser reserve the right box before the image
+src/components/StoreMap.vue: // arrives, which keeps the layered store from shifting as each layer decodes.
+src/components/StoreMap.vue: // Poster Lightbox
+src/components/StoreMap.vue: // Hit zones use the same dimensions as the layer images
+src/components/StoreMap.vue: // Z-index based on layer order: furniture first, then posters on top
+src/components/StoreMap.vue: // The store is presentable as soon as the background is sharp: every shelf and
+src/components/StoreMap.vue: // furniture layer already renders its low-resolution placeholder immediately and
+src/components/StoreMap.vue: // cross-fades to HD through `layerHdStatus`. Blocking the loading screen on all
+src/components/StoreMap.vue: // ~20 HD layers meant holding the first paint hostage to ~2.2 MB of artwork that
+src/components/StoreMap.vue: // the progressive swap was built to stream in anyway.
+src/components/StoreMap.vue: // Safety net: a stalled or blocked background image must never strand the
+src/components/StoreMap.vue: // visitor on the loading screen.
+src/components/StoreMap.vue: /* --- Main Interactive Area --- */
+src/components/StoreMap.vue: /* --- Store Layers --- */
+src/components/StoreMap.vue: /* --- Base Layer: Placeholder + HD --- */
+src/components/StoreMap.vue: /* --- Interactive Layers: Placeholder + HD --- */
+src/components/StoreMap.vue: /* Placeholder: visible, blurred, fades out when HD loads */
+src/components/StoreMap.vue: /* HD: invisible until loaded, then fades in */
+src/components/StoreMap.vue: /* Hover effect for furniture: brightness glow + subtle lift + expanded shadow */
+src/components/StoreMap.vue: /* Base realistic shadow for furniture (isometric light from top-right) */
+src/components/StoreMap.vue: /* Hover effect for posters: glow + slight scale + wall shadow */
+src/components/StoreMap.vue: /* Base subtle shadow for posters on the wall */
+src/components/StoreMap.vue: /* Override hover for placeholder layers that have HD loaded — keep them invisible */
+src/components/StoreMap.vue: /* --- Hit Zones & Interactions --- */
+src/components/StoreMap.vue: /* Uncomment below to see hit zones for debugging */
+src/components/StoreMap.vue: /* background: rgba(255, 0, 0, 0.3); */
+src/components/StoreMap.vue: /* --- Particles Layer --- */
+src/components/StoreMap.vue: /* --- Global Tooltip --- */
+src/components/StoreMap.vue: /* --- Zoom Control --- */
+src/components/StoreMap.vue: /* --- Floating Menu (Sidebar) --- */
+src/components/StoreMap.vue: /* Custom scrollbar for sidebar */
+src/components/StoreMap.vue: /* --- Floating Recommendations (Right Sidebar) --- */
+src/components/StoreMap.vue: /* --- Loading Overlay --- */
+src/components/StoreMap.vue: /* --- Poster Lightbox --- */
+src/components/StoreMap.vue: /* Lightbox transitions */
+src/components/StoreMap.vue: /* --- Mobile Utilities --- */
+src/components/StoreMap.vue: /* --- Mobile Responsive --- */
+src/composables/useCart.js: /**
+src/composables/useCart.js: /**
+src/composables/useCart.js: /**
+src/composables/useCart.js: /**
+src/composables/useNavigation.js: /**
+src/composables/useNavigation.js: /** Section key → route name. */
+src/composables/useNavigation.js: /**
+src/composables/useStoreMap.js: /**
+src/composables/useStoreMap.js: // Drag origin and pinch distance tracking (non-rendered state)
+src/composables/useStoreMap.js: // Apply a very small factor so the parallax is subtle
+src/composables/useStoreMap.js: // Tracked in a ref rather than read inside a computed: `window.innerWidth` is
+src/composables/useStoreMap.js: // not reactive, so a computed over it would cache the first result forever
+src/composables/useStoreMap.js: // and leave the zoom limits stale after a rotate or resize.
+src/composables/useStoreMap.js: // The image is `width: 100%; height: auto`, so at scale = 1 it spans the
+src/composables/useStoreMap.js: // viewport width. PAN_ENVELOPE_RATIO is a tuning value, not the artwork's
+src/composables/useStoreMap.js: // true aspect ratio (the base layer is ~0.82) — it was dialled in by hand
+src/composables/useStoreMap.js: // against how the shelves sit in frame, so changing it changes the feel.
+src/composables/useStoreMap.js: // Strictly lock horizontal to image bounds (prevent left/right edges from entering)
+src/composables/useStoreMap.js: // For vertical, increase the mobility limit significantly.
+src/composables/useStoreMap.js: // Adding half the viewport height as a buffer allows users to pan
+src/composables/useStoreMap.js: // past the strict image bounds to comfortably see the top/bottom shelves.
+src/data/arcadeData.js: /**
+src/main.js: // The particle engine is decorative, so its ~50 KB of plugins are pulled in
+src/main.js: // as a separate chunk instead of riding along in the initial bundle.
+src/router/index.js: /**
+src/router/index.js: /**
+src/router/index.js: // The isometric map owns the whole viewport and handles its own panning, so
+src/router/index.js: // the shell locks page scrolling while it is on screen.
+src/router/index.js: // Anything unrecognised drops the visitor at the front door rather than on a
+src/router/index.js: // blank screen.
+src/router/index.js: // Going back should land where the visitor left off; a fresh view starts at
+src/router/index.js: // the top. `About` scrolls itself to the requested section.
+src/router/index.js: /*
+src/router/index.js: /**
+src/router/index.js: // No wipe on the very first paint — there is nothing to wipe away yet.
+src/router/index.js: // Swallow: a failed wipe is a visual glitch, not a reason to strand the
+src/router/index.js: // visitor on the page they were leaving.
+src/router/index.js: // Let the incoming view paint underneath the cover before lifting it.
+src/router/index.js: // Same reasoning: never leave the overlay stuck over the new view.
+src/style.css: /* Estilos globales básicos (limpiados de template por defecto de Vite) */
+vite.config.js: /**
+vite.config.js: // Mirror the srcset declared on the <img> so the preload picks the same
+vite.config.js: // candidate the renderer will; preloading a single width would download
+vite.config.js: // the background twice on every device that resolves to another one.
+vite.config.js: // Separate vendor chunk for Vue runtime
+vite.config.js: // Separate data chunk for game/merch catalogs
+vite.config.js: // Only inline assets smaller than 4 KB; anything larger stays a separate,
+vite.config.js: // cacheable request instead of a base64 blob inside the JS bundle.

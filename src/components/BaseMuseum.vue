@@ -353,7 +353,7 @@ const selectConsole = (c) => {
   align-items: start;
 }
 
-/* LEFT SIDE - CABINET */
+/* Left Side - Cabinet */
 .cabinet-wrapper {
   position: relative;
   display: flex;
@@ -507,7 +507,7 @@ const selectConsole = (c) => {
   );
 }
 
-/* RIGHT SIDE - INFO PANELS */
+/* Right Side - Info Panels */
 .info-wrapper {
   display: grid;
   grid-template-columns: 1.8fr 1fr;
@@ -763,7 +763,7 @@ const selectConsole = (c) => {
   }
 }
 
-/* GAME MODAL */
+/* Game Modal */
 .game-modal-overlay {
   position: fixed;
   top: 0;
@@ -860,7 +860,7 @@ const selectConsole = (c) => {
   }
 }
 
-/* CONSOLE SPEC MODAL */
+/* Console Spec Modal */
 .console-spec-modal {
   max-width: 800px;
 }

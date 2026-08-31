@@ -1347,7 +1347,7 @@ const checkPreselected = (name) => {
     transform: translateY(calc(-15 * var(--m-scale))) scale(1.1) rotateY(0deg) !important;
   }
 
-  /* ===== MOBILE INFO PANEL (Replaces shelf, full-page scroll) ===== */
+  /* ===== Mobile Info Panel (Replaces shelf, full-page scroll) ===== */
 
   .shelf-wrapper.mobile-hidden {
     display: none;

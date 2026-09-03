@@ -11,7 +11,7 @@ https://github.com/user-attachments/assets/a195ab7f-3e89-4308-832d-c096c6b8f2e6
 
 
 <p align="center">
-  <a href="https://tienda-nivel-retro.netlify.app/"><strong>View live demo →</strong></a>
+  <a href="https://nivel-retro.nibe.dev/"><strong>View live demo →</strong></a>
 </p>
 
 <p align="center">
